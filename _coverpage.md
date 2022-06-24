@@ -11,4 +11,4 @@
 - 多种主题
 
 [GitHub](https://github.com/docsifyjs/docsify/)
-[Get Started](#docsifyUsage/docsifyUsageChapter1)
+[Get Started](#)
