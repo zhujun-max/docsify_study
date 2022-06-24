@@ -6,3 +6,4 @@
   * [五、添加代码高亮](./docsifyUsage/docsifyUsageChapter5.md)
   * [六、添加一键拷贝代码](./docsifyUsage/docsifyUsageChapter6.md)
   * [七、在GitHub上部署文档](./docsifyUsage/docsifyUsageChapter7.md)
+  * [八、tips，上传更新](./docsifyUsage/docsifyUsageChapter8.md)
