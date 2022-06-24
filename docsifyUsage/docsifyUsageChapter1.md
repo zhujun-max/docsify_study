@@ -25,7 +25,7 @@ docsify init ./docs
 
 ## 1.3、本地实时预览
 
-```
+```node
 docsify serve docs
 ```
 
