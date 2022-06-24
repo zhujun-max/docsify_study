@@ -32,11 +32,15 @@ docsify serve docs
 默认访问 ***http://localhost:3000***
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 47763ffc41578d784b529cf7f4e3b45084d90e10
 * README.md文件
 
   ![README.md文件](./images/1656038453907.png)
 
 * 预览效果：
+<<<<<<< HEAD
 =======
 ### 1. README.md文件
 
@@ -44,5 +48,7 @@ docsify serve docs
 
 ### 2. 预览效果：
 >>>>>>> 2f95a7c (completed)
+=======
+>>>>>>> 47763ffc41578d784b529cf7f4e3b45084d90e10
 
   ![预览效果](./images/1656038483755.png)
