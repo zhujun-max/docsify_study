@@ -17,7 +17,7 @@
 
 ![logo](./images/icon.svg)
 
-# 我的docsify学习笔记 <small>1.0.0</small>
+# 我的docsify学习笔记 <small>1.2.0</small>
 
 > 业精于勤荒于嬉，行成于思毁于随.
 
