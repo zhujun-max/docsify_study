@@ -1,7 +1,8 @@
-* 学习笔记
-  * [一、前端试题](content/web%E9%9D%A2%E9%A2%98.md) 
-  * [二、工作难点](difficulty)
-  * [三、其他](other/autojs.md)
+* [返回首页](/README.md) 
+    * [autojs](/other/autojs.md) 
+    * [Linux](/other/Linux.md)
+    * [npm](/other/npm.md)
+    * [时空复杂度](/other/时空复杂度.md)
   <!-- * [一、初始化项目](docsifyUsage/docsifyUsageChapter1.md)
   * [二、侧边栏配置](docsifyUsage/docsifyUsageChapter2.md)
   * [三、定制封面页](./docsifyUsage/docsifyUsageChapter3.md)

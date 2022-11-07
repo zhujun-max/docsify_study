@@ -15,16 +15,24 @@
   <div id="app">加载中</div>
   <script>
     window.$docsify = {
-      name: 'docsify',
+      // 文档标题，会显示在侧边栏顶部。
+      // name: '主页',
+      // 通过该变量显示文档更新日期 
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
       externalLinkTarget: '_blank',
       //logo: 'https://cdn.jsdelivr.net/gh/arenxiaolanz/picodemo/img/faviconyellow.png',
-      repo: 'https://github.com/arenxiaolanz/docsify_study',
-      loadNavbar: true,
+      // 设置右上角的github跳转地址
+      repo: 'https://github.com/zhujun-max/docsify_study',
+      // 是否使用右上角的自定义导航栏，会加载 _navbar.md 文件
+      loadNavbar: false,
+      // 加载自定义侧边栏，会加载 _sidebar.md 文件
       loadSidebar: true,
-      maxLevel: 2,
-      subMaxLevel: 4,
+      // 配置最大支持渲染的标题层级1-6
+      maxLevel: 1,
+      // 自定义侧边栏后默认不会再生成目录
+      subMaxLevel: 1,
       mergeNvabar: true,
+      // 是否开始封面页
       coverpage: true,
       // 完整配置参数
       search: {
@@ -40,7 +48,8 @@
         fontsize: '0.9em',
         color: 'rgb(90,90,90)',
         language: 'chinese'
-      }/*  */,
+      },
+      // 切换页面后是否自动跳转到页面顶部。
       auto2top: true,
     }
   </script>
