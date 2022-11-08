@@ -1,6 +1,6 @@
 <!-- _coverpage.md -->
 
-![logo](./images/icon.svg)
+![logo](/982997.png)
 
 # 我的学习笔记 <small>1.0.0</small>
 

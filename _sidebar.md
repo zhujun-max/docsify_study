@@ -1,12 +1,10 @@
 * 学习笔记
   * [一、前端试题](content/web%E9%9D%A2%E9%A2%98.md) 
-  * [二、工作难点](difficulty)
-  * [三、其他](other/autojs.md)
-  <!-- * [一、初始化项目](docsifyUsage/docsifyUsageChapter1.md)
-  * [二、侧边栏配置](docsifyUsage/docsifyUsageChapter2.md)
-  * [三、定制封面页](./docsifyUsage/docsifyUsageChapter3.md)
-  * [四、添加全文搜索](./docsifyUsage/docsifyUsageChapter4.md)
-  * [五、添加代码高亮](./docsifyUsage/docsifyUsageChapter5.md)
-  * [六、添加一键拷贝代码](./docsifyUsage/docsifyUsageChapter6.md)
-  * [七、在GitHub上部署文档](./docsifyUsage/docsifyUsageChapter7.md)
-  * [八、tips，上传更新](./docsifyUsage/docsifyUsageChapter8.md) -->
+    <!-- * [前端面试题](content/web%E9%9D%A2%E9%A2%98.md) -->
+  * [二、工作难点](difficulty/README.md)
+    <!-- * [难点](difficulty/README.md) -->
+  * [三、其他](other/README.md)
+    * [时空复杂度](other/%E6%97%B6%E7%A9%BA%E5%A4%8D%E6%9D%82%E5%BA%A6.md)
+    * [autojs](other/autojs.md)
+    * [Linux](other/Linux.md)
+    * [npm](other/npm.md)

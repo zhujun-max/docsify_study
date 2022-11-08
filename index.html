@@ -8,7 +8,7 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <link rel="icon" href="./images/faviconyellow.png">
+  <link rel="icon" href="./982997.png">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <script>
     window.$docsify = {
       // 文档标题，会显示在侧边栏顶部。
-      // name: '主页',
+      name: 'docsify',
       // 通过该变量显示文档更新日期 
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
       externalLinkTarget: '_blank',
@@ -29,7 +29,7 @@
       loadSidebar: true,
       // 配置最大支持渲染的标题层级1-6
       maxLevel: 1,
-      // 自定义侧边栏后默认不会再生成目录
+      // 自定义侧边栏后默认不会再生成目录0，可以设置数值开启
       subMaxLevel: 1,
       mergeNvabar: true,
       // 是否开始封面页
@@ -43,6 +43,7 @@
         depth: 4,
         hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
       },
+      // 字数统计
       count: {
         countable: true,
         fontsize: '0.9em',
@@ -55,12 +56,17 @@
   </script>
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <!-- 解析表情符号 -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <!-- 字数统计 -->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+  <!-- 代码高亮 -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+  <!-- 全文搜索 -->
   <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script> -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <!-- 复制代码 -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
 </body>
 
