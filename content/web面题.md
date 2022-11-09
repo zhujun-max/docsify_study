@@ -1,33 +1,10 @@
   <center><h1>web面试题</h1></center>
 
-> 
->
-> 作者：朱朱侠
-
-[TOC]
+## CSS基础问题
 
 
 
-# 新的技术
-
-iView：基于Vue组件库
-D3js：数据可视化
-Avue：组件库
-Ant Design Vue：组件库
-webGL：3D图形，js APi
-weex：前端框架，阿里巴巴web技术开发高性能原生应用的框架
-OOP：面向对象
-gulp：打包项目
-Bower：软件包管理器（和npm，yarn一样）
-Hybrid App混合开发
-
-
-
-# CSS基础问题
-
-
-
-## 行，块，行内块元素都有哪些
+### 行，块，行内块元素都有哪些
 
 **行内元素：**span、a、
 
@@ -37,7 +14,7 @@ Hybrid App混合开发
 
 
 
-## flex布局
+### flex布局
 
 > 容器属性
 
@@ -185,7 +162,7 @@ stretch（默认值）：如果项目未设置高度或设auto，将占满容器
 
 
 
-## BFC 自适应布局
+### BFC 自适应布局
 
 bfc：其作用是使内部元素的布局不受外部元素影响。
 
@@ -206,7 +183,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-##  css垂直居中
+###  css垂直居中
 
 + 方式1：绝对定位
 
@@ -235,7 +212,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## 左右固定，中间实现自适应
+### 左右固定，中间实现自适应
 
 **1.float实现**
 
@@ -259,7 +236,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## position有哪些属性
+### position有哪些属性
 
 1. absolute:绝对定位；脱离文档流的布局，遗留下来的空间由后面的元素填充。
 2. relative：相对定位；不脱离文档流的布局，只改变自身的位置，在文档流原先的位置遗留空白区域。
@@ -268,7 +245,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## 消除浮动
+### 消除浮动
 
 **产生原因：**
 
@@ -301,7 +278,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## 伪类和伪元素的区别
+### 伪类和伪元素的区别
 
 伪类：特殊的class选择器，或是用来添加一些特殊效果。（只能使用单冒号）
 
@@ -317,7 +294,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## 盒子模型是什么
+### 盒子模型是什么
 
 盒子模型由四个部分组成：margin（外边距）， border（边框），padding（内边距），content（内容）
 
@@ -325,7 +302,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-## CSS实现一个三角形
+### CSS实现一个三角形
 
 https://www.cnblogs.com/lidaying5/p/12605809.html
 
@@ -352,11 +329,11 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 
 ![img](https://images2015.cnblogs.com/blog/793040/201512/793040-20151208185646715-20784440.png)
 
-# 常见面试题
+## 常见面试题
 
 
 
-## MVC是什么
+### MVC是什么
 
 mvc是model-view-controller的缩写。
 
@@ -396,7 +373,7 @@ mvc是model-view-controller的缩写。
 
 
 
-##  MVVM是什么
+###  MVVM是什么
 
 MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MVVM就是将其中的view的状态和行为抽象化，让我们将视图UI和业务逻辑分开。
 
@@ -428,7 +405,7 @@ MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MV
 
 
 
-##  Vue双向绑定原理
+###  Vue双向绑定原理
 
 采用数据劫持 
 
@@ -460,7 +437,7 @@ MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MV
 
 
 
-##  Vuex是什么
+###  Vuex是什么
 
 Vuex是一个 **状态管理模式**。
 
@@ -481,7 +458,7 @@ Vuex是一个 **状态管理模式**。
 
 
 
-##  vue-router原理
+###  vue-router原理
 
 https://blog.csdn.net/xiasohuai/article/details/81982821
 
@@ -514,7 +491,7 @@ vue-roter通过**hash、history、abstract**三种方式实现前端路由
 + hash：使用URL hash值来做路由，默认传参
 
   + 改变hash并不会引起页面重载
-  + HTTP请求不包括# ，所以使用hash不会影响到其他功能
+  + HTTP请求不包括## ，所以使用hash不会影响到其他功能
   + 改变#会改变浏览器的访问历史
   + window.location.hash可以读取哈希值
   + JavaScript可以通过onhashchange监听到hash值的变化，这就意味着可以知道用户在浏览器手动改变了hash值
@@ -537,7 +514,7 @@ vue-roter通过**hash、history、abstract**三种方式实现前端路由
 
 
 
-##  promise和await/async的区别
+###  promise和await/async的区别
 
 区别主要在于按顺序调用多个 异步函数 时的写法 和报错获取 
 
@@ -572,7 +549,7 @@ async function  demo(){
 
  
 
-##  简述ES6使用到的新语句
+###  简述ES6使用到的新语句
 
 1. let：块级作用域，不能重复声明，没有变量提升
 2. const：常量；声明必须赋值，声明后的**基本数据类型无法被篡改**，引用类型可修改
@@ -585,7 +562,7 @@ async function  demo(){
 
 
 
-##  v-if 和 v-show 的区别
+###  v-if 和 v-show 的区别
 
 区别
 
@@ -611,7 +588,7 @@ async function  demo(){
 
 
 
-##  Vue的生命周期有哪些？使用场景？
+###  Vue的生命周期有哪些？使用场景？
 
 **加载时**
 
@@ -640,7 +617,7 @@ async function  demo(){
 
 
 
-## 组件通信方式
+### 组件通信方式
 
 1、 props / emit 父传子，子传父
 
@@ -716,7 +693,7 @@ https://www.jianshu.com/p/e0d0125f8dd9
 
 
 
-##  git常用命令
+###  git常用命令
 
 + 本地仓库
   + 初始化：git init
@@ -734,7 +711,7 @@ https://www.jianshu.com/p/e0d0125f8dd9
 
 
 
-##  什么是单页面应用
+###  什么是单页面应用
 
 单页应用的全称是 Single Page Application，简称 SPA
 
@@ -756,7 +733,7 @@ https://www.jianshu.com/p/e0d0125f8dd9
 
 
 
-## vue权限管理
+### vue权限管理
 
 1、接口的访问权限一般传递token由后端判断返回状态码（一般由后端验证）
 
@@ -772,7 +749,7 @@ https://www.jianshu.com/p/e0d0125f8dd9
 
 
 
-## 闭包
+### 闭包
 
 闭包函数：声明一个函数中的函数，叫做闭包函数
 
@@ -806,7 +783,7 @@ b()//10
 
 
 
-##  跨域问题
+###  跨域问题
 
 原因：浏览器同源策略
 
@@ -877,7 +854,7 @@ b()//10
 
 
 
-##  网络性能优化
+###  网络性能优化
 
 + 网络传输性能优化
 
@@ -902,9 +879,9 @@ b()//10
 
 
 
-  ## vue路由守卫
+  ### vue路由守卫
 
-## 完整的导航解析流程
+### 完整的导航解析流程
 >
 >  	1.导航被触发。
 >  	2.在失活的组件里调用 beforeRouteLeave 守卫。
@@ -987,7 +964,7 @@ b()//10
 
 
 
-## get和post的区别
+### get和post的区别
 
 + **get在浏览器回退时是无害的，而post会再次提交请求**
 + get产生的url地址可以被Bookmark，而post不可以
@@ -1001,7 +978,7 @@ b()//10
 
 
 
-## 数组操作函数
+### 数组操作函数
 
 | 对象                     | 作用                                               | 返回值                   | 改变原数组 |
 | ------------------------ | -------------------------------------------------- | ------------------------ | ---------- |
@@ -1027,7 +1004,7 @@ b()//10
 
 
 
-## 循环的方式
+### 循环的方式
 
 for：不能遍历对象。
 
@@ -1096,7 +1073,7 @@ for()遍历数组，且通过 return false 或 break 终止循环。
 
 
 
-## 前端的存储方式
+### 前端的存储方式
 
 localStorage：没有时间限制，永久存储，永不失效，除非手动删除，每个域名只有5兆（键也占空间），使用windown.localStorage可以检测，同域名多窗口共享。(IE只有3兆，其他的是5兆)
 
@@ -1113,7 +1090,7 @@ session：在服务端保存用户信息，保存的是Object类型，会话结�
 
 
 
-##  v-if和v-for的优先级
+###  v-if和v-for的优先级
 
 当v-if与v-for一起使用时，v-for具有比v-if更高的优先级，这意味这v-if将分别重复运行于每个v-for循环中
 
@@ -1126,7 +1103,7 @@ vue内部把v-if的代码封装成一个匿名函数，传递给了v-for，而v-
 
 
 
-## vue中的methods,watch和computed区别
+### vue中的methods,watch和computed区别
 
 https://blog.csdn.net/ligang2585116/article/details/94590314
 
@@ -1149,7 +1126,7 @@ https://blog.csdn.net/ligang2585116/article/details/94590314
 
 
 
-## 离线存储哪些方式，各自适应的环境有哪些
+### 离线存储哪些方式，各自适应的环境有哪些
 
 localStorage：键值对的方式存储，永久存储，永不失效，必须手动删除，每个域名5M，不安全。
 
@@ -1168,7 +1145,7 @@ cookies：缺点是请求头带着数据，4k；
 
 
 
-## DOM事件流，完整的过程
+### DOM事件流，完整的过程
 
 **1.什么是DOM事件流：**
 
@@ -1220,7 +1197,7 @@ e.cancelBubble = true;
 
 
 
-## 语义化
+### 语义化
 
 简单理解：根据内容的结构化，选择合适的标签，便于发者阅读和写出更加优化的代码。
 
@@ -1234,7 +1211,7 @@ e.cancelBubble = true;
 
 
 
-## js基础数据类型和引用类型区别，怎么判断
+### js基础数据类型和引用类型区别，怎么判断
 
 基本数据类型：Number、String 、Boolean、Null、Undefined、Symbol（ES6）、BigInt（ES10）。
 
@@ -1256,7 +1233,7 @@ e.cancelBubble = true;
 
 
 
-## js作用域，作用域链是什么
+### js作用域，作用域链是什么
 
 **1. 什么是作用域:**
 
@@ -1302,7 +1279,7 @@ e.cancelBubble = true;
 
 
 
-## 原型与原型链
+### 原型与原型链
 
 1. 为所有子对象保存共有方法的对象，成为原型对象。
 
@@ -1345,7 +1322,7 @@ console.log(lilei.className, hmm.className)
 
 
 
-## es6解构赋值使用场景
+### es6解构赋值使用场景
 
 1、数组解构赋值
 
@@ -1471,7 +1448,7 @@ function setCookie(name, value, { secure, path, domain, expires }) {
 
 ```
 
-## 箭头函数的特点
+### 箭头函数的特点
 
 箭头函数是匿名函数.
 1.不能作为构造函数，不能使用new
@@ -1502,7 +1479,7 @@ C(1,2,3,3)
 
 
 
-## 什么是虚拟dom，有什么好处
+### 什么是虚拟dom，有什么好处
 
 虚拟dom就是用来模拟DOM结构的一个js对象。
 
@@ -1532,7 +1509,7 @@ vue采用的是虚拟dom
 
 
 
-## 多维数组的扁平化
+### 多维数组的扁平化
 
 var arr = [[1, 2, 8, [6, 7]], 3, [3, 6, 9], 4]
 
@@ -1628,7 +1605,7 @@ const res=arr.flat(Infinity)
 
 
 
-## 解决首屏加载慢
+### 解决首屏加载慢
 
 单页面应用首次加载的文件较多，导致首屏渲染速度很慢。
 
@@ -1652,7 +1629,7 @@ const res=arr.flat(Infinity)
 
 
 
-## 插槽slot，有几种方法
+### 插槽slot，有几种方法
 
 主要分三种，默认插槽、具名插槽、作用域插槽
 
@@ -1723,7 +1700,7 @@ const res=arr.flat(Infinity)
 
 
 
-## vue-router 如何做历史返回提示
+### vue-router 如何做历史返回提示
 
 获取vue-router的上一个页面是否存在或者是否为自己需要返回的地址，可以使用vue-router的声明周期函数
 
@@ -1733,7 +1710,7 @@ const res=arr.flat(Infinity)
 
 
 
-##  防抖节流
+###  防抖节流
 
 防抖：事件连续触发，只执行最后一次。
 
@@ -1783,7 +1760,7 @@ div1.addEventListener('drag', e => {
 
 
 
-## v-for为什么要加key
+### v-for为什么要加key
 
 vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id index等，因为vue组件高度复用增加Key可以识组件的唯一性，为了更好地区别各个组件 key的作用主要是为了高效的更新虚拟DOM
 
@@ -1794,7 +1771,7 @@ vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id in
 
 
 
-## keep-alive
+### keep-alive
 
 1. keep-alive是vue内置的一个组件，可以使用包含的组件保留状态，避免重新渲染。
 2. 一般结合路由和动态组件一起使用，用于缓存组件。
@@ -1803,7 +1780,7 @@ vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id in
 
 
 
-## $nextTick
+### $nextTick
 
 > vue dom是异步执行的，一旦观察到数据变化，vue就会开启一个队列，然后把同一个事件循环当中观察到数据变化的watcher推送到这个队列。如果这个watcher被触发多次，只会被推送一次。这种缓冲行为可以有效的去掉重复数据造成的不必要的计算和dom操作。而在下一个事件循环时，vue会清空队列，并进行必要的dom更新。
 >
@@ -1839,7 +1816,7 @@ vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id in
 
 
 
-## 解决父子组件执行顺序的问题
+### 解决父子组件执行顺序的问题
 
 > **父beforeCreate->父created->父beforeMount**
 >
@@ -1866,7 +1843,7 @@ mounted(){
 
 
 
-## vue如何监听数组的变化
+### vue如何监听数组的变化
 
 
 
@@ -1891,7 +1868,7 @@ mounted(){
 
 
 
-## 混入 mixin
+### 混入 mixin
 
 当多个组件中有相同的方法和处理逻辑，就可以使用 混入mixin。
 
@@ -1920,22 +1897,22 @@ export var myMixin = {
 
 ![img](https://img2020.cnblogs.com/blog/1366381/202108/1366381-20210818163234045-668246168.png)
 
-## webpack
+### webpack
 
-### webpack核心概念
+#### webpack核心概念
 
 + Entry：入口，告诉webpack要使用哪个模块作为构建项目的起点。默认为./src/index.js
 + output：出口，告诉webpack在哪里输出打包的代码以及命名。默认为./dist。
 + Loader：模块转换器，用于把模块原内容按照需求转换成新内容（比如sass转css，Ts转js）。
 + Plugin：插件可以监听这些时间的发生，在特定时机做对应的事情。
 
-### webpack的工作原理
+#### webpack的工作原理
 
 webpack可以理解是一个模块打包机，它做的事情是，分析你的项目结构，找到JavaScript模块以及其他的一些浏览器不能直接运行的拓展语言（Sass、Ts等），并将其转换和打包为合适的格式供浏览器使用。在3.0出现后，webpack还肩负起了优化项目的责任。
 
 
 
-### webpack的打包原理
+#### webpack的打包原理
 
 把一切都视为模块，不管是css、js、image还是html都可以互相引用，通过定义entry.js对所有的文件进行跟踪，将各个模块通过loader和plugins处理，然后打包在一起。
 
@@ -1943,7 +1920,7 @@ webpack可以理解是一个模块打包机，它做的事情是，分析你的�
 
 
 
-### webpack的总体打包流程
+#### webpack的总体打包流程
 Webpack首先会把配置参数和命令行的参数及默认参数合并，并初始化需要使用的插件和配置插件等执行环境所需要的参数；初始化完成后会调用Compiler的run来真正启动webpack编译构建过程，webpack的构建流程包括compile、make、build、seal、emit阶段，执行完这些阶段就完成了构建过程。这其实就是我们上面所讲到的。
 
 + **初始化参数： **从配置文件和 Shell 语句中读取与合并参数，得出最终的参数。
@@ -1958,9 +1935,9 @@ Webpack首先会把配置参数和命令行的参数及默认参数合并，并�
 
 
 
-# 不常见面试题
+## 不常见面试题
 
-## 浮点数相加
+### 浮点数相加
   1. 将小数转为整数，相加之后除以相差的倍数
   ```js
     FloatAdd(arg1, arg2) {
@@ -1980,7 +1957,7 @@ Webpack首先会把配置参数和命令行的参数及默认参数合并，并�
     },
   ```
 
-## 对象扁平化
+### 对象扁平化
 
 ```js
 function flatObj(o){
@@ -2007,7 +1984,7 @@ function flatObj(o){
 
 
 
-##  < !DOCTYPE / >
+###  < !DOCTYPE / >
 
 https://www.cnblogs.com/better-echo/p/6285301.html
 
@@ -2024,7 +2001,7 @@ https://www.cnblogs.com/better-echo/p/6285301.html
 
 
 
-## H5新特性
+### H5新特性
 
 语义化标签：header、footer、article、selection
 
@@ -2036,7 +2013,7 @@ https://www.cnblogs.com/better-echo/p/6285301.html
 
 
 
-## undefined 和unll的区别
+### undefined 和unll的区别
 
 ```js
 null==undefined  //ture
@@ -2069,7 +2046,7 @@ undefined表示“缺少值”，就是此处应该有一个值，但是没有�
 
 
 
-## Watch监听
+### Watch监听
 
 watch：一个数据影响多个数据。
 
@@ -2159,7 +2136,7 @@ computed：一个数据受多个数据影响。缓存值，不会主动重新计
 
 
 
-## 单项数据流的理解
+### 单项数据流的理解
 
 vue中子组件可以使用父组件传递过来的数据，但是绝对不能修改传递过来的数据。
 
@@ -2167,7 +2144,7 @@ vue中子组件可以使用父组件传递过来的数据，但是绝对不能�
 
 
 
-## axios和ajax的区别
+### axios和ajax的区别
 
 axios是通过promise实现了对ajax技术的一种封装，就像jQuery实现ajax封装一样。
 
@@ -2190,7 +2167,7 @@ axios优点：
 
 
 
-## Map和Set
+### Map和Set
 
 ES6新增了两个对象，Map和Set，Map是一组键值对的结构，具有极快的查找速度。Set是一组key的集合，但不存储value，而且key不重复，可自动排重。
 
@@ -2316,7 +2293,7 @@ console.log(s1);                // Set(0) {}
 
 
 
-## jQuery
+### jQuery
 
 选择器使用
 
@@ -2372,7 +2349,7 @@ jQuery.ready函数只需要等待DOM执行完毕后，就会执行。
 
 
 
-## Typescript和JavaScript的区别
+### Typescript和JavaScript的区别
 
 **JavaScript**
 
@@ -2388,7 +2365,7 @@ jQuery.ready函数只需要等待DOM执行完毕后，就会执行。
 
 
 
-## http的工作过程
+### http的工作过程
 
 1. 地址解析
 
@@ -2406,7 +2383,7 @@ jQuery.ready函数只需要等待DOM执行完毕后，就会执行。
 
 
 
-## export和export default的区别
+### export和export default的区别
 
 1. export与export default均可用于导出常量，函数，文件，模块等
 2. 在一个文件或模块中，export，import可以有多个，export default仅有一个
@@ -2434,7 +2411,7 @@ import {str,log} from 'a'//引入名必须和函数名一致,可以不全引
 
 
 
-## PC端与手机端自适应
+### PC端与手机端自适应
 
 + Bootstrap 这种框架就是依赖媒体查询，实现布局随设备宽度自动切换
 + 字体大小 元素大小都使用rem或em这种相对单位，不使用px固定单位
@@ -2444,7 +2421,7 @@ import {str,log} from 'a'//引入名必须和函数名一致,可以不全引
 
 
 
-## http与https区别
+### http与https区别
 
 http协议和https协议的区别：传输信息安全性不同，连接方式不同，端口不同，证书申请方式不同
 
@@ -2463,7 +2440,7 @@ http协议和https协议的区别：传输信息安全性不同，连接方式�
 
 
 
-## apply call bind 的区别
+### apply call bind 的区别
 
 为非**箭头函数**设置函数体中的this对象
 
@@ -2487,7 +2464,7 @@ a()
 
 
 
-## 浏览器渲染流程
+### 浏览器渲染流程
 
 1. 构建DOM：从上到下解析HTML文档生成DOM节点树，也叫内容树。
 2. 构建CSSOM树：加载解析样式生产CSSDOM树。
@@ -2498,7 +2475,7 @@ a()
 
 
 
-## js怎么实现继承，各自优缺点
+### js怎么实现继承，各自优缺点
 
 原型链继承、构造继承、实例继承、拷贝继承、组合继承、寄生组合继承
 
@@ -2672,7 +2649,7 @@ a()
 
 
 
-## 项目目录结构
+### 项目目录结构
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20191225163735830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2NDEwNzk1,size_16,color_FFFFFF,t_70)
 
@@ -2680,7 +2657,7 @@ a()
 
 
 
-## vue内部指令
+### vue内部指令
 
 v-bind：响应并更新DOM特性
 
@@ -2714,7 +2691,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## js符号优先级
+### js符号优先级
 
 | 优先级 | 运算符                                                       | 说明                                                   |      |
 | ------ | ------------------------------------------------------------ | ------------------------------------------------------ | ---- |
@@ -2736,7 +2713,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## import和require和区别
+### import和require和区别
 
 遵循规范
 
@@ -2755,7 +2732,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## 代码规范，Eslint是干什么的
+### 代码规范，Eslint是干什么的
 
 基本格式化
 
@@ -2773,7 +2750,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## v-on监听多个方法
+### v-on监听多个方法
 
 ```html
 <input type="text" v-on={input:onInput,focus:onFocus,blur:onBlur}>
@@ -2781,7 +2758,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## vue中事件绑定加括号和不加括号的区别
+### vue中事件绑定加括号和不加括号的区别
 
 ```java
 // 不带括号，不写实参。默认传event(事件对象)
@@ -2796,7 +2773,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## src和href的区别
+### src和href的区别
 
 1. href标识超文本引用，用再link等元素上，href和a等元素上，href是引用和页面关联，实在当前元素和引用资源之间建立联系。
 2. src表示引用资源，表示替换当前元素，用在img，script，iframe上，src是页面内容不可缺少的一部分。
@@ -2805,7 +2782,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 
 
-## Event loop
+### Event loop
 
 javaScript是单线程，所有任务都需要排队，前一个任务结束，才会执行后一个人任务。
 
@@ -2821,7 +2798,7 @@ javaScript是单线程，所有任务都需要排队，前一个任务结束，�
 
 
 
-## for循环中let和var区别
+### for循环中let和var区别
 
 var是全局作用域，有变量提升的作用，所以在for中定义一个变量，全局可以使用，循环中的每一次变量i赋值都是给全局变量i赋值。
 
@@ -2829,7 +2806,7 @@ let是块级作用域，只能在代码块中起作用，在js中一个{}中的�
 
 
 
-## HTML行内元素和块级元素的区别
+### HTML行内元素和块级元素的区别
 
 1. 可以相互转换，使用display属性进行转换，
 2. 行内元素会在一条水平线上排列；块级元素总是独占一行，垂直向下排列，若想水平排列，可以使用浮动。
@@ -2838,7 +2815,7 @@ let是块级作用域，只能在代码块中起作用，在js中一个{}中的�
 
 
 
-## JSON.stringify和qs.stringify的区别
+### JSON.stringify和qs.stringify的区别
 
 json. 只能在字符串和对象中进行的转换，多用于改变数据类型（类似local sessionStorage只能存储字符串）
 
@@ -2858,7 +2835,7 @@ console.log(JSON.parse(url))
 
 
 
-## vue2和vue3的区别
+### vue2和vue3的区别
 
 1. 默认进行懒观察
 
@@ -2887,7 +2864,7 @@ console.log(JSON.parse(url))
 
 
 
-## vue修饰符
+### vue修饰符
 
 **事件修饰符**
 
@@ -2937,7 +2914,7 @@ console.log(JSON.parse(url))
 
 
 
-## HTTP协议状态码
+### HTTP协议状态码
 
 浏览器与web服务器之间的通信协议
 
@@ -2959,7 +2936,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
  
 
-## new的执行过程
+### new的执行过程
 
 使用new关键字调用构造函数Student，分为四步。
 
@@ -2985,7 +2962,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## JS常见的内存泄漏
+### JS常见的内存泄漏
 
 1. 意外的全局变量（全局变量很难被垃圾回收器回收，所以会进行内存泄漏）
 2. 被遗忘的计时器或回调函数（忘记中止定时器）
@@ -3005,7 +2982,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## 重绘和回流
+### 重绘和回流
 
 引起DOM树结构变化，页面布局变化的行为叫回流,且回流一定伴随重绘。
 
@@ -3013,7 +2990,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## js浮点数运算精度问题
+### js浮点数运算精度问题
 
 **产生原因：**
 
@@ -3027,7 +3004,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## 垃圾回收和内存泄漏
+### 垃圾回收和内存泄漏
 
 **内存泄漏：**不再用到的内存，没有及时释放。
 
@@ -3045,7 +3022,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## 漏洞防御
+### 漏洞防御
 
 + xss跨站脚本攻击（原理，如何进行的，防御手段是什么）
 + CSRF跨站请求伪造（如何防伪造，怎么防御，等等都要说清楚）
@@ -3054,7 +3031,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## 前端数据加密方法
+### 前端数据加密方法
 
 + md5加密
 + base64加密
@@ -3063,7 +3040,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-##  router和route的区别
+###  router和route的区别
 
 1. $router时vueRouter的一个对象，通过router的实列对象，这个对象是一个全局的对象，他包含了所有的路由，包含了许多关键的对象和属性。
 
@@ -3076,7 +3053,7 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## vue-router路由传参的几种方式
+### vue-router路由传参的几种方式
 
 1. get方法
   ```js
@@ -3117,9 +3094,9 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
     // url上显示参数：http://localhost:8080/test/123/xia
   ```
 
-## js语句和表达式的区别
+### js语句和表达式的区别
 
-  ### 表达式：会产生一个值，可以放在任何地方，（vue template中只能写表达式）
+  #### 表达式：会产生一个值，可以放在任何地方，（vue template中只能写表达式）
     下面这些都是表达式：
     1. a.
     2. a+b
@@ -3127,13 +3104,13 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
     4. arr.map(1)
     5. function test(){}
 
-  ### 语句：就是在js中写的代码
+  #### 语句：就是在js中写的代码
     1. if(){}
     2. for(){}
     3. switch(){}
     4. forEach()
 
-## Object中的方法
+### Object中的方法
 
 > javascript中object方法：assign()、create()、entries()、freeze()、getPrototypeOf()、is()、keys()、seal()、values()、isSealed()等等。
 
@@ -3278,16 +3255,16 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 
 
-## npm、cnpm、yarn的区别
+### npm、cnpm、yarn的区别
   1. npm: 网速慢。容易造成版本不统一。输出内容长。
   2. cnpm: 网速快。淘宝对npm的拷贝，10分钟同步一次。
   3. yarn: 以前安装过，后期可以离线安装。版本统一。扁平模式（将依赖包的不同版本归结为单个版本，以避免创建多个副本）
 
-# 简答题
+## 简答题
 
 
 
-## 1到100 使用递归
+### 1到100 使用递归
 
 ```js
 function add(n){
@@ -3302,7 +3279,7 @@ function add(n){
 
 
 
-## axios请求拦截器 显示加载状态
+### axios请求拦截器 显示加载状态
 
 ```js
 //vue页面当中
@@ -3323,7 +3300,7 @@ created(){
 
 
 
-## 做过哪些组件封装
+### 做过哪些组件封装
 
 1. 工具函数的封装
    1. 获取时间的方法，时间相减。
@@ -3339,7 +3316,7 @@ created(){
 
 
 
-## Event loop
+### Event loop
 
 1. 首先执行主任务：直接打印的、promise。
 2. 微任务：.then、
@@ -3406,7 +3383,7 @@ setTimeout(function() {
 
 
 
-# 未解决的问题
+## 未解决的问题
 
 
 > > 浏览器进程和线程
@@ -3457,7 +3434,7 @@ vue3
 3. k8s的list-watch
 
 
-# 待优化项
+## 待优化项
 循环方式，没写清楚，
 porams的理解
 es6解构赋值使用场景

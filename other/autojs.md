@@ -1,14 +1,6 @@
 
 
-
-
-
-
-[TOC]
-
-
-
-# 软件安装
+## 软件安装
 
 autojs下载地址：    https://wwc.lanzouq.com/iloaG02jz2va
 
@@ -24,7 +16,7 @@ autojs打包插件：   https://wwc.lanzouq.com/iIWEH02jz37c
 
 
 
-# 连接手机
+## 连接手机
 
 确保手机和电脑在同一个局域网中。你可以将手机和电脑都连到同一个Wifi上，或者电脑开启热点给手机连接，或者手机开启热点给电脑连接。如果以上都无法做到，你还可以通过USB线连接手机，参考《adb连接手机(USB)》。
 
@@ -57,7 +49,7 @@ toast("文本");   //弹出框
 
 https://hyb1996.github.io/AutoJs-Docs/#/app?id=appintentoptions
 
-## App
+## 基础指令
 
 app模块提供的一系列函数，用于和其他应用交互，列如发送图片，打开邮件等。
 
@@ -233,7 +225,7 @@ shell("am start " + app.intentToShell({
 
 
 
-## 全局变量与函数
+### 全局变量与函数
 
 全局变量和函数在所有模块中均可使用，但是以下变量的作用域只在模块内
 
@@ -330,7 +322,7 @@ shell("am start " + app.intentToShell({
 
 
 
-## Console
+### Console
 
 控制台模块提供了一个和web浏览器中相似的用于调试的控制台，用于输出一些调试信息，中间结果等。
 
@@ -415,7 +407,7 @@ shell("am start " + app.intentToShell({
 
 
 
-## 基于坐标的触摸模拟
+### 基于坐标的触摸模拟
 
 + 坐标点击、滑动函数，有些需要安卓7.0以上，有的需要root权限。
 + 要获取点击的位置的坐标，可以在开发模式中开启“指针位置”。
@@ -501,7 +493,7 @@ RootAutomator是一个使用root权限来模拟触摸的对象，用它可以完
 
 
 
-## Device
+### Device
 
 device模块提供了与设备有关的信息与操作，列如获取设备宽高，内存使用率等。
 
@@ -731,7 +723,7 @@ Android ID为一个用16进制字符串表示的64位整数，在设备第一次
 
 
 
-## Dialogs
+### Dialogs
 
 dialogs 模块提供了简单的对话框支持，可以通过对话框和用户进行交互。最简单的例子如下：
 
@@ -1019,7 +1011,7 @@ dialogs.build({
 
 
 
-## Engines
+### Engines
 
 engines模块包含了一些与脚本环境、脚本运行、脚本引擎有关的函数，包含运行其他脚本，关闭i脚本等。
 
@@ -1134,7 +1126,7 @@ engines模块包含了一些与脚本环境、脚本运行、脚本引擎有关�
 
 
 
-## 悬浮窗
+### 悬浮窗
 
 floaty模块提供了悬浮窗的相关函数，可以在屏幕上显示自定义悬浮窗，控制悬浮窗大小、位置等。
 
@@ -1250,7 +1242,7 @@ floaty模块提供了悬浮窗的相关函数，可以在屏幕上显示自定�
 
 
 
-## 文件系统
+### 文件系统
 
 files模块提供了一些常见的文件处理，包括文件读写，移动，复制，删除等。
 
@@ -1470,7 +1462,7 @@ files模块提供了一些常见的文件处理，包括文件读写，移动，
 
 
 
-## HTTP
+### HTTP
 
 http提供了一些进行http请求的函数
 
@@ -1546,7 +1538,7 @@ HTTP请求的响应。
 
 
 
-## 图片与颜色
+### 图片与颜色
 
 **colors**
 
@@ -1660,7 +1652,7 @@ HTTP请求的响应。
 
 
 
-###  [图片处理](https://hyb1996.github.io/AutoJs-Docs/#/images?id=图片处理)
+####  [图片处理](https://hyb1996.github.io/AutoJs-Docs/#/images?id=图片处理)
 
 **[images.read(path)](https://hyb1996.github.io/AutoJs-Docs/#/images?id=imagesreadpath)**
 
@@ -1856,7 +1848,7 @@ images.save(clip, "/sdcard/clip.png");
 
 
 
-### [找图找色](https://hyb1996.github.io/AutoJs-Docs/#/images?id=找图找色)
+#### [找图找色](https://hyb1996.github.io/AutoJs-Docs/#/images?id=找图找色)
 
 **images.requestScreenCapture([landscape\])](https://hyb1996.github.io/AutoJs-Docs/#/images?id=imagesrequestscreencapturelandscape)**
 
@@ -1973,7 +1965,7 @@ if(images.detectsColor(img, "#fed9a8", x, y)){
 
 
 
-## 画布
+### 画布
 
 canvas提供了使用画布进行2D画图的支持，可用于简单的小游戏开发或者图片编辑。使用canvas可以轻松地在一张图片或一个界面上绘制各种线与图形。
 
@@ -2011,7 +2003,7 @@ canvas.drawRect(0, 0, 100, 100, paint);
 
 
 
-## 按键模拟
+### 按键模拟
 
 按键模拟部分提供了一些模拟物理按键的全局函数，包括Home、音量键、照相键等，有的函数依赖于无障碍服务，有的函数依赖于root权限。
 
@@ -2103,7 +2095,7 @@ canvas.drawRect(0, 0, 100, 100, paint);
 
 
 
-## 多媒体
+### 多媒体
 
 media模块提供多媒体编程的支持。目前仅支持音乐播放和媒体文件扫描。后续会结合UI加入视频播放等功能。
 
@@ -2174,7 +2166,7 @@ media.scanFile(path);
 
 
 
-## 模块
+### 模块
 
 Auto.js 有一个简单的模块加载系统。 在 Auto.js 中，文件和模块是一一对应的（每个文件被视为一个独立的模块）。
 
@@ -2184,7 +2176,7 @@ Auto.js 有一个简单的模块加载系统。 在 Auto.js 中，文件和模�
 
 
 
-## 基于控件的操作
+### 基于控件的操作
 
 选择屏幕上的控件，获取其信息或对其进行操作。对于一般软件而言，基于控件的操作对不同机型有很好的兼容性；但是对于游戏而言，由于游戏界面并不是由控件构成，无法采用本章节的方法，也无法使用本章节的函数。有关游戏脚本的编写，请参考《基于坐标的操作》。
 
@@ -2192,7 +2184,7 @@ Auto.js 有一个简单的模块加载系统。 在 Auto.js 中，文件和模�
 
 您也可以在脚本开头使用`"auto";`表示这个脚本需要无障碍服务，但是不推荐这种做法，因为这个标记必须在脚本的最开头(前面不能有注释或其他语句、空格等)，我们推荐使用`auto()`函数来确保无障碍服务已启用。
 
-### auto([mode])
+#### auto([mode])
 
 - `fast` 快速模式。该模式下会启用控件缓存，从而选择器获取屏幕控件更快。对于需要快速的控件操作的脚本可以使用该模式，一般脚本则没有必要使用该函数。
 - `normal` 正常模式，默认。
@@ -2209,7 +2201,7 @@ Auto.js 有一个简单的模块加载系统。 在 Auto.js 中，文件和模�
 
 
 
-#### SimpleActionAutomator
+##### SimpleActionAutomator
 
 SimpleActionAutomator提供了一些模拟简单操作的函数，例如点击文字、模拟按键等。这些函数可以直接作为全局函数使用。
 
@@ -2270,7 +2262,7 @@ SimpleActionAutomator提供了一些模拟简单操作的函数，例如点击�
 
 
 
-#### UiSelector
+##### UiSelector
 
 UiSelector即选择器，用于通过各种条件选取屏幕上的控件，再对这些控件进行点击、长按等动作。这里需要先简单介绍一下控件和界面的相关知识。
 
@@ -2493,7 +2485,7 @@ drawingOrder为一个控件在父控件中的绘制顺序，通常可以用于�
 
 
 
-#### [UiObject](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=uiobject)
+##### [UiObject](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=uiobject)
 
 UiObject表示一个控件，可以通过这个对象获取到控件的属性，也可以对控件进行点击、长按等操作。
 
@@ -2619,7 +2611,7 @@ UiObject表示一个控件，可以通过这个对象获取到控件的属性，
 
 
 
-#### [UiCollection](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=uicollection)
+##### [UiCollection](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=uicollection)
 
 UiCollection, 控件集合, 通过选择器的`find()`, `untilFind()`方法返回的对象。
 
@@ -2653,7 +2645,7 @@ UiCollection, 控件集合, 通过选择器的`find()`, `untilFind()`方法返�
 
 
 
-#### [Rect](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=rect)
+##### [Rect](https://hyb1996.github.io/AutoJs-Docs/#/widgetsBasedAutomation?id=rect)
 
 `UiObject.bounds()`, `UiObject.boundsInParent()`返回的对象。表示一个长方形(范围)。
 
@@ -2699,7 +2691,7 @@ UiCollection, 控件集合, 通过选择器的`find()`, `untilFind()`方法返�
 
 
 
-### 传感器
+#### 传感器
 
 sensors模块提供了获取手机上的传感器的信息的支持，这些传感器包括距离传感器、光线光感器、重力传感器、方向传感器等。需要指出的是，脚本只能获取传感器的数据，**不能模拟或伪造传感器的数据和事件**，因此诸如模拟摇一摇的功能是无法实现的。
 
@@ -2707,7 +2699,7 @@ sensors模块提供了获取手机上的传感器的信息的支持，这些传�
 
 
 
-### Shell函数
+#### Shell函数
 
 shell即Unix Shell，在类Unix系统提供与操作系统交互的一系列命令。
 
@@ -2715,7 +2707,7 @@ shell即Unix Shell，在类Unix系统提供与操作系统交互的一系列命�
 
 
 
-### 本地存储
+#### 本地存储
 
 storages模块提供了保存简单数据、用户配置等的支持。保存的数据除非应用被卸载或者被主动删除，否则会一直保留。
 
@@ -2733,7 +2725,7 @@ storages保存的数据在脚本之间是共享的，任何脚本只要知道sto
 
 
 
-#### [Storages](https://hyb1996.github.io/AutoJs-Docs/#/storages?id=storages-1)
+##### [Storages](https://hyb1996.github.io/AutoJs-Docs/#/storages?id=storages-1)
 
 **Storage.get(key[, defaultValue\])](https://hyb1996.github.io/AutoJs-Docs/#/storages?id=storagegetkey-defaultvalue)**
 
@@ -2763,7 +2755,7 @@ storages保存的数据在脚本之间是共享的，任何脚本只要知道sto
 
 
 
-### 多线程
+#### 多线程
 
 threads模块提供了多线程支持，可以启动新线程来运行脚本。
 
@@ -2795,7 +2787,7 @@ threads模块提供了多线程支持，可以启动新线程来运行脚本。
 
 
 
-#### [Thread](https://hyb1996.github.io/AutoJs-Docs/#/threads?id=thread)
+##### [Thread](https://hyb1996.github.io/AutoJs-Docs/#/threads?id=thread)
 
 线程对象，`threads.start()`返回的对象，用于获取和控制线程的状态，与其他线程交互等。
 
@@ -2843,7 +2835,7 @@ Thread对象提供了和timers模块一样的API，例如`setTimeout()`, `setInt
 
 
 
-### 定时器
+#### 定时器
 
 timers 模块暴露了一个全局的 API，用于在某个未来时间段调用调度函数。 因为定时器函数是全局的，所以使用该 API 无需调用 timers。
 
@@ -2889,7 +2881,7 @@ setImmediate()、setInterval() 和 setTimeout() 方法每次都会返回表示�
 
 
 
-### 用户界面
+#### 用户界面
 
 ui模块提供了编写用户界面的支持。
 
@@ -3001,7 +2993,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [style](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=style)
+#### [style](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=style)
 
 设置View的样式。不同控件有不同的可选的内置样式。具体参见各个控件的说明。
 
@@ -3009,7 +3001,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [文本控件: text](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=文本控件-text)
+#### [文本控件: text](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=文本控件-text)
 
 **[text](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=text)**
 
@@ -3083,7 +3075,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [按钮控件: button](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=按钮控件-button)
+#### [按钮控件: button](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=按钮控件-button)
 
 按钮控件是一个特殊的文本控件，因此所有文本控件的函数的属性都适用于按钮控件。
 
@@ -3099,7 +3091,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [输入框控件: input](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=输入框控件-input)
+#### [输入框控件: input](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=输入框控件-input)
 
 输入框控件也是一个特殊的文本控件，因此所有文本控件的函数的属性和函数都适用于按钮控件。输入框控件有自己的属性和函数，要查看所有这些内容，阅读[EditText](http://www.zhdoc.net/android/reference/android/widget/EditText.html)。
 
@@ -3175,7 +3167,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [图片控件: img](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=图片控件-img)
+#### [图片控件: img](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=图片控件-img)
 
 图片控件用于显示来自网络、本地或者内嵌数据的图片，并可以指定图片以圆角矩形、圆形等显示。但是不能用于显示gif动态图。
 
@@ -3232,7 +3224,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [垂直布局: vertical](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=垂直布局-vertical)
+#### [垂直布局: vertical](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=垂直布局-vertical)
 
 垂直布局是一种比较简单的布局，会把在它里面的控件按照垂直方向依次摆放，如下图所示：
 
@@ -3258,7 +3250,7 @@ View的变换中心坐标y。用于View的旋转、放缩等变换的中心坐�
 
 
 
-### [水平布局: horizontal](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=水平布局-horizontal)
+#### [水平布局: horizontal](https://hyb1996.github.io/AutoJs-Docs/#/ui?id=水平布局-horizontal)
 
 水平布局是一种比较简单的布局，会把在它里面的控件按照水平方向依次摆放，如下图所示： 水平布局: ————————————————————————————
 
