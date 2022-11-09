@@ -316,7 +316,7 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 }
 ```
 
-![img](https://images2015.cnblogs.com/blog/793040/201512/793040-20151208180612402-1265264731.png)
+![img](./img/01.png)
 
 ```css
 #triangle-topleft {
@@ -327,7 +327,7 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 }
 ```
 
-![img](https://images2015.cnblogs.com/blog/793040/201512/793040-20151208185646715-20784440.png)
+![img](./img/02.png)
 
 ## 常见面试题
 
@@ -357,7 +357,7 @@ mvc是model-view-controller的缩写。
 
   > 书写普通的html，不掺杂任何js代码。
   >
-  > 例如：<butt id='tedu’>Tedy</button>
+  > 例如：<butt id='tedu'>Tedy</button>
   >
   > 注意：此按钮美誉偶onclick的事件写法。
 
@@ -803,21 +803,21 @@ b()//10
   + 前端：发送特定的jsonp格式数据到服务器
 
     ```javascript
-    <div id='divCustomers'></div>
-    <script>
-    function callbackFunction(result,methodName){
-        var html='<ul>';
-        for(var i = 0; i < result.length; i++){
-     		html += '<li>' + result[i] + '</li>';
-     	}
-     	html += '</ul>';
-     document.getElementById('divCustomers').innerHTML = html;
-    }
-    </script>
-    <script type="text/javascript"
-    src="https://www.runoob.com/try/ajax/jsonp.php?
-    jsoncallback=callbackFunction">
-    </script>
+        <div id='divCustomers'></div>
+        <script>
+        function callbackFunction(result,methodName){
+            var html='<ul>';
+            for(var i = 0; i < result.length; i++){
+            html += '<li>' + result[i] + '</li>';
+          }
+          html += '</ul>';
+        document.getElementById('divCustomers').innerHTML = html;
+        }
+        </script>
+        <script type="text/javascript"
+        src="https://www.runoob.com/try/ajax/jsonp.php?
+        jsoncallback=callbackFunction">
+        </script>
     
     ```
 
