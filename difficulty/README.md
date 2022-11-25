@@ -7,3 +7,8 @@ https://javaforall.cn/190289.html
 
 
 Failed to connect to github.com port 443 
+
+monment工具库
+ - moment().unix() 获得的时间戳单位为秒
+ - moment().valueOf() 等同于 new Date().getTime() 获得的时间戳单位为毫秒
+ - Date.parse() 得到的值是以毫秒为单位的，且后三位默认为0，即不具体到毫秒如果想将时间戳转化为日期，moment的参数必须是毫秒为单位的,它就是识别为毫秒的，如果不是的话，会使结果出错
