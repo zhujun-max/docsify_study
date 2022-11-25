@@ -18,147 +18,70 @@
 
 > 容器属性
 
-1. flex-direction（主轴方向）
-2. flex-wrap（换行）
-3. flex-flow（方向 换行）
-4. justify-content（对齐方式）
-5. align-items（交叉轴对齐方式）
-6. align-content（多轴对齐方式）
+1. flex-direction（主轴方向）  
+    row（默认）：主轴为水平方向，起点在左端。  
+    row-reverse：主轴为水平方向，起点在右端。   
+    column：主轴为垂直方向，起点在上沿。  
+    column-reverse：主轴为垂直方向，起点在下沿。   
 
+2. flex-wrap（换行）  
+    nowrap（默认）：不换行（设置的项目的宽度就失效了，强行在一行显示）。  
+    wrap：换行。  
+    wrap-reverse：换行，第一行在下方。  
 
+3. flex-flow（方向 换行）  
+    flex-direction和flex-wrap的简写。默认值为row nowrap。
 
-**flex-direction属性**
+4. justify-content（主轴对齐方式）  
+    flex-start（默认）：左对齐。  
+    flex-end：右对齐。  
+    center：居中。  
+    space-between：两端对齐，项目之间的间隔都相等。  
+    space-around：每个项目的两侧间隔都相等，所以项目之间的间隔比边框大一倍。  
 
-决定主轴的方向（既项目的排列方向）
+5. align-items（交叉轴对齐方式，上下高度对其）  
+    flex-start：交叉轴的起点对齐，顶部对齐。  
+    flex-end：交叉轴的终点对齐，底部对齐。  
+    center：交叉轴的中点对齐。  
+    baseline：项目的第一行文字的基线对齐。  
+    stretch（默认）：如果项目未设置高度或设auto，将占满容器的高度。 
 
-row（默认值）：主轴为水平方向，起点在左端。
-
-row-reverse：主轴为水平方向，起点在右端。
-
-column：主轴为垂直方向，起点在上沿。
-
-column-reverse：主轴为垂直方向，起点在下沿。
-
-
-
-**flex-wrap**
-
-一条轴线排不下，如何换行
-
-nowrap（默认）：不换行。
-
-wrap：换行。
-
-wrap-reverse：换行，第一行在下方。
-
-
-
-**flex-flow**
-
-flex-direction和flex-flow的简写。默认值为row nowrap。
-
-
-
-**justify-content**
-
-主轴上的对齐方式
-
-flex-start（默认）：左对齐。
-
-flex-end：右对齐。
-
-center：居中。
-
-space-between：两端对齐，项目之间的间隔都相等。
-
-space-around：每个项目的两侧间隔都相等，所以项目之间的间隔比边框大一倍。
-
-
-
-**align-iems**
-
-交叉轴上如何对齐
-
-flex-start：交叉轴的起点对齐，顶部对齐。
-
-flex-end：交叉轴的终点对齐，底部对齐。
-
-center：交叉轴的中点对齐。
-
-baseline：项目的第一行文字的基线对齐。
-
-stretch（默认值）：如果项目未设置高度或设auto，将占满容器的高度。
-
-
-
-**align-content**
-
-多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
-
-flex-start：交叉轴的起点对齐，顶部对齐。
-
-flex-end：交叉轴的终点对齐，底部对齐。
-
-center：交叉轴的中点对齐。
-
-space-between：与交叉轴两端对齐，轴线之间的间隔平均布局。
-
-space-around：每根轴线两侧的间隔都相等。所以，项目之间的间隔比边框的间隔大一倍。
-
+6. align-content（多轴对齐方式。如果项目只有一根轴线，该属性不起作用）   
+    flex-start：交叉轴的起点对齐，顶部对齐。  
+    flex-end：交叉轴的终点对齐，底部对齐。  
+    center：交叉轴的中点对齐。  
+    space-between：与交叉轴两端对齐，轴线之间的间隔平均布局。  
+    space-around：每根轴线两侧的间隔都相等。所以，项目之间的间隔比边框的间隔大一倍。  
+    stretch（默认值）：轴线占满整个交叉轴。
 
 
 > 项目属性
 
-1. order（排列顺序，默认0）
-2. flex-grow（放大比列，默认0）
-3. flex-shrink（缩小比列，默认1）
+1. order（排列顺序，默认0）  
+    项目的排列顺序，数值越小越靠前，默认为0。可负数
+
+2. flex-grow（放大比列，默认0）  
+    项目的放大比列，默认为0，如果存在剩余空间，也不放大。
+    如果所有项目属性值都大于0并相同，则他们将等分剩余空间。
+
+3. flex-shrink（缩小比列，默认1）  
+    项目的缩小比列，默认为1。  
+    属性为0时，将不会缩小，负值无效。  
+
 4. flex-basis（项目占据固定大小）
+  定义有多余空间，项目占据的主轴空间大小，默认为auto（原本的大小）。  
+  可以设置和宽高一样的属性，px，%，vh都可以用。  
+
 5. flex（放大 缩小 大小三属性的缩写）
-6. align-self（不一样的对齐方式）
+  flex-grow，flex-shrink，flex-basis的简写，默认为0 1 auto，后两个可选。  
 
-**order**
-
-项目的排列顺序，数值越小越靠前，默认为0。
-
-**flex-grow**
-
-项目的放大比列，默认为0，如果存在剩余空间，也不放大。
-
-如果所有项目属性值都大于0并相同，则他们将等分剩余空间。
-
-**flex-shrink**
-
-项目的缩小比列，默认为1。
-
-属性为0时，将不会缩小，负值无效。
-
-**flex-basis**
-
-定义有多余空间，项目占据的主轴空间大小，默认为auto（原本的大小）。
-
-可以设置和宽高一样的属性，px，%，vh都可以用。
-
-**flex**
-
-flex-grow，flex-shrink，flex-basis的简写，默认为0 1 auto，后两个可选。
-
-**align-self**
-
-允许单个项目有不一样的对齐方式
-
-可覆盖align-items属性。
-
-auto：继承父元素的align-items属性。
-
-flex-start：交叉轴的起点对齐，顶部对齐。
-
-flex-end：交叉轴的终点对齐，底部对齐。
-
-center：交叉轴的中点对齐。
-
-baseline：项目的第一行文字的基线对齐。
-
-stretch（默认值）：如果项目未设置高度或设auto，将占满容器的高度。
+6. align-self（允许单个项目有不一样的对齐方式）  
+    auto：继承父元素的align-items属性。  
+    flex-start：交叉轴的起点对齐，顶部对齐。  
+    flex-end：交叉轴的终点对齐，底部对齐。  
+    center：交叉轴的中点对齐。  
+    baseline：项目的第一行文字的基线对齐。  
+    stretch（默认值）：如果项目未设置高度或设auto，将占满容器的高度。  
 
 
 
@@ -286,17 +209,34 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 
 
-伪类：![image.png](https://segmentfault.com/img/bVcQVRO)
+<!-- 伪类：![image.png](./img/03.png) -->
 
-伪元素：![image.png](https://segmentfault.com/img/bVcQVRP)
+| 伪类                    | 作用                                        |
+| ------------------------| -----------------------------------------  |
+| :active                 | 将样式添加到被激活的元素                     | 
+| :focus                  | 将样式添加到被选中的元素                      | 
+| :hover                  | 当鼠标悬浮在元素上方时，向元素添加样式         | 
+| :link                   | 将特殊的样式添加到未被访问过的链接             | 
+| :visited                | 将特殊的样式添加到被访问过的链接              | 
+| :first-child            | 将特殊的样式添加到元素的第一个子元素           |
+| :lang                   | 允许创作者来定义指定的元素中使用的语言         | 
 
+<!-- 伪元素：![image.png](./img/04.png) -->
+| 伪元素               | 作用                                        |
+| ---------------------| -----------------------------------------  |
+| :first-letter        | 将特殊的样式添加到文本的首字母                | 
+| :first-line          | 将特殊的样式添加到文本的首行                  | 
+| :before              | 在某元素之前插入某些内容                      | 
+| :after               | 在某元素之后插入某些内容                      | 
 
 
 
 
 ### 盒子模型是什么
 
-盒子模型由四个部分组成：margin（外边距）， border（边框），padding（内边距），content（内容）
+盒子模型由四个部分组成： 
+
+margin（外边距）， border（边框），padding（内边距），content（内容）
 
 如果就想用设置宽高来当总体的宽高度 ，就设置一个box-sizing：border-box；
 
@@ -3484,3 +3424,6 @@ const clonedColors=Array.from(colors)
 console.log(clonedColors); //"[red,green,blue]"
 ```
 
+npm 安装  --save   -g   是什么意思
+
+vue新建页面，methods: ，有些是函数，有些是对象呢
