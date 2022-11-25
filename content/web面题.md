@@ -3427,3 +3427,8 @@ console.log(clonedColors); //"[red,green,blue]"
 npm 安装  --save   -g   是什么意思
 
 vue新建页面，methods: ，有些是函数，有些是对象呢
+	
+工具函数的使用 monment
+	
+	
+	
