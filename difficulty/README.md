@@ -44,3 +44,8 @@ monment工具库
  <!-- 解决方案 -->
   <el-image :src="require('../assets/bg_login.jpeg')"></el-image>
  ```
+
+
+问题：PDF附件文本框，输入数字和字母不会自动换行
+ 原因：html的p标签，遇到长数字和字母不会换行
+ 解决方案：style="word-wrap:break-word;word-break:break-all;"

@@ -8,4 +8,4 @@
     - [autojs](other/autojs.md)
     - [Linux](other/Linux.md)
     - [npm](other/npm.md)
-    - [古诗](other/%E5%8F%A4%E8%AF%97.md)
+    - [前端规范](other/前端规范.md)
