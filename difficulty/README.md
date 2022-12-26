@@ -17,7 +17,7 @@
 
 ## Git
 
-1. Failed to connect to github.com port 443 
+1. Failed to connect to github.com port 443     
 ```js
   //编辑host文件
   # GitHub Start 
