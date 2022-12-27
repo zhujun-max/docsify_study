@@ -161,10 +161,10 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 ### position有哪些属性
 
-1. absolute:绝对定位；脱离文档流的布局，遗留下来的空间由后面的元素填充。
-2. relative：相对定位；不脱离文档流的布局，只改变自身的位置，在文档流原先的位置遗留空白区域。
+1. absolute:绝对定位；根据父元素为基准点进行定位，脱离文档流，不占用原来的位置。
+2. relative：相对定位；根据自身为基准点进行定位，不脱离文档流，只改变自身的位置，还是会占用原来的位置。
 3. fixed：固定定位；类似absolute，但不随滚动条的位置而改变。
-4. static：默认值；默认布局。
+4. static：默认值；默认布局（使用z-index无效）。
 
 
 
@@ -1232,7 +1232,7 @@ e.cancelBubble = true;
 
    **访问父对象：**子对象._ _propo_ _
 
-![img](https://s1.ax1x.com/2022/03/29/q6JFq1.png)
+![img](./img/q6JFq1.png)
 
 ```javascript
 function Student(sname,sage){
@@ -1835,7 +1835,7 @@ export var myMixin = {
 
 + **混入和page页面代码执行顺序（mixin先执行）**
 
-![img](https://img2020.cnblogs.com/blog/1366381/202108/1366381-20210818163234045-668246168.png)
+![img](./img/1366381-20210818163234045-668246168.png)
 
 ### webpack
 
@@ -2591,7 +2591,7 @@ a()
 
 ### 项目目录结构
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20191225163735830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2NDEwNzk1,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](./img/20191225163735830.png)
 
 
 
@@ -3200,9 +3200,70 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
   2. cnpm: 网速快。淘宝对npm的拷贝，10分钟同步一次。
   3. yarn: 以前安装过，后期可以离线安装。版本统一。扁平模式（将依赖包的不同版本归结为单个版本，以避免创建多个副本）
 
+### npm安装时-g、-S、-D有什么区别
+**npm install name**：安装依赖到 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install -g name**：全局安装,不在 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install name -S**：npm install name -save的简写，自动把模块和版本添加到dependencies。
+
+**npm install name -D**：npm install name -save-dev简写自动把模块和版本添加到devDependencies。
+
+**-D**后，安装包会在package.json中的devDependencies对象中，简称dev。dev是在开发中要用到的。
+
+**-S**后，安装包会在package.json中的dependencies对象中。简称dep。dep是在生产环境中要用到的。
+
+比如：
+
+**构建工具**：gulp和webpakc是用来压缩代码，打包需要的工具，程序实际运行中时候并不需要，就要放在dev中所以要用 -D。
+
+**项目插件**：如element ui ,echarts,这种的插件要在运行中使用的，就要放在dep中所以就用-S。 一般我们项目插件，在api中都可以看到，一般都是-S。因为这些插件是在程序运行中使用的。
+
+### css定位和层级
+1. z-index只有设置了定位才能生效（设置static默认定位是无效的）
+2. 层级一样的情况下，后者的元素会覆盖前者。
+3. 标准<浮动<定位
+
+![层级关系](./img/7845-4323.png)
 ## 简答题
 
+### 复制数组的方法
 
+1. 在ES5中，开发者们经常使用concat()方法来克隆数组
+
+```js
+// 在 ES5 中克隆数组(concat()方法的设计初衷是连接两个数组，如果调用时不传递参数就会返回当前函数的副本)
+const colors = [ "red", "green", "blue" ];
+const clonedColors = colors.concat();
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+2. 在ES6中，可以通过不定元素的语法来实现相同的目标
+
+```js
+// 在 ES6 中克隆数组
+const colors = [ "red", "green", "blue" ];
+const [ ...clonedColors ] = colors;
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+3. 使用fill创建相同长度数组，然后使用splice剪切原数组，（会改变原数组）
+
+```js
+// 
+const colors = [ "red", "green", "blue" ];
+const clonedColors = new Array(colors.length).fill(0)
+clonedColors.splice(0,colors.length,...colors);
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+4. 使用Array.from()
+
+```js
+const colors = [ "red", "green", "blue" ];
+const clonedColors=Array.from(colors)
+console.log(clonedColors); //"[red,green,blue]"
+```
 
 ### 1到100 使用递归
 
@@ -3386,48 +3447,8 @@ v-on监听多个方法
 qiankun微服务
 Object方法
 
-复制数组的方法
-
-1. 在ES5中，开发者们经常使用concat()方法来克隆数组
-
-```js
-// 在 ES5 中克隆数组(concat()方法的设计初衷是连接两个数组，如果调用时不传递参数就会返回当前函数的副本)
-const colors = [ "red", "green", "blue" ];
-const clonedColors = colors.concat();
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-2. 在ES6中，可以通过不定元素的语法来实现相同的目标
-
-```js
-// 在 ES6 中克隆数组
-const colors = [ "red", "green", "blue" ];
-const [ ...clonedColors ] = colors;
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-3. 使用fill创建相同长度数组，然后使用splice剪切原数组，（会改变原数组）
-
-```js
-// 
-const colors = [ "red", "green", "blue" ];
-const clonedColors = new Array(colors.length).fill(0)
-clonedColors.splice(0,colors.length,...colors);
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-4. 使用Array.from()
-
-```js
-const colors = [ "red", "green", "blue" ];
-const clonedColors=Array.from(colors)
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-npm 安装  --save   -g   是什么意思
 
 vue新建页面，methods: ，有些是函数，有些是对象呢
 	
 工具函数的使用 monment
 	
-css定位和层级，谁高
