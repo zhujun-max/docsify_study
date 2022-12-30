@@ -488,6 +488,15 @@ async function  demo(){
   + await/async使用try...catch...方式抓取错误
 
  
+### Promise对象
+Promise 是异步编程的一种解决方案    
+Promise接收两个参数，resolve, reject
+**Promise 的基本使用**
+1. then 链式操作，正确时执行
+2. catch 链式操作，错误时执行（如果执行resolve的回调出错，也会执行catch）
+3. finally 不管最后的状态如何，都会执行的操作
+4. all 所有的接口请求完毕后才会执行回调（只有要一个接口失败就走catch）
+5. race 所有的接口，谁第一个执行完毕就执行回调（和all类似，all是执行完所有，race是执行完第一个）
 
 ###  简述ES6使用到的新语句
 
@@ -930,18 +939,22 @@ b()//10
 | sort(a,b)                | 对数组元素进行排序（会先调用toString方法，然后按照字符串序列排序。也可以自定义排序） | 返回排序后的值           | 是         |
 | forEach(item,index,arr) | 对所有元素执行函数，常用来遍历元素 | 无 | 是 |
 | splice(start, end,value) | 可以删除，插入，替换 | 返回被替换/删除/插入的值 | 是 |
-|isArray()					|用于检测是否为数组|返回true，false|否|
-|toString()		|把元素转换为字符串，默认以逗号分割		|返回字符串|否|
-|every(item,index,arr)	|对所有元素执行函数，全部都为true，返回true	|返回true，false|否|
-|some()	|对所有元素执行函数，有一个为true，返回true	|返回true，false|否|
-|filter(item,index,arr)	|对所有元素执行函数(自定义函数)	|返回满足条件的值|否|
-|map(item,index,arr)	|对所有元素执行函数	|返回自定义函数结果|否|
+| isArray()					|用于检测是否为数组|返回true，false|否|
+| toString()		|把元素转换为字符串，默认以逗号分割		|返回字符串|否|
+| every(item,index,arr)	|对所有元素执行函数，全部都为true，返回true	|返回true，false|否|
+| some()	|对所有元素执行函数，有一个为true，返回true	|返回true，false|否|
+| filter(item,index,arr)	|对所有元素执行函数(自定义函数)	|返回满足条件的值|否|
+| map(item,index,arr)	|对所有元素执行函数	|返回自定义函数结果|否|
 | concat()                 | 拼接两个或多个数组                               | 返回合并的值             | 否         |
 | join()                   | 把元素转成字符串，使用指定符号分割                 | 返回分割后的字符串        | 否         |
 | slice(start, end)        | 截取元素                                           | 返回截取的值             | 否         |
-| indexOf(x, start)        | 查找元素第一次出现的位置                           | 返回下标，没找到返回-1   | 否         |
+| indexOf(x, start)        | 查找元素第一次出现的位置。只能使用数组中的值                           | 返回下标，没找到返回-1   | 否         |
 | lastIndexOf(x,start)  | 查找元素最后一次出现的位置                         | 返回下标，没找到返回-1   | 否         |
-
+| findIndex()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回下标，没找到返回undefined   | 否         |
+| find()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回元素值，没找到返回undefined   | 否         |
+| includes(x,start)  | 查找元素是否包含指定的值        | 返回true和false  | 否         |
+| toString()  | 将数组用逗号隔开        | 返回字符串  | 否         |
+| slice(start, end)  | 复制指定位置元素        | 返回数组中被选中的元素  | 否         |
 
 
 ### 循环的方式
@@ -3446,14 +3459,14 @@ vue3
 
 
 ## 待优化项
-循环方式，没写清楚，
-porams的理解
-es6解构赋值使用场景
-true和false是怎么判断的
-项数据流的理解
-axios为什么要二次封装
-http的工作过程
-v-on监听多个方法
-qiankun微服务
-Object方法
+循环方式，没写清楚，    
+porams的理解    
+es6解构赋值使用场景   
+true和false是怎么判断的   
+项数据流的理解    
+axios为什么要二次封装   
+http的工作过程    
+v-on监听多个方法    
+qiankun微服务   
+Object方法    
 
