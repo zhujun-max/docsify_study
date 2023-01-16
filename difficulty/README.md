@@ -15,6 +15,8 @@
     <el-image :src="require('../assets/bg_login.jpeg')"></el-image>
     ```
 
+5. element数值输入框小数点最后一位，会出现异常情况
+
 ## Git
 
 1. Failed to connect to github.com port 443     

@@ -6,7 +6,10 @@
 
 ### 行，块，行内块元素都有哪些
 
-**行内元素：**span、a、
+**行内元素：**span、a、  
+<span style="    font-size: 12px;
+    line-height: 10px;
+    color: #878787;">注意：行内元素设置margin的上下高度是无效的<br>padding的上下高度只会影响边框和背景</span>
 
 **块级元素：**p、div、form、hr、h1~h6、
 
@@ -373,7 +376,7 @@ MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MV
 
    ​	3）待属性变动，dep.notice()通知时，就调用自身的updete()方法，并触发Compile中绑定的回调
    
-4. 最后，viewmodel（vue实例对象）作为数据绑定的入口，整合Observer，Compile，Watcher三者，通过 Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起 Observer和Compile之间的通信桥梁，达到数据变化 (ViewModel)-》视图更新(view)；视图变化 (view)-》数据(ViewModel)变更的双向绑定效果。
+4. 最后，viewmodel（vue实例对象）作为数据绑定的入口，整合Observer，Compile，Watcher三者，通过 Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起 Observer和Compile之间的通信桥梁，达到数据变化 (ViewModel) -> 视图更新(view)；视图变化 (view) -> 数据(ViewModel)变更的双向绑定效果。
 
 
 
@@ -488,6 +491,11 @@ async function  demo(){
   + await/async使用try...catch...方式抓取错误
 
  
+
+### 同步和异步
+**同步**: 先执行完当前行内容，然后再执行下一条内容，会阻止后续代码执行，通过返回值获取结果  
+**异步**: 把要执行的内容以回调函数形式放入到事件队列，不会阻止后续代码执行，通过回调函数获取结果  
+
 ### Promise对象
 Promise 是异步编程的一种解决方案    
 Promise接收两个参数，resolve, reject
@@ -570,45 +578,38 @@ Promise接收两个参数，resolve, reject
 
 1、 props / emit 父传子，子传父
 
-​	   缺点：多级嵌套组件
+​	   缺点：跨组件、同级传参麻烦
 
-2、provide(破外特)与inject（鹰假可特）默认不是响应式
+2、provide与inject
 
-这对选项需要一起使用，以允许一个组件向其所有子孙后代注入一个依赖，无论层级有多深，都在其上下游关系成立的时间里始终生效。
+  数据向下传递。成对使用。
 
-​		缺点：子组件不能向祖先组件传递数据
+​		缺点：子组件不能向祖先组件传递数据。  
+         不是响应式（但如果传入对象，是响应的）
 
-```vue
+```js
 // A组件 父级
-<div>
-      <h1>A 组件</h1>
-      <ChildrenB />
-</div>
+  <div>
+    <h1>A 组件</h1>
+    <ChildrenB />
+  </div>
   provide() {
     return {
-      theme: this//方法一：提供祖先组件的实例
+      theme: this // 方法一：提供祖先组件的实例
+      name: ()=> this  // 响应式写法
     };
   }
 
-// F组件 子级或者孙级
-<template functional>
+  // F组件 子级或者孙级
   <div class="border2">
     <h3 :style="{ color: injections.theme.color }">F 组件</h3>
   </div>
-</template>
-<script>
-export default {
-  inject: {
-    theme: {
-      //函数式组件取值不一样
-      default: () => ({})
-    }
-  }
-};
-</script>
+  // 也可以使用对象的方式接收，可设置默认值
+  inject: ['theme','name']
+  // name传递的是函数，需要调用才行
 ```
 
-3、$attrs （哦脆死）/ $listeners（你什哪丝）
+3、$attrs / $listeners
 
  		能够实现子传祖
 
@@ -2737,7 +2738,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 ### Event loop
 
-javaScript是单线程，所有任务都需要排队，前一个任务结束，才会执行后一个人任务。
+javaScript是单线程，所有任务都需要排队，前一个任务结束，才会执行后一个任务。
 
 而这种**主线程从"任务队列"中读取执行事件，不断循环重复的过成**，就被称为**事件循环（Event Loop）**
 
@@ -2849,7 +2850,6 @@ console.log(JSON.parse(url))
 ```javascript
 <!-- 只有在‘key’是‘Enter’时调用‘vm.submit()’ -->
 <input v-on.keyup.enter="submit">
-`l`
 ```
 
 **v-model修饰符**
