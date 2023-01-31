@@ -302,7 +302,7 @@ mvc是model-view-controller的缩写。
   >
   > 例如：<butt id='tedu'>Tedy</button>
   >
-  > 注意：此按钮美誉偶onclick的事件写法。
+  > 注意：此按钮没有onclick的事件写法。
 
 + Controller：控制层
 
@@ -1408,10 +1408,8 @@ function setCookie(name, value, { secure, path, domain, expires }) {
 1.不能作为构造函数，不能使用new
 
 ```javascript
-let foo=()=>{
-
-}
-var newFoo=new foo()//foo is not a construcotr
+  let foo=()=>{}
+  var newFoo=new foo()//foo is not a construcotr
 ```
 
 2.不能使用argumetns,取而代之用rest参数...解决
@@ -1716,10 +1714,11 @@ div1.addEventListener('drag', e => {
 
 ### v-for为什么要加key
 
-vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id index等，因为vue组件高度复用增加Key可以识组件的唯一性，为了更好地区别各个组件 key的作用主要是为了高效的更新虚拟DOM
+key是唯一标识，它作用主要是为了更高效的让diff算法更准确的找到需要被对比的两个结点  
 
-无：key属性时，状态默认绑定的是位置
-有：key属性时，状态根据key的属性值绑定到了相应的数组元素
+如果不定义key的话，Vue只能认为比较的两个节点是同一个，导致了频繁更新元素，使得整个patch（diff算法）过程比较低效，影响性能。 
+
+在实际的使用中在渲染一组列表时key必须设置，而且必须是唯一标识（所以不能用随机数做key），应该避免使用index作为key，因为会导致一些隐蔽的bug；Vue中在使用相同标签元素过渡切换时，也会使用key属性，其目的也是为了让Vue可以区分它们，否则Vue只会替换其内部属性而不会触发过渡效果。  
 
 **index不能作为key值**
 
