@@ -6,7 +6,10 @@
 
 ### 行，块，行内块元素都有哪些
 
-**行内元素：**span、a、
+**行内元素：**span、a、  
+<span style="    font-size: 12px;
+    line-height: 10px;
+    color: #878787;">注意：行内元素设置margin的上下高度是无效的<br>padding的上下高度只会影响边框和背景</span>
 
 **块级元素：**p、div、form、hr、h1~h6、
 
@@ -161,10 +164,10 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 ### position有哪些属性
 
-1. absolute:绝对定位；脱离文档流的布局，遗留下来的空间由后面的元素填充。
-2. relative：相对定位；不脱离文档流的布局，只改变自身的位置，在文档流原先的位置遗留空白区域。
+1. absolute:绝对定位；根据父元素为基准点进行定位，脱离文档流，不占用原来的位置。
+2. relative：相对定位；根据自身为基准点进行定位，不脱离文档流，只改变自身的位置，还是会占用原来的位置。
 3. fixed：固定定位；类似absolute，但不随滚动条的位置而改变。
-4. static：默认值；默认布局。
+4. static：默认值；默认布局（使用z-index无效）。
 
 
 
@@ -299,7 +302,7 @@ mvc是model-view-controller的缩写。
   >
   > 例如：<butt id='tedu'>Tedy</button>
   >
-  > 注意：此按钮美誉偶onclick的事件写法。
+  > 注意：此按钮没有onclick的事件写法。
 
 + Controller：控制层
 
@@ -373,7 +376,7 @@ MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MV
 
    ​	3）待属性变动，dep.notice()通知时，就调用自身的updete()方法，并触发Compile中绑定的回调
    
-4. 最后，viewmodel（vue实例对象）作为数据绑定的入口，整合Observer，Compile，Watcher三者，通过 Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起 Observer和Compile之间的通信桥梁，达到数据变化 (ViewModel)-》视图更新(view)；视图变化 (view)-》数据(ViewModel)变更的双向绑定效果。
+4. 最后，viewmodel（vue实例对象）作为数据绑定的入口，整合Observer，Compile，Watcher三者，通过 Observer来监听自己的model数据变化，通过Compile来解析编译模板指令，最终利用Watcher搭起 Observer和Compile之间的通信桥梁，达到数据变化 (ViewModel) -> 视图更新(view)；视图变化 (view) -> 数据(ViewModel)变更的双向绑定效果。
 
 
 
@@ -489,6 +492,20 @@ async function  demo(){
 
  
 
+### 同步和异步
+**同步**: 先执行完当前行内容，然后再执行下一条内容，会阻止后续代码执行，通过返回值获取结果  
+**异步**: 把要执行的内容以回调函数形式放入到事件队列，不会阻止后续代码执行，通过回调函数获取结果  
+
+### Promise对象
+Promise 是异步编程的一种解决方案    
+Promise接收两个参数，resolve, reject
+**Promise 的基本使用**
+1. then 链式操作，正确时执行
+2. catch 链式操作，错误时执行（如果执行resolve的回调出错，也会执行catch）
+3. finally 不管最后的状态如何，都会执行的操作
+4. all 所有的接口请求完毕后才会执行回调（只有要一个接口失败就走catch）
+5. race 所有的接口，谁第一个执行完毕就执行回调（和all类似，all是执行完所有，race是执行完第一个）
+
 ###  简述ES6使用到的新语句
 
 1. let：块级作用域，不能重复声明，没有变量提升
@@ -561,45 +578,38 @@ async function  demo(){
 
 1、 props / emit 父传子，子传父
 
-​	   缺点：多级嵌套组件
+​	   缺点：跨组件、同级传参麻烦
 
-2、provide(破外特)与inject（鹰假可特）默认不是响应式
+2、provide与inject
 
-这对选项需要一起使用，以允许一个组件向其所有子孙后代注入一个依赖，无论层级有多深，都在其上下游关系成立的时间里始终生效。
+  数据向下传递。成对使用。
 
-​		缺点：子组件不能向祖先组件传递数据
+​		缺点：子组件不能向祖先组件传递数据。  
+         不是响应式（但如果传入对象，是响应的）
 
-```vue
+```js
 // A组件 父级
-<div>
-      <h1>A 组件</h1>
-      <ChildrenB />
-</div>
+  <div>
+    <h1>A 组件</h1>
+    <ChildrenB />
+  </div>
   provide() {
     return {
-      theme: this//方法一：提供祖先组件的实例
+      theme: this // 方法一：提供祖先组件的实例
+      name: ()=> this  // 响应式写法
     };
   }
 
-// F组件 子级或者孙级
-<template functional>
+  // F组件 子级或者孙级
   <div class="border2">
     <h3 :style="{ color: injections.theme.color }">F 组件</h3>
   </div>
-</template>
-<script>
-export default {
-  inject: {
-    theme: {
-      //函数式组件取值不一样
-      default: () => ({})
-    }
-  }
-};
-</script>
+  // 也可以使用对象的方式接收，可设置默认值
+  inject: ['theme','name']
+  // name传递的是函数，需要调用才行
 ```
 
-3、$attrs （哦脆死）/ $listeners（你什哪丝）
+3、$attrs / $listeners
 
  		能够实现子传祖
 
@@ -930,18 +940,22 @@ b()//10
 | sort(a,b)                | 对数组元素进行排序（会先调用toString方法，然后按照字符串序列排序。也可以自定义排序） | 返回排序后的值           | 是         |
 | forEach(item,index,arr) | 对所有元素执行函数，常用来遍历元素 | 无 | 是 |
 | splice(start, end,value) | 可以删除，插入，替换 | 返回被替换/删除/插入的值 | 是 |
-|isArray()					|用于检测是否为数组|返回true，false|否|
-|toString()		|把元素转换为字符串，默认以逗号分割		|返回字符串|否|
-|every(item,index,arr)	|对所有元素执行函数，全部都为true，返回true	|返回true，false|否|
-|some()	|对所有元素执行函数，有一个为true，返回true	|返回true，false|否|
-|filter(item,index,arr)	|对所有元素执行函数(自定义函数)	|返回满足条件的值|否|
-|map(item,index,arr)	|对所有元素执行函数	|返回自定义函数结果|否|
+| isArray()					|用于检测是否为数组|返回true，false|否|
+| toString()		|把元素转换为字符串，默认以逗号分割		|返回字符串|否|
+| every(item,index,arr)	|对所有元素执行函数，全部都为true，返回true	|返回true，false|否|
+| some()	|对所有元素执行函数，有一个为true，返回true	|返回true，false|否|
+| filter(item,index,arr)	|对所有元素执行函数(自定义函数)	|返回满足条件的值|否|
+| map(item,index,arr)	|对所有元素执行函数	|返回自定义函数结果|否|
 | concat()                 | 拼接两个或多个数组                               | 返回合并的值             | 否         |
 | join()                   | 把元素转成字符串，使用指定符号分割                 | 返回分割后的字符串        | 否         |
 | slice(start, end)        | 截取元素                                           | 返回截取的值             | 否         |
-| indexOf(x, start)        | 查找元素第一次出现的位置                           | 返回下标，没找到返回-1   | 否         |
+| indexOf(x, start)        | 查找元素第一次出现的位置。只能使用数组中的值                           | 返回下标，没找到返回-1   | 否         |
 | lastIndexOf(x,start)  | 查找元素最后一次出现的位置                         | 返回下标，没找到返回-1   | 否         |
-
+| findIndex()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回下标，没找到返回undefined   | 否         |
+| find()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回元素值，没找到返回undefined   | 否         |
+| includes(x,start)  | 查找元素是否包含指定的值        | 返回true和false  | 否         |
+| toString()  | 将数组用逗号隔开        | 返回字符串  | 否         |
+| slice(start, end)  | 复制指定位置元素        | 返回数组中被选中的元素  | 否         |
 
 
 ### 循环的方式
@@ -1232,7 +1246,7 @@ e.cancelBubble = true;
 
    **访问父对象：**子对象._ _propo_ _
 
-![img](https://s1.ax1x.com/2022/03/29/q6JFq1.png)
+![img](./img/q6JFq1.png)
 
 ```javascript
 function Student(sname,sage){
@@ -1394,10 +1408,8 @@ function setCookie(name, value, { secure, path, domain, expires }) {
 1.不能作为构造函数，不能使用new
 
 ```javascript
-let foo=()=>{
-
-}
-var newFoo=new foo()//foo is not a construcotr
+  let foo=()=>{}
+  var newFoo=new foo()//foo is not a construcotr
 ```
 
 2.不能使用argumetns,取而代之用rest参数...解决
@@ -1702,10 +1714,11 @@ div1.addEventListener('drag', e => {
 
 ### v-for为什么要加key
 
-vue中列表循环需加:key="唯一标识" 唯一标识可以是item里面id index等，因为vue组件高度复用增加Key可以识组件的唯一性，为了更好地区别各个组件 key的作用主要是为了高效的更新虚拟DOM
+key是唯一标识，它作用主要是为了更高效的让diff算法更准确的找到需要被对比的两个结点  
 
-无：key属性时，状态默认绑定的是位置
-有：key属性时，状态根据key的属性值绑定到了相应的数组元素
+如果不定义key的话，Vue只能认为比较的两个节点是同一个，导致了频繁更新元素，使得整个patch（diff算法）过程比较低效，影响性能。 
+
+在实际的使用中在渲染一组列表时key必须设置，而且必须是唯一标识（所以不能用随机数做key），应该避免使用index作为key，因为会导致一些隐蔽的bug；Vue中在使用相同标签元素过渡切换时，也会使用key属性，其目的也是为了让Vue可以区分它们，否则Vue只会替换其内部属性而不会触发过渡效果。  
 
 **index不能作为key值**
 
@@ -1835,7 +1848,7 @@ export var myMixin = {
 
 + **混入和page页面代码执行顺序（mixin先执行）**
 
-![img](https://img2020.cnblogs.com/blog/1366381/202108/1366381-20210818163234045-668246168.png)
+![img](./img/1366381-20210818163234045-668246168.png)
 
 ### webpack
 
@@ -2599,7 +2612,7 @@ a()
 
 ### 项目目录结构
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20191225163735830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2NDEwNzk1,size_16,color_FFFFFF,t_70)
+![项目目录结构](./img/20191225163735830.png)
 
 
 
@@ -2732,7 +2745,7 @@ v-once：不需要表达式，只渲染元素或组件一次，随后的渲染�
 
 ### Event loop
 
-javaScript是单线程，所有任务都需要排队，前一个任务结束，才会执行后一个人任务。
+javaScript是单线程，所有任务都需要排队，前一个任务结束，才会执行后一个任务。
 
 而这种**主线程从"任务队列"中读取执行事件，不断循环重复的过成**，就被称为**事件循环（Event Loop）**
 
@@ -2844,7 +2857,6 @@ console.log(JSON.parse(url))
 ```javascript
 <!-- 只有在‘key’是‘Enter’时调用‘vm.submit()’ -->
 <input v-on.keyup.enter="submit">
-`l`
 ```
 
 **v-model修饰符**
@@ -3208,9 +3220,80 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
   2. cnpm: 网速快。淘宝对npm的拷贝，10分钟同步一次。
   3. yarn: 以前安装过，后期可以离线安装。版本统一。扁平模式（将依赖包的不同版本归结为单个版本，以避免创建多个副本）
 
+### npm安装时-g、-S、-D有什么区别
+**npm install name**：安装依赖到 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install -g name**：全局安装,不在 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install name -S**：npm install name -save的简写，自动把模块和版本添加到dependencies。
+
+**npm install name -D**：npm install name -save-dev简写自动把模块和版本添加到devDependencies。
+
+**-D**后，安装包会在package.json中的devDependencies对象中，简称dev。dev是在开发中要用到的。
+
+**-S**后，安装包会在package.json中的dependencies对象中。简称dep。dep是在生产环境中要用到的。
+
+比如：
+
+**构建工具**：gulp和webpakc是用来压缩代码，打包需要的工具，程序实际运行中时候并不需要，就要放在dev中所以要用 -D。
+
+**项目插件**：如element ui ,echarts,这种的插件要在运行中使用的，就要放在dep中所以就用-S。 一般我们项目插件，在api中都可以看到，一般都是-S。因为这些插件是在程序运行中使用的。
+
+### css定位和层级
+1. z-index只有设置了定位才能生效（设置static默认定位是无效的）
+2. 层级一样的情况下，后者的元素会覆盖前者。
+3. 标准 < 浮动 < 定位
+
+![层级关系](./img/7845-4323.png)
+
+### vue组件中为什么data要写成对象的形式，而实中不需要
+  组件需要复用，实例不需要    
+  https://blog.csdn.net/F_fengzilin/article/details/116710610
+
+
+### js中if判断true和false
+''、0、undefined、null、false、NaNd都为false。其他的都为true。
+
+
 ## 简答题
 
+### 复制数组的方法
 
+1. 在ES5中，开发者们经常使用concat()方法来克隆数组
+
+```js
+// 在 ES5 中克隆数组(concat()方法的设计初衷是连接两个数组，如果调用时不传递参数就会返回当前函数的副本)
+const colors = [ "red", "green", "blue" ];
+const clonedColors = colors.concat();
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+2. 在ES6中，可以通过不定元素的语法来实现相同的目标
+
+```js
+// 在 ES6 中克隆数组
+const colors = [ "red", "green", "blue" ];
+const [ ...clonedColors ] = colors;
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+3. 使用fill创建相同长度数组，然后使用splice剪切原数组，（会改变原数组）
+
+```js
+// 
+const colors = [ "red", "green", "blue" ];
+const clonedColors = new Array(colors.length).fill(0)
+clonedColors.splice(0,colors.length,...colors);
+console.log(clonedColors); //"[red,green,blue]"
+```
+
+4. 使用Array.from()
+
+```js
+const colors = [ "red", "green", "blue" ];
+const clonedColors=Array.from(colors)
+console.log(clonedColors); //"[red,green,blue]"
+```
 
 ### 1到100 使用递归
 
@@ -3383,59 +3466,14 @@ vue3
 
 
 ## 待优化项
-循环方式，没写清楚，
-porams的理解
-es6解构赋值使用场景
-true和false是怎么判断的
-项数据流的理解
-axios为什么要二次封装
-http的工作过程
-v-on监听多个方法
-qiankun微服务
-Object方法
+循环方式，没写清楚，    
+porams的理解    
+es6解构赋值使用场景   
+true和false是怎么判断的   
+项数据流的理解    
+axios为什么要二次封装   
+http的工作过程    
+v-on监听多个方法    
+qiankun微服务   
+Object方法    
 
-复制数组的方法
-
-1. 在ES5中，开发者们经常使用concat()方法来克隆数组
-
-```js
-// 在 ES5 中克隆数组(concat()方法的设计初衷是连接两个数组，如果调用时不传递参数就会返回当前函数的副本)
-const colors = [ "red", "green", "blue" ];
-const clonedColors = colors.concat();
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-2. 在ES6中，可以通过不定元素的语法来实现相同的目标
-
-```js
-// 在 ES6 中克隆数组
-const colors = [ "red", "green", "blue" ];
-const [ ...clonedColors ] = colors;
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-3. 使用fill创建相同长度数组，然后使用splice剪切原数组，（会改变原数组）
-
-```js
-// 
-const colors = [ "red", "green", "blue" ];
-const clonedColors = new Array(colors.length).fill(0)
-clonedColors.splice(0,colors.length,...colors);
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-4. 使用Array.from()
-
-```js
-const colors = [ "red", "green", "blue" ];
-const clonedColors=Array.from(colors)
-console.log(clonedColors); //"[red,green,blue]"
-```
-
-npm 安装  --save   -g   是什么意思
-
-vue新建页面，methods: ，有些是函数，有些是对象呢
-	
-工具函数的使用 monment
-	
-css定位和层级，谁高
