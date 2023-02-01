@@ -1877,6 +1877,14 @@ Webpack首先会把配置参数和命令行的参数及默认参数合并，并�
 
 ## 不常见面试题
 
+### 微信小程序跳转方式
+wx.navigateTo(Object)：保留当前页面，跳转到应用内的某个页面，使用 wx.navigateBack 可以返回到原页（新页面入栈）  
+wx.redirectTo(Object)：关闭当前页面，跳转到应用内的某个页面（当前页面出栈，新页面入栈）  
+wx.switchTab(Object)：跳转到 tabBar 页面，同时关闭其他非 tabBar 页面（非Tab页面全部出栈，只留下新的 Tab 页面）  
+wx.navigateBack(Object)：返回上一页面（页面不断出栈）  
+wx.reLaunch(Object)：关闭所有页面，打开到应用内的某个页面（页面全部出栈，只留下新的页面）  
+
+
 ### 浮点数相加
   1. 将小数转为整数，相加之后除以相差的倍数
   ```js
