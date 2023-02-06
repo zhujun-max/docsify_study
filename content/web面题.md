@@ -1890,6 +1890,14 @@ Webpack首先会把配置参数和命令行的参数及默认参数合并，并�
 
 ## 不常见面试题
 
+### 微信小程序跳转方式
+wx.navigateTo(Object)：保留当前页面，跳转到应用内的某个页面，使用 wx.navigateBack 可以返回到原页（新页面入栈）  
+wx.redirectTo(Object)：关闭当前页面，跳转到应用内的某个页面（当前页面出栈，新页面入栈）  
+wx.switchTab(Object)：跳转到 tabBar 页面，同时关闭其他非 tabBar 页面（非Tab页面全部出栈，只留下新的 Tab 页面）  
+wx.navigateBack(Object)：返回上一页面（页面不断出栈）  
+wx.reLaunch(Object)：关闭所有页面，打开到应用内的某个页面（页面全部出栈，只留下新的页面）  
+
+
 ### 浮点数相加
   1. 将小数转为整数，相加之后除以相差的倍数
   ```js
@@ -1943,7 +1951,7 @@ https://www.cnblogs.com/better-echo/p/6285301.html
 
 1. doctype的作用
 
-   >< DOCTYPE >  声明位于HTML文档中的第一行，处于<html>标签之前。告诉浏览器用什么文档标准解析这个文档。DOMTYPE不存在或格式不正确会导致文档以兼容模式呈现。
+   >< !DOCTYPE >声明叫做文件类型定义（DTD），声明的作用为了告诉浏览器该文件的类型。让浏览器解析器知道应该用哪个规范来解析文档。<!DOCTYPE>声明必须在 HTML 文档的第一行，但这并不是一个 HTML 标签。
 
 2. 严格模式和混合模式如何区分？他们有什么意思？
 
@@ -2005,7 +2013,7 @@ watch：一个数据影响多个数据。
 
 computed：一个数据受多个数据影响。缓存值，不会主动重新计算，只有存在依赖数据，依赖数据发发生改变才会重新计算。
 
-**如果在handler函数中使用了箭头函数，改变了this指向，就无法获取到Vue实列，则为undefined。所以不要在这使用箭头函数，如果用，let that=this。**
+**如果在handler函数中使用了箭头函数，改变了this指向，就无法获取到Vue实列，则为undefined。所以不要在这使用箭头函数，如果用，`let that=this`。**
 
 **对于父子组件传参，异步获数据有时会存在获取不到值的情况。这是watch就派上用场，适当的时候配合immediate或者deep属性配合使用**
 
@@ -2060,13 +2068,13 @@ computed：一个数据受多个数据影响。缓存值，不会主动重新计
    },
    watch:{
    	'obj.a':{//监听对象属性
-       'arr.length':{//监听数组长度，最好配合计算属性使用
-       '$route':{//监听route变化。
-           hander(newVal,oldVal){
-               cons.log('newVal-a',obj.a)
-               cons.log('oldVal-a',obj.a)
-           }
-       }
+    'arr.length':{//监听数组长度，最好配合计算属性使用
+    '$route':{//监听route变化。
+        hander(newVal,oldVal){
+            cons.log('newVal-a',obj.a)
+            cons.log('oldVal-a',obj.a)
+        }
+      }
    }
    ```
 
