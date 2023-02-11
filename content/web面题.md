@@ -54,13 +54,13 @@
     flex-end：交叉轴的终点对齐，底部对齐。  
     center：交叉轴的中点对齐。  
     space-between：与交叉轴两端对齐，轴线之间的间隔平均布局。  
-    space-around：每根轴线两侧的间隔都相等。所以，项目之间的间隔比边框的间隔大一倍。  
+    space-around：每根轴线两侧的间隔都相等。项目之间的间隔比边框的间隔大一倍。  
     stretch（默认值）：轴线占满整个交叉轴。
 
 
 > 项目属性
 
-1. order（排列顺序，默认0）  
+1. order（排列顺序，默认0）   
     项目的排列顺序，数值越小越靠前，默认为0。可负数
 
 2. flex-grow（放大比列，默认0）  
@@ -71,14 +71,14 @@
     项目的缩小比列，默认为1。  
     属性为0时，将不会缩小，负值无效。  
 
-4. flex-basis（项目占据固定大小）
+4. flex-basis（项目占据固定大小）  
   定义有多余空间，项目占据的主轴空间大小，默认为auto（原本的大小）。  
   可以设置和宽高一样的属性，px，%，vh都可以用。  
 
-5. flex（放大 缩小 大小三属性的缩写）
+5. flex（放大 缩小 大小三属性的缩写）  
   flex-grow，flex-shrink，flex-basis的简写，默认为0 1 auto，后两个可选。  
 
-6. align-self（允许单个项目有不一样的对齐方式）  
+6. align-self（允许单个项目有不一样的对齐方式）   
     auto：继承父元素的align-items属性。  
     flex-start：交叉轴的起点对齐，顶部对齐。  
     flex-end：交叉轴的终点对齐，底部对齐。  
@@ -93,7 +93,6 @@
 bfc：其作用是使内部元素的布局不受外部元素影响。
 
 **BFC的触发条件**
-
 + 根元素，也就是html根标签
 + position：fixed/absoluted
 + float属性值不是none的
@@ -101,7 +100,6 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 + display属性值：inline-display/table-cell/table-caption/flex/inline-flex;
 
 **BFC的作用**
-
 + bfc内部元素的布局不受外部元素影响。
 + bfc区域不会出现margin重叠
 + bfc区域计算高度时候会自动计算浮动元素
@@ -140,7 +138,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 ### 左右固定，中间实现自适应
 
-**1.float实现**
+**1. float实现**
 
 ```html
 <div>
@@ -150,7 +148,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 </div>
 ```
 
-**2.flex实现**
+**2. flex实现**
 
 ```html
 <div style="display:flex;">
@@ -173,24 +171,16 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 ### 消除浮动
 
-**产生原因：**
+**产生原因：**  
+1. 当父元素不给高度的时候；  
+2. 子元素设置了float浮动属性；
 
-​	当父元素不给高度的时候；
-
-​	子元素设置了float浮动属性；
-
-**解决方案：**
-
-1. 在标签的最后位置添加一个div标签，设置clear: both;
-
-2. 给父元素添加overflow属性
-
-3. 让父级元素也浮动
-
-4. 给邻接元素添加clear:both;
-
-5. 给父级设置after元素，设置
-
+**解决方案：**  
+1. 在标签的最后位置添加一个div标签，设置``clear: both;``  
+2. 给父元素添加overflow属性  
+3. 让父级元素也浮动  
+4. 给邻接元素添加``clear:both; `` 
+5. 给父级设置after元素，设置  
    ```css
    .clearfix:after{
      content: "";
@@ -200,9 +190,6 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
      visibility: hidden;  
    }
    ```
-
-
-
 
 ### 伪类和伪元素的区别
 
@@ -284,37 +271,26 @@ mvc是model-view-controller的缩写。
 
 让html中不存在任何逻辑代码，没有javascript代码痕迹。
 
-***
-
-以原生HTML为例：
 
 + model：数据模型层
 
-  > 早期前端：弱化的model，不关注Model层，数据都是从服务器下来，直接使用即可。
-  >
-  > 现在前端：使用webStorage，框架中的vuex，Redux等管理数据。
-  >
-  > 在TypeScript语言中，新增了数据类型声明特征，才让Model在前端变得尤为重要。
+   早期前端：弱化的model，不关注Model层，数据都是从服务器下来，直接使用即可。  
+   现在前端：使用webStorage，框架中的vuex，Redux等管理数据。  
+   在TypeScript语言中，新增了数据类型声明特征，才让Model在前端变得尤为重要。
 
 + View：视图层
 
-  > 书写普通的html，不掺杂任何js代码。
-  >
-  > 例如：<butt id='tedu'>Tedy</button>
-  >
-  > 注意：此按钮没有onclick的事件写法。
+   书写普通的html，不掺杂任何js代码。  
+   例如：``<butt id='tedu'>Tedy</button>``  
+   注意：此按钮没有onclick的事件写法。
 
 + Controller：控制层
 
-  > 控制HTML的具体行为，具体为script代码范围。列入id=‘tedu’的按钮事件写法；
-  >
-  > ```javascript
-  > var btn=docuent.getElementById("tedu");
-  > btn.onclick=functon(){alret('123')}
-  > ```
-  >
-
-
+   控制HTML的具体行为，具体为script代码范围。列入id=‘tedu’的按钮事件写法；
+   ```js
+   var btn=docuent.getElementById("tedu");
+   btn.onclick=functon(){alret('123')}
+   ```
 
 ###  MVVM是什么
 
@@ -322,19 +298,15 @@ MVVM就是Model-View-ViewModel的简写。他本质上就是MVC的改进版。MV
 
 以vue为例：
 
-+ Model：数据模型层
++ Model：数据模型层  
+   script部分的data属性，专门管理数据。
 
-  > script部分的data属性，专门管理数据。
++ View：视图层  
+   即template中的代码，负责UI的构建。
 
-+ View：视图层
-
-  > 即template中的代码，负责UI的构建。
-
-+ ViewModel：视图模型层
-
-  > new Vue({ })部分。自动管理数据和视图层。
-  >
-  > 重点是双向数据绑定功能，实现变化视图自动更新，视图变化，数据自动联动。
++ ViewModel：视图模型层  
+   new Vue({ })部分。自动管理数据和视图层。  
+   重点是双向数据绑定功能，实现变化视图自动更新，视图变化，数据自动联动。
 
 **解决了什么问题**
 
@@ -503,7 +475,7 @@ Promise接收两个参数，resolve, reject
 1. then 链式操作，正确时执行
 2. catch 链式操作，错误时执行（如果执行resolve的回调出错，也会执行catch）
 3. finally 不管最后的状态如何，都会执行的操作
-4. all 所有的接口请求完毕后才会执行回调（只有要一个接口失败就走catch）
+4. all 所有的接口请求完毕后才会执行回调（只要有一个接口失败就走catch）
 5. race 所有的接口，谁第一个执行完毕就执行回调（和all类似，all是执行完所有，race是执行完第一个）
 
 ###  简述ES6使用到的新语句
@@ -807,23 +779,24 @@ b()//10
 ###  网络性能优化
 
 + 网络传输性能优化
-
   + 浏览器缓存
   + 资源打包压缩（js/html/css压缩，服务器Gzip压缩）
   + 图片资源优化 （webp，精灵图，字体图标）
   + 使用CDN
-+ 页面渲染优化
 
++ 页面渲染优化
   + css属性读写分离（最好不用js操作样式）
   + 通过切换class或者style去批量操作样式
   + 将没用的元素设置为不可见：visibility：heiden
   + 压缩dom深度，少用dom，多用伪元素
   + 图片指定大小，或者脱离文本流
+
 + js阻塞性能
   + 注意作用域的数量，访问作用域外的变量都会循环作用域链
   + 避免全局查找
   + 选择正确的方式，优化循环
   + 最小化语句
+
 + 负载均衡
   + nginx搭建反向代理
 
@@ -832,25 +805,22 @@ b()//10
   ### vue路由守卫
 
 ### 完整的导航解析流程
->
->  	1.导航被触发。
->  	2.在失活的组件里调用 beforeRouteLeave 守卫。
->  	3.调用全局的 beforeEach 守卫。
->  	4.在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。
->  	5.在路由配置里调用 beforeEnter。
->  	6.解析异步路由组件。
->  	7.在被激活的组件里调用 beforeRouteEnter。
->  	8.调用全局的 beforeResolve 守卫 (2.5+)。
->  	9.导航被确认。 
->  	10.调用全局的 afterEach 钩子。
->  	11.触发 DOM 更新。
->  	12.调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
+1.导航被触发。  
+2.在失活的组件里调用 beforeRouteLeave 守卫。   
+3.调用全局的 beforeEach 守卫。  
+4.在重用的组件里调用 beforeRouteUpdate 守卫 (2.2+)。  
+5.在路由配置里调用 beforeEnter。  
+6.解析异步路由组件。  
+7.在被激活的组件里调用 beforeRouteEnter。   
+8.调用全局的 beforeResolve 守卫 (2.5+)。  
+9.导航被确认。   
+10.调用全局的 afterEach 钩子。  
+11.触发 DOM 更新。  
+12.调用 beforeRouteEnter 守卫中传给 next 的回调函数，创建好的组件实例会作为回调函数的参数传入。
 
 总结：
 
-路由守卫一共有三种，全局路由守卫，组件内路由守卫，独享守卫。
-
-
+路由守卫一共有三种：全局路由守卫、组件内路由守卫、独享守卫。
 
 + 全局路由守卫 
 
@@ -871,8 +841,6 @@ b()//10
   	// 不接受next函数，也不会改变导航本身
   })
   ```
-
-  
 
 + 路由独享守卫
 
@@ -909,10 +877,6 @@ b()//10
       // 可以访问组件实例 `this`
     }
   ```
-
-  
-
-
 
 ### get和post的区别
 
@@ -1423,15 +1387,15 @@ function setCookie(name, value, { secure, path, domain, expires }) {
 
 ### 箭头函数的特点
 
-箭头函数是匿名函数.
-1.不能作为构造函数，不能使用new
+箭头函数是匿名函数.  
+1. 不能作为构造函数，不能使用new
 
 ```javascript
   let foo=()=>{}
   var newFoo=new foo()//foo is not a construcotr
 ```
 
-2.不能使用argumetns,取而代之用rest参数...解决
+2. 不能使用argumetns,取而代之用rest参数...解决
 
 ```javascript
 let C = (...c) => {
@@ -1440,13 +1404,9 @@ let C = (...c) => {
 C(1,2,3,3)
 ```
 
-3.this永远指向其父级的作用域
+3. this永远指向其父级的作用域（call、apply、bind也无法改变）
 
-​	箭头函数的this永远指向上级的this，call、apply、bind也无法改变
-
-4.箭头函数没有原型对象
-
-
+4. 箭头函数没有原型对象
 
 
 
@@ -1456,7 +1416,7 @@ C(1,2,3,3)
 
 **减少对真实DOM的操作**
 
-​	在vue，react技术出现之前，我们要改变页面展示的内容只能通过遍历查询dom树的方式找到需要修改的dom然后修改样式行为或者结构，来达到更新视图的目的。这种方式相当消耗计算资源，因为每次查询dom几乎都需要遍历整颗dom树，如果建立一个与dom树对应的虚拟dom对象（js对象），以对象嵌套的方式来表示dom树，那么每次dom树的更改就变成了js对象的属性的更改，这样一来就能查找js对象属性变化要比查询dom树的性能开销要小。
+​	   在vue，react技术出现之前，我们要改变页面展示的内容只能通过遍历查询dom树的方式找到需要修改的dom然后修改样式行为或者结构，来达到更新视图的目的。这种方式相当消耗计算资源，因为每次查询dom几乎都需要遍历整颗dom树，如果建立一个与dom树对应的虚拟dom对象（js对象），以对象嵌套的方式来表示dom树，那么每次dom树的更改就变成了js对象的属性的更改，这样一来就能查找js对象属性变化要比查询dom树的性能开销要小。
 
 **vue的方式**
 
@@ -1472,10 +1432,7 @@ vue采用的是虚拟dom
 
 替换dom树上对应的旧dom。
 
-
-
 **缺点**
-
 无法进行极致优化：虽然虚拟DOM+合理的优化，足以应对绝大部分的性能需求，但在一些性能要求极高的应用中虚拟DOM无法进行针对性的极致优化。首次渲染大量DOM时，由于多了一层虚拟DOM的计算，会比innerHTML慢。
 
 
@@ -3271,13 +3228,13 @@ http返回码：2xx成功，3xx请求重定向，4xx客户端错误，5xx服务�
 
 ![层级关系](./img/7845-4323.png)
 
-### vue组件中为什么data要写成对象的形式，而实中不需要
+### vue组件中为什么data要写成对象的形式，而实例中不需要
   组件需要复用，实例不需要    
   https://blog.csdn.net/F_fengzilin/article/details/116710610
 
 
 ### js中if判断true和false
-''、0、undefined、null、false、NaNd都为false。其他的都为true。
+''、0、undefined、null、false、NaN都为false。其他的都为true。
 
 
 ## 简答题
