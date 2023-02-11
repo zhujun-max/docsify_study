@@ -1216,6 +1216,17 @@ e.cancelBubble = true;
   普通函数：使用return  
   构造函数：使用new，不使用return
 
+### delete和Vue.delete删除数组的区别
+delete：普通的delete删除一个数组中的元素，该元素会成为空值。数组长度不变。  
+vue.delete：删除会直接删除一个数组元素，长度会减少。
+```js
+  var a=[1,2,3,4]
+  var b=[1,2,3,4]
+  delete a[1]
+  console.log(a)//[1,empty,3,4]
+  this.$delete(b,1)//同vue.delete
+  console.log(b)//[1,3,4]
+```
 ### 原型与原型链
 
 1. 为所有子对象保存共有方法的对象，成为原型对象。
@@ -1881,6 +1892,17 @@ wx.reLaunch(Object)：关闭所有页面，打开到应用内的某个页面（�
   //['11', 23, 43, '454', 4, '443', 43]
 ```
 
+### 深拷贝
+1. 循环判断添加
+2. JSON.parse(JSON.stringify(obj))
+3. jQuery的extend方法实现深拷贝
+4. Object.assign(obj1, obj2)。一级属性是深拷贝，二级是浅拷贝
+5. 扩展运算符。一级属性是深拷贝，二级是浅拷贝
+
+### vue子组件调用父组件的方法
+1. 直接在子组件中通过this.$parent.event来调用父组件的方法。
+2. 在子组件里用$emit()向父组件触发一个事件，父组件监听这个事件就行了。
+3. 父组件把方法传入子组件中，在子组件里直接调用这个方法。
 
 ### 浮点数相加
   1. 将小数转为整数，相加之后除以相差的倍数
@@ -2840,6 +2862,11 @@ console.log(JSON.parse(url))
 <!-- 只有在‘key’是‘Enter’时调用‘vm.submit()’ -->
 <input v-on.keyup.enter="submit">
 ```
+
+**鼠标按键修饰符**
++ .left
++ .right
++ .middle
 
 **v-model修饰符**
 
