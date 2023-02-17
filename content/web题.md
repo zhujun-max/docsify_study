@@ -544,7 +544,11 @@ Promise接收两个参数，resolve, reject
 + destroyed：销毁完毕
   + data和methods此处已消失，无法使用
 
-
+**激活**
++ activated：激活前
+  +  初始化时会执行
++ deactivated：激活后
+  + 离开组件时，可清除定时器（相当于eforeDestroy）
 
 ### 组件通信方式
 
@@ -993,10 +997,10 @@ for()遍历数组，且通过 return false 或 break 终止循环。
 
 ### 前端的存储方式
 
-localStorage：没有时间限制，永久存储，永不失效，除非手动删除，每个域名只有5兆（键也占空间），使用windown.localStorage可以检测，同域名多窗口共享。(IE只有3兆，其他的是5兆)
+localStorage：没有时间限制，永久存储，永不失效，除非手动删除，每个域名只有5兆（键也占空间），使用windown.localStorage可以检测，同域名多窗口共享（容易出现串数据）。(IE只有3兆，其他的是5兆)
 
-sessionstorage：使用方法和localStrage一样，区别在于sessionStorage浏览器关闭后即被删除。
-
+sessionstorage：使用方法和localStrage一样，区别在于sessionStorage浏览器关闭后即被删除。（在该标签或窗口打开一个新页面时会复制顶级浏览器会话的上下文作为新会话的上下文）
+（就是说window.open或者a标签跳转的页面会复制之前的sessionstorage到下一个页面）
 IndexedDB：浏览器数据库，大于250兆，手动更新，
 web sql: 页面刷新就丢失(不常用，基本要废弃)
 
@@ -1717,6 +1721,9 @@ key是唯一标识，它作用主要是为了更高效的让diff算法更准确�
 2. 一般结合路由和动态组件一起使用，用于缓存组件。
 3. 对应两个钩子函数activated和deactivated，当组件被激活时，触发钩子函数activated，当组件被移除时，触发钩子函数deactivated。
 4. 提供include和exclude属性，两者都支持字符串或正则表达式，include表示只有名称匹配的组件会被缓存，exclude表示任何名称匹配的组件都不会被缓存，其中exclude的优先级比include高。
+5. 页面的created，mounted不会起作用，想要在进入页面时获取新的数据。需要使用activated和deactivated。
+  activated：组件被激活时使用，返回页面需要重新渲染，就在此钩子下调用。
+  deactivated：组件被停用时调用，用于清除定时器或其他
 
 
 
@@ -2456,6 +2463,21 @@ a()
 4. 构建渲染树：根据DOM树和CSSOM树，生成渲染树。
 5. 布局：根据渲染树节点的每一个节点布局在屏幕上正确位置
 6. 绘制：便利渲染树绘制所有节点，为每一个节点适用于对应的样式，这一过程是通过UI后端模块完成
+
+### computed中传递参数
+```vue
+  <div>add(10)</div>
+
+  computed:{
+    add(){
+      conosle.log(num)
+      // 直接使用箭头函数，值就是传递过来的值
+      return v=>{
+        return v+num
+      }
+    }
+  }
+```
 
 
 
