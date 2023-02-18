@@ -1,5 +1,5 @@
 - 学习笔记
-  - [一、前端试题](content/web%E9%9D%A2%E9%A2%98.md)
+  - [一、前端试题](content/web%E9%A2%98.md)
     <!-- * [前端面试题](content/web%E9%9D%A2%E9%A2%98.md) -->
   - [二、工作难点](difficulty/README.md)
     <!-- * [难点](difficulty/README.md) -->

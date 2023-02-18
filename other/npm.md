@@ -72,3 +72,6 @@
     存储持久化vuex-persist
 
 15. 二维码qrcodejs2
+
+16. fastClick
+    解决移动端300毫秒延迟

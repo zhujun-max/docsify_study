@@ -475,8 +475,28 @@ Promise接收两个参数，resolve, reject
 1. then 链式操作，正确时执行
 2. catch 链式操作，错误时执行（如果执行resolve的回调出错，也会执行catch）
 3. finally 不管最后的状态如何，都会执行的操作
-4. all 所有的接口请求完毕后才会执行回调（只要有一个接口失败就走catch）
+4. all 所有的接口请求完毕后才会执行回调（只要有一个接口失败就走catch）(结果是数组，按照接口请求顺序排序)
 5. race 所有的接口，谁第一个执行完毕就执行回调（和all类似，all是执行完所有，race是执行完第一个）
+
+  **其中一个promise出错，如何保证all执行**  
+  在promise.all队列中，使用map滤每一个promise任务，其中任意一个报错后，return一个返回值，确保promise能正常执行走到.then中
+  ```js
+  var p1 = new Promise((resolve, reject) => {
+	resolve('p1');
+});
+var p2 = new Promise((resolve, reject) => {
+	resolve('p2');
+});
+var p3 = new Promise((resolve, reject) => {
+	reject('p3');
+});
+Promise.all([p1, p2, p3].map(p => p.catch(e => '出错后返回的值' )))
+  .then(values => {
+    console.log(values);
+  }).catch(err => {
+    console.log(err);
+  })
+  ```
 
 ###  简述ES6使用到的新语句
 
@@ -548,7 +568,7 @@ Promise接收两个参数，resolve, reject
 + activated：激活前
   +  初始化时会执行
 + deactivated：激活后
-  + 离开组件时，可清除定时器（相当于eforeDestroy）
+  + 离开组件时，可清除定时器（相当于beforeDestroy）
 
 ### 组件通信方式
 
@@ -1238,7 +1258,7 @@ vue.delete：删除会直接删除一个数组元素，长度会减少。
 2. 一个类型中，prototypr和_ _propo_ _其实指向的是同一个原型对象。
 
    1. prototypr属于构造函数对象，是站在和原型对象平级的位置，查找构造.prototypr.
-   2. _ _peopo_ _属于每个子对象，是站在子级角度，称呼父对象。
+   2. _ _propo_ _属于每个子对象，是站在子级角度，称呼父对象。
 
    **访问原型对象：**构造函数.prorotypr
 
@@ -1768,28 +1788,50 @@ key是唯一标识，它作用主要是为了更高效的让diff算法更准确�
 子beforeCreate->子created->子beforeMount->子mounted->  
 父mounted
 
-```javascript
-// 父组件
-mounted(){
-    window.parentMounted = this._isMounted	// _isMounted是当前实例mouned()是否执行 此时为true
-}
-// 子组件
-mounted(){
-    let time=setInterval(()=>{
-		if(window.parentMounted){
-         	clearInterval(time)
-            // 此时父组件的mounted已经执行完毕
-            //...
-        }
-    },500)
-}
+1. 
+  ```javascript
+  // 父组件
+  mounted(){
+      window.parentMounted = this._isMounted	// _isMounted是当前实例mouned()是否执行 此时为true
+  }
+  // 子组件
+  mounted(){
+      let time=setInterval(()=>{
+      if(window.parentMounted){
+            clearInterval(time)
+              // 此时父组件的mounted已经执行完毕
+              //...
+          }
+      },500)
+  }
+  ```
+
+2. 通常我们使用 $emit 监听组件生命周期，父组件接收事件进行通知。
+  ```js
+  // 子组件
+  export default {
+    mounted() {
+        this.$emit( listenMounted )
+    }
+  }
+  // 父组件
+  <template>
+      <div>
+          <List @listenMounted="listenMounted" />
+      </div>
+  </template>
+  ```
+
+3. 使用@hook 来监听组件的生命周期，而不需要在组件内部做任何改动。同样，创建、更新等也可以使用这个方法。
+
+```vue
+  <template>
+    <div>
+        <List @hook:mounted="listenMounted" />
+    </div>
+</template>
 ```
-
-
-
 ### vue如何监听数组的变化
-
-
 
 1. 使用watch 深度监听（性能消耗大，不推荐）
 
@@ -2002,7 +2044,14 @@ https://www.cnblogs.com/better-echo/p/6285301.html
 
 多媒体：video、audio（音频）。
 
+### Vue中动态添加多个class
 
+```jsp
+  <p :class="`${condition1 ? 'font' : ''}${condition1 ? ' size' : ''}`">
+  <p :calas="[aa,bb]"></p>
+  <p :calas="{aa,bb}"></p>
+  <p :calas="classS1()"></p>
+```
 
 ### undefined 和unll的区别
 
@@ -2123,7 +2172,72 @@ computed：一个数据受多个数据影响。缓存值，不会主动重新计
    }
    ```
 
-   
+5. Watch监听多个变量
+  watch 本身不能监听多个变量。但是，我们可以通过返回具有计算属性的对象。通过计算属性的特性，去监听计算属性返回的值。 从而实现“监听多个变量”。
+  ```js
+    export default {
+        data() {
+            return {
+                msg1:  apple ,
+                msg2:  banana
+            }
+        },
+        compouted: {
+            msgObj() {
+                const { msg1, msg2 } = this
+                return {
+                    msg1,
+                    msg2
+                }
+            }
+        },
+        watch: {
+            msgObj: {
+                handler(newVal, oldVal) {
+                    if (newVal.msg1 != oldVal.msg1) {
+                        console.log( msg1 is change )
+                    }
+                    if (newVal.msg2 != oldVal.msg2) {
+                        console.log( msg2 is change )
+                    }
+                },
+                deep: true
+            }
+        }
+    }
+  ```
+
+6. 一个监听器触发多个方法
+  当特定开发需求，需要触发监听器执行多个方法时，可以使用数组，您可以设置多个形式，包括字符串、函数、对象。
+  ```js
+    export default {
+        data: {
+            name:  Joe
+        },
+        watch: {
+            name: [
+              // 调用定义的函数
+                sayName1 ,
+                // 
+                (newVal, oldVal) => {
+                    ...
+                },
+                {
+                    handler:  sayName3 ,
+                    immaediate: true
+                }
+            ]
+        },
+        methods: {
+            sayName1() {
+                console.log( sayName1==> , this.name)
+            },
+            sayName3() {
+                console.log( sayName3==> , this.name)
+            }
+        }
+    }
+  ```
 
 
 
