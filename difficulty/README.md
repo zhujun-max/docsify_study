@@ -66,3 +66,13 @@ monment工具库
 2. 网页卡死，无响应   
   原因：axios 接口请求失败导致页面卡死问题    
   解决方案：获取错误catch，在接口错误的时候处理
+
+3. uniapp 从首页点击到视频详情页。视频未加载出来前，点击返回。整个app卡死无响应
+    1. 视频分段加载
+    2. 使用iframe播放
+
+4. uniapp 使用vant加载不出来icon。
+    内网开发，没有网络，加载不出来字体图片，可以使用uniapp-icons，但是需要将uni-icons放入到uni-modules中
+
+5. uniapp在image标签中使用动态地址图片一直在加载不出来
+   需要把图片放到static静态文件夹中才能加载
