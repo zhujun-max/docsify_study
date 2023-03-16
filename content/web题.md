@@ -3630,3 +3630,28 @@ qiankun微服务
 Object方法    
 
 vue结构，代理在什么文件。router在什么文件
+
+
+### vue两行代码实现表单重置清空
+  `this.$options.data()` 可以获取data中定义的初始数据
+```js
+  data() {
+        return {
+            formData: {
+                username: '',
+                password: ''
+            } 
+        }
+    }, 
+    //重置表单
+      recover(){
+         this.formData = {
+                username: 'Green',
+                password: 'admin123'
+          }
+          this.formData=this.$options.data().formData;
+      }
+    } 
+
+
+```
