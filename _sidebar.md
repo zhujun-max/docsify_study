@@ -9,3 +9,5 @@
     - [Linux](other/Linux.md)
     - [npm](other/npm.md)
     - [前端规范](other/前端规范.md)
+    - [web提升题](other/web%E6%8F%90%E5%8D%87%E9%A2%98.md)
+    - [微信小程序](other/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F.md)

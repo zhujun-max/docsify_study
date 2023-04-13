@@ -431,9 +431,6 @@ vue-roter通过**hash、history、abstract**三种方式实现前端路由
 
 区别主要在于按顺序调用多个 异步函数 时的写法 和报错获取 
 
-promise方法
-
-promise是同步，then是异步
 
 ```javascript
 ajax().then(fun1).then(fun2).then(fun3).then(fun4)
@@ -468,7 +465,9 @@ async function  demo(){
 
 ### Promise对象
 Promise 是异步编程的一种解决方案    
-Promise接收两个参数，resolve, reject
+Promise接收两个参数，resolve, reject  
+promise是同步，then是异步  
+
 **Promise 的基本使用**
 1. then 链式操作，正确时执行
 2. catch 链式操作，错误时执行（如果执行resolve的回调出错，也会执行catch）
@@ -479,21 +478,21 @@ Promise接收两个参数，resolve, reject
   **其中一个promise出错，如何保证all执行**  
   在promise.all队列中，使用map滤每一个promise任务，其中任意一个报错后，return一个返回值，确保promise能正常执行走到.then中
   ```js
-  var p1 = new Promise((resolve, reject) => {
-	resolve('p1');
-});
-var p2 = new Promise((resolve, reject) => {
-	resolve('p2');
-});
-var p3 = new Promise((resolve, reject) => {
-	reject('p3');
-});
-Promise.all([p1, p2, p3].map(p => p.catch(e => '出错后返回的值' )))
-  .then(values => {
-    console.log(values);
-  }).catch(err => {
-    console.log(err);
-  })
+    var p1 = new Promise((resolve, reject) => {
+      resolve('p1');
+    });
+    var p2 = new Promise((resolve, reject) => {
+      resolve('p2');
+    });
+    var p3 = new Promise((resolve, reject) => {
+      reject('p3');
+    });
+    Promise.all([p1, p2, p3].map(p => p.catch(e => '出错后返回的值' )))
+      .then(values => {
+        console.log(values);
+      }).catch(err => {
+        console.log(err);
+      })
   ```
 
 ###  简述ES6使用到的新语句
@@ -683,17 +682,20 @@ https://www.jianshu.com/p/e0d0125f8dd9
 
 ### vue权限管理
 
-1、接口的访问权限一般传递token由后端判断返回状态码（一般由后端验证）
+一、页面级的权限(用户是否有权限能看到这个页面)
 
-​	如果判断权限不够，直接弹出提示。跳转致登录页面或404页面。
+  1. 后端返回路由信息，前端存储完整路由表：  
+      前端拿到路由信息采取递归的方式动态生成页面菜单。自己本身的router.js文件定义好页面所有的路由。这种方式弊端很明显，并不能实现真正的权限控制，因为如果用户记住了某个理由，用户不点击菜单，直接在地址栏里输入地址，那么页面还是可以显示出来
+  2. 后端返回路由权限名，前端存储完整路由权限表，并动态生成路由(真正的权限控制)  
+      首先前端router.js文件存储的路由配置信息会分为两部分，分别是需要权限的和不需要权限的。
+      页面一开始不能一个路由没有，所以会有一些不需要权限的页面，比如登录页，404页面等。所以一开始直接渲染
+      这个不需要权限的路由表，等后台返回之后再把需要权限的路由加到当前路由里面形成一个全新的路由表就可以了
+  3. 前端存储基础路由，后端返回路由，addRoutes添加  
+      前端存储基础的路由，如login，404路由。登陆成功之后直接由后端返回异步路由表，然后前端直接通过addRoutes方法添加。减少了前端工作量，但是实际工作比较麻烦，前端每次要加权限都需要让后端帮助添加， 因为路由表是在后端维护的。
 
-2、页面的显示权限
-
-​	原因：不同的用户有不同的权限，能访问的页面是不一样的。
-
-​	解决：动态生成路由，利用vue-router的addRoutes方法可以动态添加路由
-
-
+二、按钮级的权限(用户是否能看到或者能用页面中的某个按钮)  
+  1. 后端返回权限，前端判断用户权限，显示当前按钮。  
+  2. 自定义指令，获取用户权限，判断元素是否显示隐藏
 
 
 
@@ -2953,7 +2955,15 @@ console.log(JSON.parse(url))
 //报错，因为url不是字符串
 ```
 
-
+### 可选链
+  作用：可选链操作符(?.)允许读取位于链接对象链身处的属性的值    
+  如果该链任意一环节不存在，则忽略整个链并返回undefined。  
+  语法：  
+  ```js
+  obj?.prop
+  obj?.[expr]
+  func?.(args)
+  ```
 
 ### vue2和vue3的区别
 
@@ -3630,3 +3640,105 @@ qiankun微服务
 Object方法    
 
 vue结构，代理在什么文件。router在什么文件
+## 基础提升题（面试基本不会问）
+
+### forEach会改变原来的数组吗?
+答：如果数组中的值是基本类型, 改变不了;
+如果是引用类型分两种情况：
+  1、没有修改形参元素的地址值, 只是修改形参元素内部的某些属性，会改变原数组；
+  2、直接修改整个元素对象时，无法改变原数组；
+
+  map也是一样的  
+
+一、 数组中的值是基本类型
+  数组包含的是基本数据类型a,那么在在使用forEach时候，形参b会在栈中拷贝一份原数组的指针与值，此时a与b是完全独立的数据，我们在修改b的值时是不会影响到a的值。
+  ```js
+    let array = [1, 2, 3, 4];
+    array.forEach(item => {
+    item = item * 2
+    })
+    console.log(array); // [1,2,3,4]
+  ```
+二、 数组中的值是引用类型
+  数组包含的是引用数据类型a，那么在使用forEach的时候，形参b拷贝的是引用数据类型在栈中的地址，此时a和b都同时指向在一开始定义a时在堆中保存的数据，所以当我们修改b的数据，a的值也会改变，因为他们都是指向的堆中的同一数据。
+（基本数据类型：栈中保存指针与值；引用数据类型：栈中保存指针，堆中保存值）
+  1、数组的元素是引用数据类型：（直接修改整个元素对象时，无法改变原数组）
+  ```js
+    let array = [
+      { name: '张三', age: 10 },
+      { name: '李四', age: 20 },
+  ];
+  
+  array.forEach((item) => {
+      item = {
+          name: '王五',
+          age: '29',
+      };
+  });
+  console.log(array ); 
+  
+  // 打印结果：[{"name": "张三","age": 10},{"name": "李四","age": 10}]
+  ```
+  2、数组的元素是引用数据类型：（修改元素对象里的某个属性时，可以改变原数组）
+  ```js
+    let arr= [
+      { name: '张三', age: 10 },
+      { name: '李四', age: 20 },
+  ];
+  
+  arr.forEach((item) => {
+      item.name = '王五';
+  });
+  console.log(arr);
+  // 打印结果：[{"name":"王五","age":18},{"name":"王五","age":20}]
+  ```
+  **如何改变原数组中基本类型的值：**  
+  可以借助第二个参数index来改变数组
+  ```js
+  let array = [1, 2, 3, 4];
+  array.forEach((item,index) => {
+  array[index] = item * 2
+  })
+  console.log(array); // [1,2,3,4]
+  ```
+  
+## 解决问题
+
+### forEach和map跳出循环
+  ```js
+    // 采用try..catch.. 和  throw new Error()来实现条件跳出，或者报错防止阻塞代码的作用
+  // 1. 单层循环：
+  try{
+    obj.forEach(item => {
+      console.log(`当前id：${item.id}`)
+      if(item.id === '002'){
+        throw new Error('id等于002，跳出循环');
+      }
+    });
+  }
+  catch(error){
+    console.error(error)
+  };
+  console.log("如果看见了这段话说明代码没有被报错所阻塞");
+
+  // 2. 双层循环：
+  // 只是跳出了第二层循环，第一层循环会继续执行的
+
+  try{
+    obj.forEach(item => {
+      console.log(`第一层forEach循环：${item.id}`);
+      try{
+        item.array.forEach(val => {
+          if(val.age < 18){
+            throw  new Error('年龄不能小于18岁');
+          }
+        })
+      }catch(error){
+        console.error(error)
+      }
+    })
+  }catch(error){
+    console.log(error)
+  };
+  console.log("如果看见了这段话说明代码没有被报错所阻塞");
+  ```
