@@ -3507,7 +3507,9 @@ created(){
    1. Echarts图表封装（自定义数据格式，大小自适应）
    2. Element表格封装
 
-
+### 获取vue data中的初始值
+获取到data中的初始值，可以直接点出来单个的值：`this.data.options()`
+获取当data组件当前的所有值： `this.$data`
 
 ### Event loop
 
