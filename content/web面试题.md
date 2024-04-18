@@ -1443,7 +1443,32 @@ let C = (...c) => {
 C(1,2,3,3)
 ```
 
-3. this永远指向其父级的作用域（call、apply、bind也无法改变）
+3. this永远指向其（创建时的）父级的作用域（call、apply、bind也无法改变）
+
+  ```javascript
+      function regularFunction() {
+      this.value = 1;
+
+      setTimeout(function() {
+        this.value++;
+        console.log("Regular function this.value:", this.value);
+      }, 1000);
+    }
+
+    function arrowFunction() {
+      this.value = 1;
+
+      setTimeout(() => {
+        this.value++;
+        console.log("Arrow function this.value:", this.value);
+      }, 1000);
+    }
+
+    const obj = new regularFunction(); // 输出 "Regular function this.value: NaN"，因为 this 在 setTimeout 回调中指向全局对象而不是 obj
+
+    const objWithArrowFunction = new arrowFunction(); // 输出 "Arrow function this.value: 2"，因为箭头函数继承了外部上下文的 this
+
+  ```
 
 4. 箭头函数没有原型对象
 
