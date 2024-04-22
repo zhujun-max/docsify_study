@@ -168,6 +168,12 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 4. static：默认值；默认布局（使用z-index无效）。
 
 
+### css定位和层级
+1. z-index只有设置了定位才能生效（设置static默认定位是无效的）
+2. 层级一样的情况下，后者的元素会覆盖前者。
+3. 标准 < 浮动 < 定位
+
+![层级关系](./img/7845-4323.png)
 
 ### 消除浮动
 
@@ -832,7 +838,7 @@ b()//10
 
   ### vue路由守卫
 
-### 完整的导航解析流程
+#### 完整的导航解析流程
 1.导航被触发。  
 2.在失活的组件里调用 beforeRouteLeave 守卫。   
 3.调用全局的 beforeEach 守卫。  
@@ -917,105 +923,6 @@ b()//10
 + 对参数的数据类型，get只接受ASCII字符，而post没有限制
 + get比post更不安全，因为参数直接暴露在url中，所以不能用来传递敏感信息
 + **get参数通过url传递，post放在Request body中**
-
-
-
-### 数组操作函数
-
-| 对象                     | 作用                                               | 返回值                   | 改变原数组 |
-| ------------------------ | -------------------------------------------------- | ------------------------ | ---------- |
-| push()                   | 向数组的末尾添加一个或多个元素                     | 返回新数组的长度         | 是         |
-| pop()                    | 删除数组的最后一个元素                             | 返回删除的值             | 是         |
-| unshift()                | 数组的头部添加一个或多个元素                       | 返回新数组的长度     | 是         |
-| shift()                  | 删除数组的第一个元素                               | 返回删除的值             | 是         |
-| reverse()                | 颠倒数组中的元素顺序                               | 返回颠倒后的值           | 是         |
-| sort(a,b)                | 对数组元素进行排序（会先调用toString方法，然后按照字符串序列排序。也可以自定义排序） | 返回排序后的值           | 是         |
-| forEach(item,index,arr) | 对所有元素执行函数，常用来遍历元素 | 无 | 是 |
-| splice(start, end,value) | 可以删除，插入，替换 | 返回被替换/删除/插入的值 | 是 |
-| isArray()					|用于检测是否为数组|返回true，false|否|
-| toString()		|把元素转换为字符串，默认以逗号分割		|返回字符串|否|
-| every(item,index,arr)	|对所有元素执行函数，全部都为true，返回true	|返回true，false|否|
-| some()	|对所有元素执行函数，有一个为true，返回true	|返回true，false|否|
-| filter(item,index,arr)	|对所有元素执行函数(自定义函数)	|返回满足条件的值|否|
-| map(item,index,arr)	|对所有元素执行函数	|返回自定义函数结果|否|
-| concat()                 | 拼接两个或多个数组                               | 返回合并的值             | 否         |
-| join()                   | 把元素转成字符串，使用指定符号分割                 | 返回分割后的字符串        | 否         |
-| slice(start, end)        | 截取元素                                           | 返回截取的值             | 否         |
-| toString()  | 将数组用逗号隔开        | 返回字符串  | 否         |
-| slice(start, end)  | 复制指定位置元素        | 返回数组中被选中的元素  | 否         |
-| indexOf(x, start)        | 查找元素第一次出现的位置。只能使用数组中的值         | 返回下标，没找到返回-1   | 否         |
-| lastIndexOf(x,start)  | 查找元素最后一次出现的位置。只能使用数组中的值          | 返回下标，没找到返回-1   | 否         |
-| findIndex()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回下标，没找到返回-1   | 否         |
-| find()  | 查找元素第一次出现的位置。可以使用回调函数         | 返回元素值，没找到返回undefined   | 否         |
-| includes(x,start)  | 查找元素是否包含指定的值        | 返回true和false  | 否         |
-
-
-### 循环的方式
-
-for：不能遍历对象。
-
-for in:只能遍历对象。
-
-for of:不能遍历对象，同for循环一样。
-
-map:对数组进行操作，返回一个新数组。(不会对空数组进行检测)。
-
-forEach：对数组的操作会改变原数组。不应过度滥用。
-
-filter：根据条件过滤数组中的某些值，最后返回布尔值。
-
-reduce：返回结果为单个值（求和，找最大值。返回内容）
-
-find：找到符合条件的项目并打算之后使用该项目（返回新内容）
-
-some：检查是否符合条件，只要有一个条件符合，就返回true。（返回布尔值）
-
-every：检查是否符合条件，所有项目都符合条件，才会返回true。（返回布尔值）
-
-```javascript
-//forEach
-//需要迭代数组以执行特定操作（不返回参数）
-const items=[1,2,3,4,5]
-items.forEach(item=>console.log(item))
-
-//filter
-//根据条件过滤数组，在每次迭代中返回一个布尔值，否则js会强制转换为布尔（返回过滤后的新数组）
-const evenValue = items.filter(currentValue => {
-   return currentValue % 2 == 0 
-})
-
-//map
-//将数组转为另一个数组（返回新数组）
-const result=items.map(item=>{
-    return nitem * 2
-})
-
-//reduce
-//从数组中进行操作，返回结果为单个值。必须求和，求最大。（返回新结果）
-const sum = items.reduce((accumulator, currentValue) => {
-   return accumulator += currentValue
-}, 0)
-
-//find
-//找到符合条件的项目（返回找到的结果,没有找到返回undefined）
-const item = items.find(item => item === 3)
-
-//some
-//查找是否有符合条件的值（返回布尔值）
-const item = items.some(item => item === 3)
-
-//every
-//匹配所有项目，全部为true，返回true（返回布尔值）
-const item = items.every(item => item >= 20)
-
-
-some()遍历每一项，一项返回true，则返回true。因此当 some 内部返回  true 时，跳出整个循环。
-every()遍历每一项，全部true,则返回true。因此当 every 内部返回 false 时，跳出整个循环。
-map()遍历每一项，返回一个新的数组，每个元素为调用函数处理后的值，return false 无法终止循环。
-forEach()没有返回值，对数组中的每一项运行给定函数，参数都是 function 类型。return false 无法终止循环。
-for()遍历数组，且通过 return false 或 break 终止循环。
-```
-
 
 
 
@@ -1812,76 +1719,6 @@ key是唯一标识，它作用主要是为了更高效的让diff算法更准确�
 
 
 
-### 解决父子组件执行顺序的问题
-父beforeCreate->父created->父beforeMount->  
-子beforeCreate->子created->子beforeMount->子mounted->  
-父mounted
-
-1. 
-  ```javascript
-  // 父组件
-  mounted(){
-      window.parentMounted = this._isMounted	// _isMounted是当前实例mouned()是否执行 此时为true
-  }
-  // 子组件
-  mounted(){
-      let time=setInterval(()=>{
-      if(window.parentMounted){
-            clearInterval(time)
-              // 此时父组件的mounted已经执行完毕
-              //...
-          }
-      },500)
-  }
-  ```
-
-2. 通常我们使用 $emit 监听组件生命周期，父组件接收事件进行通知。
-  ```js
-  // 子组件
-  export default {
-    mounted() {
-        this.$emit( listenMounted )
-    }
-  }
-  // 父组件
-  <template>
-      <div>
-          <List @listenMounted="listenMounted" />
-      </div>
-  </template>
-  ```
-
-3. 使用@hook 来监听组件的生命周期，而不需要在组件内部做任何改动。同样，创建、更新等也可以使用这个方法。
-
-```vue
-  <template>
-    <div>
-        <List @hook:mounted="listenMounted" />
-    </div>
-</template>
-```
-### vue如何监听数组的变化
-
-1. 使用watch 深度监听（性能消耗大，不推荐）
-
-2. 重写数组函数，7种方法。
-
-   ​	在将数组处理成响应式数据后，如果使用数组原始方法改变数组时，数组值会发生变化，但是并不会触发数组的setter来通知所有依赖该数组的地方进行更新，为此，vue通过重写数组的某些方法来监听数组变化，重写后的方法会手动触发通知该数组的所有依赖进行更新。
-
-3. 利用计算属性+ watch
-
-4. 直接监听对象中的属性
-
-5. vue.set()或者this.$set()
-
-   ```javascript
-   vue.set(target,key,value)
-   //vue.set(修改的值，修改的位置，修改后的参数)
-   
-   //页面中存在的属性，是可以直接通过赋值的方式更改，因为内部通过Object.defineProperty实现了数据双向绑定，但是对于后面新增的属性，是没有办法渲染的，那么就必须使用Vue.set()
-   ```
-
-
 
 ### 混入 mixin
 
@@ -1949,15 +1786,6 @@ Webpack首先会把配置参数和命令行的参数及默认参数合并，并�
 + **输出完成：**在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
 
 
-
-## 不常见面试题
-
-### 微信小程序跳转方式
-wx.navigateTo(Object)：保留当前页面，跳转到应用内的某个页面，使用 wx.navigateBack 可以返回到原页（新页面入栈）  
-wx.redirectTo(Object)：关闭当前页面，跳转到应用内的某个页面（当前页面出栈，新页面入栈）  
-wx.switchTab(Object)：跳转到 tabBar 页面，同时关闭其他非 tabBar 页面（非Tab页面全部出栈，只留下新的 Tab 页面）  
-wx.navigateBack(Object)：返回上一页面（页面不断出栈）  
-wx.reLaunch(Object)：关闭所有页面，打开到应用内的某个页面（页面全部出栈，只留下新的页面）  
 
 ### 数组去空值
 1. 使用filter
@@ -3426,12 +3254,6 @@ console.log(JSON.parse(url))
 
 **项目插件**：如element ui ,echarts,这种的插件要在运行中使用的，就要放在dep中所以就用-S。 一般我们项目插件，在api中都可以看到，一般都是-S。因为这些插件是在程序运行中使用的。
 
-### css定位和层级
-1. z-index只有设置了定位才能生效（设置static默认定位是无效的）
-2. 层级一样的情况下，后者的元素会覆盖前者。
-3. 标准 < 浮动 < 定位
-
-![层级关系](./img/7845-4323.png)
 
 ### vue组件中为什么data要写成对象的形式，而实例中不需要
   组件需要复用，实例不需要    
@@ -3442,7 +3264,6 @@ console.log(JSON.parse(url))
 ''、0、undefined、null、false、NaN都为false。其他的都为true。
 
 
-## 简答题
 
 ### 复制数组的方法
 
@@ -3599,75 +3420,78 @@ setTimeout(function() {
 
 
 
+## 问答题
 
 
+### 解决父子组件执行顺序的问题
+父beforeCreate->父created->父beforeMount->  
+子beforeCreate->子created->子beforeMount->子mounted->  
+父mounted
 
+1. 
+  ```javascript
+  // 父组件
+  mounted(){
+      window.parentMounted = this._isMounted	// _isMounted是当前实例mouned()是否执行 此时为true
+  }
+  // 子组件
+  mounted(){
+      let time=setInterval(()=>{
+      if(window.parentMounted){
+            clearInterval(time)
+              // 此时父组件的mounted已经执行完毕
+              //...
+          }
+      },500)
+  }
+  ```
 
-## 未解决的问题
+2. 通常我们使用 $emit 监听组件生命周期，父组件接收事件进行通知。
+  ```js
+  // 子组件
+  export default {
+    mounted() {
+        this.$emit( listenMounted )
+    }
+  }
+  // 父组件
+  <template>
+      <div>
+          <List @listenMounted="listenMounted" />
+      </div>
+  </template>
+  ```
 
+3. 使用@hook 来监听组件的生命周期，而不需要在组件内部做任何改动。同样，创建、更新等也可以使用这个方法。
 
-> > 浏览器进程和线程
+```vue
+  <template>
+    <div>
+        <List @hook:mounted="listenMounted" />
+    </div>
+</template>
+```
+### vue如何监听数组的变化
 
-> > 从输出URL到页面加载发生了什么
+1. 使用watch 深度监听（性能消耗大，不推荐）
 
-> > 前端异常监控
+2. 重写数组函数，7种方法。
 
+   ​	在将数组处理成响应式数据后，如果使用数组原始方法改变数组时，数组值会发生变化，但是并不会触发数组的setter来通知所有依赖该数组的地方进行更新，为此，vue通过重写数组的某些方法来监听数组变化，重写后的方法会手动触发通知该数组的所有依赖进行更新。
 
+3. 利用计算属性+ watch
 
-> > 面试官问的题
+4. 直接监听对象中的属性
 
-观察者模式是怎么理解的。
+5. vue.set()或者this.$set()
 
-webpack除了编译，其他方法用过吗
+   ```javascript
+   vue.set(target,key,value)
+   //vue.set(修改的值，修改的位置，修改后的参数)
+   
+   //页面中存在的属性，是可以直接通过赋值的方式更改，因为内部通过Object.defineProperty实现了数据双向绑定，但是对于后面新增的属性，是没有办法渲染的，那么就必须使用Vue.set()
+   ```
 
-
-
-webpack都经过了哪几个过程
-
-axios请求都经过了哪几步操作
-
-请求拦截实现方式。
-
-vuex生命周期
-
-微信小程序如何存储数据
-
-vue3的理解，一句话解释（朝reatc靠拢）
-
-ts的理解（泛型）
-
-diff算法
-分为两种
-vue2
-1. 判断是不是同一个元素，不是同一个元素，直接替换
-2. 是同一个元素=》比对属性=》比对儿子（1.老的有子节点，新的没有 2.新的有子节点，老的没有 3.文本的情况 4.都有children）=》 双指针：头头，尾尾，头尾，尾头=》对比查继续复用
-
-vue3
-采用最长递增子序列
-
-
-
-
-双向即时通信的方法
-1. websockets
-2. 长轮循
-3. k8s的list-watch
-
-
-## 待优化项
-循环方式，没写清楚，    
-porams的理解    
-es6解构赋值使用场景   
-true和false是怎么判断的   
-项数据流的理解    
-axios为什么要二次封装   
-http的工作过程    
-v-on监听多个方法    
-qiankun微服务   
-Object方法    
-
-vue结构，代理在什么文件。router在什么文件
-## 基础提升题（面试基本不会问）
 
 ### forEach会改变原来的数组吗?
 答：如果数组中的值是基本类型, 改变不了;
@@ -3728,8 +3552,7 @@ vue结构，代理在什么文件。router在什么文件
   })
   console.log(array); // [1,2,3,4]
   ```
-  
-## 解决问题
+
 
 ### forEach和map跳出循环
   ```js
