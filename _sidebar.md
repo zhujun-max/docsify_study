@@ -6,6 +6,7 @@
     - [npm](content/npm.md)
     - [react](content/react.md)
     - [vue3](content/vue3.md)
+    - [js事件](content/js%E4%BA%8B%E4%BB%B6.md)
     - [TS](content/TypeScript.md)
   - [二、其他](other/README.md)
     - [复杂情况记录](other/%E5%A4%8D%E6%9D%82%E6%83%85%E5%86%B5%E8%AE%B0%E5%BD%95.md)

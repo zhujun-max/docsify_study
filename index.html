@@ -27,6 +27,9 @@
       loadNavbar: false,
       // 加载自定义侧边栏，会加载 _sidebar.md 文件
       loadSidebar: true,
+      alias: {
+      '/.*/_sidebar.md': '/_sidebar.md'
+    },
       // 配置最大支持渲染的标题层级1-6
       // maxLevel:1,
       // 自定义侧边栏后默认不会再生成目录0，可以设置数值开启
@@ -57,7 +60,7 @@
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <!-- 解析表情符号 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script> -->
   <!-- 字数统计 -->
   <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
   <!-- 代码高亮 -->
