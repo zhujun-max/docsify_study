@@ -168,7 +168,7 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 2. 层级一样的情况下，后者的元素会覆盖前者。
 3. 标准 < 浮动 < 定位
 
-![层级关系](./img/7845-4323.png)
+![层级关系](./img/css/7845-4323.png)
 
 ### 消除浮动
 
@@ -247,7 +247,7 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 }
 ```
 
-![img](./img/01.png)
+![img](./img/css/01.png)
 
 ```css
 #triangle-topleft {
@@ -258,5 +258,5 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 }
 ```
 
-![img](./img/02.png)
+![img](./img/css/02.png)
 

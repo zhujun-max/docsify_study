@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>docsify</title>
+  <title>学习笔记</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -12,11 +12,12 @@
 </head>
 
 <body>
-  <div id="app">加载中</div>
+  <div id="app"></div>
   <script>
     window.$docsify = {
       // 文档标题，会显示在侧边栏顶部。
-      name: 'docsify',
+      name: '学习笔记',
+      nameLink: '/',
       // 通过该变量显示文档更新日期 
       formatUpdated: '{MM}/{DD} {HH}:{mm}',
       externalLinkTarget: '_blank',
@@ -36,6 +37,7 @@
       // 自定义侧边栏后默认不会再生成目录0，可以设置数值开启
       subMaxLevel: 2,
       mergeNvabar: true,
+      homepage: './home.md',
       // 是否开始封面页
       coverpage: true,
       // 完整配置参数

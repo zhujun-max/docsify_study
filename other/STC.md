@@ -13,7 +13,6 @@
 6. 在没有特殊说明时，我们所分析的算法的时间复杂度都是指**最坏时间复杂度**
 
 
-
 ### 2、 常见的时间复杂度
 
 | 执行次数函数举例 | 阶       | 非正式术语 |
@@ -45,6 +44,17 @@ let i+j
 上述代码在执行的时候，它消耗的时候随着莫格变量的增长而增长，那么无论这类代码有多长，即使有几万行，都可以用O(1)来表示它的时间复杂度
 
 
+### O(logn)  对数阶
+
+```js
+let i=1;
+while(i<n){
+    i=i*2;
+}
+```
+
+上面的代码，在while循环里面，每次都将i乘以2，乘完之后，i距离n就越近，直到i小于n退出。我们试着求解一下，假设循环次数为x，也就是2的x次方等于n，则由2^x=n得出x=log2n。因此这个代码的时间复杂度为O(logn)
+
 
 #### O(n)  线性阶
 
@@ -57,48 +67,6 @@ for(let i=0;i<n;i++){
 ```
 
 这段代码，for循环里面的代码会执行n遍，因此消耗的时间是随着n的变化而变化的，因此这类代码可以用O(n)来表示它的时间复杂度。
-
-
-
-### O(n^2)   平方阶
-
-O(n^2)表示一个算法的性能将会随着输入数据的增长而呈现出二次增长。最常见的就是对输入数据进行嵌套循环。如果嵌套层级不断深入的话，算法的性能将会变为立方阶O(n^3), O(n^4),O(n^k)依次类推
-
-```js
-for(let i=1;i<n;i++){
-    for(let j=1;j<n;j++){
-        console.log(j,i)
-    }
-}
-```
-
-
-
-### O(2^n)  指数阶
-
-表示一个算法的性能会随着输入数据的每次增加而增大两倍，典型的方法就是斐波那契数列的递归计算实现
-
-```js
-add(n){
-    if(n<=1) return n;
-    return add(n-2) + add(n-1)
-}
-```
-
-
-
-
-
-### O(logn)  对数阶
-
-```js
-let i=1;
-while(i<n){
-    i=i*2;
-}
-```
-
-上面的代码，在while循环里面，每次都将i乘以2，乘完之后，i距离n就越近，直到i小于n退出。我们试着求解一下，假设循环次数为x，也就是2的x次方等于n，则由2^x=n得出x=log2n。因此这个代码的时间复杂度为O(logn)
 
 
 
@@ -115,7 +83,29 @@ for(let m=1;m<n;m++){
 }
 ```
 
+### O(n^2)   平方阶
 
+O(n^2)表示一个算法的性能将会随着输入数据的增长而呈现出二次增长。最常见的就是对输入数据进行嵌套循环。如果嵌套层级不断深入的话，算法的性能将会变为立方阶O(n^3), O(n^4),O(n^k)依次类推
+
+```js
+for(let i=1;i<n;i++){
+    for(let j=1;j<n;j++){
+        console.log(j,i)
+    }
+}
+```
+
+
+### O(2^n)  指数阶
+
+表示一个算法的性能会随着输入数据的每次增加而增大两倍，典型的方法就是斐波那契数列的递归计算实现
+
+```js
+add(n){
+    if(n<=1) return n;
+    return add(n-2) + add(n-1)
+}
+```
 
 
 
@@ -126,7 +116,6 @@ for(let m=1;m<n;m++){
 
 
 ### 1、空间复杂度
-
 
 
 #### O(1)
@@ -161,29 +150,26 @@ for(let i=;i<=n;++i){
 
 
 
-
-
-
 ### 2、 复杂度速查表
 
-![img](./img/时空复杂度/00831rSTly1gcbecysa6qj319w01w0sy.jpg)
+![img](./img/STC/00831rSTly1gcbecysa6qj319w01w0sy.jpg)
 
 大O复杂度曲线
 
-![img](./img/时空复杂度/00831rSTly1gcbed227xkj317s0qy77v.jpg)
+![img](./img/STC/00831rSTly1gcbed227xkj317s0qy77v.jpg)
 
 抽象数据结构的操作复杂度
 
-![img](./img/时空复杂度/00831rSTly1gcbed4ehcnj30xz0u0n4m.jpg)
+![img](./img/STC/00831rSTly1gcbed4ehcnj30xz0u0n4m.jpg)
 
 数组排序
 
-![img](./img/时空复杂度/00831rSTly1gcbeda0vscj316f0u0jx3.jpg)
+![img](./img/STC/00831rSTly1gcbeda0vscj316f0u0jx3.jpg)
 
 图操作
 
-![img](./img/时空复杂度/00831rSTly1gcbede8tjnj31ac08gwg1.jpg)
+![img](./img/STC/00831rSTly1gcbede8tjnj31ac08gwg1.jpg)
 
 堆操作
 
-![img](./img/时空复杂度/00831rSTly1gcbedhhqq0j31a40j8n0w.jpg)
+![img](./img/STC/00831rSTly1gcbedhhqq0j31a40j8n0w.jpg)
