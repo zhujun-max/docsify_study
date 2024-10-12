@@ -192,4 +192,56 @@ bindtap是不会阻止冒泡事件的，catchtap是阻值冒泡的
 + 小程序的名称作为核心关键词语排名
 
 ## echarts
-EChart图表底色设置问题 ： EChart的DOM一般为DIV，直接设置EChart所在DOM的背景色是没有任何作用的，因为不管怎么设置，EChart都会将颜色设置成transparent（透明）；因此，要设置背景色，需要在外部再添加一个DIV，通过设置外部DIV的背景色达到修改EChart图表背景色的目的。
+
+
+### EChart图表底色设置问题 ： 
+EChart的DOM一般为DIV，直接设置EChart所在DOM的背景色是没有任何作用的，因为不管怎么设置，EChart都会将颜色设置成transparent（透明）；因此，要设置背景色，需要在外部再添加一个DIV，通过设置外部DIV的背景色达到修改EChart图表背景色的目的。
+
+
+### 当x轴太拥挤,x轴数据不能全部展示怎么办?
+1. 这时候就只需要在xAxis的axisLabel对象中添加属性 interval : 0 就可以显示全部数据 , interval 属性是用来调整x轴数据的间距的 , 数值越大间距越大 .
+
+```js
+xAxis: [
+        axisLabel: {
+            interval:0, 
+        }
+    ]
+```
+
+2. 当x轴数据太多,水平展示太过拥挤,可以选择垂直展示或者倾斜展示
+
+```js
+xAxis: [
+        axisLabel: {
+            rotate: 30,
+        }
+    ]
+```
+
+
+### 对echarts中的属性进行操作后,需要更新echarts图,怎么操作?
+首先要确定,echarts 的 option 是否是操作后的最新数据,如果不是则需要对 option 进行检查,直到拿到最新数据再使用 this.$ref.mychart.setOption(this.option) 进行视图更新, 如果使用 this.$ref.mychart.setOption(this.option) 更新无效,则可以使用 this.$ref.mychart.setOption(this.option , true) 强制更新   
+
+```js
+ // 强制刷新页面,true
+ this.$nextTick(() => {
+     this.$refs.mychart.setOption(this.option, true)
+  })
+```
+
+### echarts数据y轴刻度默认显示千分制,如果不需要怎么办?
+在 ECharts 中，要取消 Y 轴的千分位格式化，可以通过设置 axisLabel 的 formatter 属性为一个简单的字符串模板或者一个函数，该函数直接返回传入的值。
+
+以下是一个简单的例子，展示如何取消 Y 轴的千分位格式化：
+```js
+yAxis: {
+        type: 'value',
+        axisLabel: {
+            // 使用函数作为 formatter，直接返回数值
+            formatter: function(value) {
+                return value;
+            }
+        }
+    }
+```

@@ -78,7 +78,7 @@
     top: 30px;
     background-color: #fff;
     font-size: 40px;
-    font-family: "隶书";
+    font-family: "LiSu";
     /* 竖向文本 */
     writing-mode: vertical-lr;
     padding: 10px 5px 5px 5px;
@@ -97,7 +97,7 @@
     left: 0;
     z-index: -1;
     font-size: 40px;
-    font-family: "隶书";
+    font-family: "LiSu";
     line-height: 50px;
     letter-spacing: 5px;
     display: flex;

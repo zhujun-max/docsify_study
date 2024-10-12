@@ -7,7 +7,6 @@
     - [js](content/js.md)
     - [vue](content/vue.md)
     - [其他](content/other.md)
-    - [问答题](content/%E9%97%AE%E7%AD%94%E9%A2%98.md)
     - [工作中的问题](content/%E9%9A%BE%E7%82%B9.md)
   - **学习资料**
     - [时空复杂度](other/STC.md)

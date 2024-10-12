@@ -267,3 +267,21 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 
 重绘：只是样式的变化，不会引起DOM树的变化，页面布局的行为叫重绘，且重绘不一定会伴随回流。
 
+
+## CSS书写顺序及命名规范
+### 书写顺序
+1. 位置属性：position、top、right、z-index、display、float等
+2. 大小：width、height、padding、margin等
+3. 文字系列：font、line-height、letter-spacing、color-text-align等
+4. 背景：background、border等
+5. 其他：animation、transition等
+
+### 书写规范
++ css属性使用缩写。
++ 去掉小数点后面的0。
++ 16进制颜色代码缩写。
+
+### css选择器命名规范
++ 长名称或词组可以使用中横线来为选择器命名。
++ 少用大写。
++ 不随意使用id。
