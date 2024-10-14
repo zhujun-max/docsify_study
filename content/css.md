@@ -268,7 +268,6 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 重绘：只是样式的变化，不会引起DOM树的变化，页面布局的行为叫重绘，且重绘不一定会伴随回流。
 
 
-## CSS书写顺序及命名规范
 ### 书写顺序
 1. 位置属性：position、top、right、z-index、display、float等
 2. 大小：width、height、padding、margin等

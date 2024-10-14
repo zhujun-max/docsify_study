@@ -315,7 +315,7 @@ https://www.jianshu.com/p/e0d0125f8dd9
   1. 后端返回权限，前端判断用户权限，显示当前按钮。  
   2. 自定义指令，获取用户权限，判断元素是否显示隐藏
 
-  ### vue路由守卫
+### vue路由守卫
 
 #### 完整的导航解析流程
 1.导航被触发。  
@@ -617,8 +617,52 @@ key是唯一标识，它作用主要是为了更高效的让diff算法更准确�
 
 关于微任务，vue会先判断是否支持promise，是就使用Promise，然后判断是否支持MutaionObserver，是就使用MutaionObserver；否则把宏任务赋值给微任务，把宏任务当作微任务执行。
 
+### scoped原理及穿透方法
+
+#### scoped原理
+当一个style标签拥有scoped属性时，它的css就只能作用于当前的组件，通过该属性，可以使组件之间样式不会互相污染。  
 
 
+**原理**
+1. 为组件实例生成一个唯一标识，给组件中的每个标签对应的dom元素添加一个标签属性，`data-v-xxxx`。
+2. 给`<style scoped>`中的每个选择器的最后一个选择器添加一个属性选择器，原选择器[data-v-xxxx],   
+如：原选择器为:`.container #id div`，则更改后选择器为:`.container #id div[data-v-xxxx]`
+
+
+**实例**   
+
+转译前的vue代码：
+```vue
+<template>
+	<div class="example">hello world</div>
+</template>
+<style scoped>
+.example {
+	color: red;
+}
+</style>
+
+```
+转译后：
+```vue
+<template>
+	<div class="example" data-v-49729759>hello world</div>
+</template>
+<style scoped>
+.example[data-v-49729759] {
+	color: red;
+}
+</style>
+
+```
+#### 样式穿透
+引用了第三方组件后，需要在组件中局部修改第三方组件的样式，而又不想去除scoped属性造成组件之间的样式污染。此时只能通过特殊的方式，穿透scoped。
+
+**穿透的方法**
+
+1. `>>>` 。如果项目使用的是css原生样式，那么可以直接使`>>>`传统样式。
+2. `/deep/`。项目style中用到了css预处理器 scss 、sass、less时， 操作符 `>>>` 可能会因为无法编译而报错 。可以使用 `/deep/`。
+3. `::v-deep`。 在vue-cli3编译时，`/deep/`的方式会报错或者警告，导致变异报错。这个时候用`::v-deep`。
 
 ### 混入 mixin
 
@@ -1162,10 +1206,11 @@ vue中子组件可以使用父组件传递过来的数据，但是绝对不能�
   }
 ```
 
-### scoped的原理
-vue中的scoped属性的效果主要通过PostCSS转译实现 ， PostCSS给一个组件中的所有dom添加了一个独一无二的动态属性，然后，给CSS选择器额外添加一个对应的属性选择器来选择该组件中dom，这种做法使得样式只作用于含有该属性的dom——组件内部dom。
-
 ## vue3
+
+> 以下内容未完成
+
+
 
 ### 新特性
 没有this。
@@ -1185,7 +1230,6 @@ setup语法糖
 #### 单文件组件中的组合式API语法糖（setup）
 
 
-### 面试题
 #### Vue3的编译流程
 vue3的便宜分为两部分，编译期和运行期。编译期间，先通过vue-loader把单文件组件编译成符合原生javascript语法的模块；运行期间，会通过内置的模块引擎对模板进行编译，生成render()函数，且按照先父组件后子组件的顺序对模板进行编译。
 
