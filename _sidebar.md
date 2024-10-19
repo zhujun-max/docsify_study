@@ -18,5 +18,7 @@
     - [centos命令](other/CentOS.md)
     - [一个div](other/oneDiv.md)
     - [三角形](other/triangle.md)
+    - [奇淫巧计](other/skill.md)
     - [npm依赖](other/npm.md)
+    - [Chrome控制台](other/Chrome.md)
     - [基础算法题](other/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95.md)

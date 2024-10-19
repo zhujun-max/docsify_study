@@ -1,4 +1,4 @@
-[一个div的网站](https://a.singlediv.com/)
+[学习的网站](https://a.singlediv.com/)
 
 ## 所需知识点
 

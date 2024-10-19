@@ -13,6 +13,10 @@
     </div>
 
 <style>
+    @font-face {
+        font-family: "STXinwei"; /* 定义字体名 */
+        src: url("./STXinwei.ttf"); /* 引入本体字体文件 */
+      }
 .book{
     margin: 10vh auto;
     width: 300px;
@@ -78,7 +82,7 @@
     top: 30px;
     background-color: #fff;
     font-size: 40px;
-    font-family: "LiSu";
+    font-family: "STXinwei";
     /* 竖向文本 */
     writing-mode: vertical-lr;
     padding: 10px 5px 5px 5px;
@@ -97,7 +101,7 @@
     left: 0;
     z-index: -1;
     font-size: 40px;
-    font-family: "LiSu";
+    font-family: "STXinwei";
     line-height: 50px;
     letter-spacing: 5px;
     display: flex;
