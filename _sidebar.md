@@ -8,7 +8,7 @@
     - [vue](content/vue.md)
     - [其他](content/other.md)
     - [问答题](content/questions.md)
-    - [工作中的问题](content/%E9%9A%BE%E7%82%B9.md)
+    - [工作中的问题](content/difficulty.md)
   - **学习资料**
     - [时空复杂度](other/STC.md)
     - [Linux](other/Linux.md)

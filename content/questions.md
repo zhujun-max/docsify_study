@@ -82,8 +82,6 @@
 ### webWorker
 ### 前端工程化
 ### Webpack
-### 二叉树种类
-### 二叉树遍历
 ### 网络
 ### HTTP2对于HTTP1.1
 ### TCP和UDP的区别
