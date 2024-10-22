@@ -19,12 +19,14 @@
 ### 运行大量个耗时并且会占用主线程的任务，保证页面不卡顿
  将所有耗时函数放入到requestAnimationFrame中，判断每次16.6毫秒就让页面更新，页面更新完后继续执行。
 [视频地址](https://www.bilibili.com/video/BV1184y117Pj/?spm_id_from=333.337.search-card.all.click&vd_source=1f32a8797e6b69ce980a73da54121281)
+
 ### 漏洞防御
 
 + xss跨站脚本攻击（原理，如何进行的，防御手段是什么）
 + CSRF跨站请求伪造（如何防伪造，怎么防御，等等都要说清楚）
 + sql脚本注入（注入方式，防御方式） 
 + 上传漏洞（防御方式）
+
 ### 做过哪些组件封装
 
 1. 工具函数的封装
@@ -39,7 +41,170 @@
    1. Echarts图表封装（自定义数据格式，大小自适应）
    2. Element表格封装
 
+### git常见的冲突，如何解决
+**冲突原因**
+   1. 多个开发者修改相同文件下，同一行代码。
+   2. 重命名、移动、删除文件时，其他分支也对该文件进行了修改。
+**预防冲突**
+   1. 及时更新代码
+   2. 区分每个人的开发模块，避免开发到同一模块
+   3. 频繁提交
 
+### 二次封装 localStorage，需要考虑什么?
++ **注意命名，防止污染**    
+   比如一个域名下有两个子项目，两个子项目中都要存储`userInfo`。为了防止数据互相污染，就**给对应的项目加上前缀**。
+
++ **注意版本，迭代防范**   
+   项目更新之前`userInfo`用来存的字符串，更新后存的对象，存取方式不一样，容易报错。每次更改内容，可以**添加一个版本号**
+
++ **时效性**    
+   存数据时，加入一个时间戳，取数据时做判断
+
++  **兼容 SSR（服务端渲染）**   
+   在服务端是使用不了 localStorage 的，因为不是浏览器环境，所以你像封装一个比较通用的 localStorage，得兼顾 SSR 的情况
+
++ **加密**
+
++ **存入取出类型转换（注意考虑map、set、Date类型）**  
+   使用`instanceof`判断类型，存入的时候添加类型，取出的时候根据类型判断就行。
+
+<details> 
+   <summary>点我展开看代码</summary>
+
+   ```js
+      class EnhancedLocalStorage {  
+         static serialize(value) {  
+            if (value instanceof Map) {  
+                  return JSON.stringify({  
+                     type: 'Map',  
+                     value: Array.from(value.entries())  
+                  });  
+            } else if (value instanceof Set) {  
+                  return JSON.stringify({  
+                     type: 'Set',  
+                     value: Array.from(value.values())  
+                  });  
+            } else if (value instanceof Date) {  
+                  return JSON.stringify({  
+                     type: 'Date',  
+                     value: value.toISOString()  
+                  });  
+            } else if (typeof value === 'object' && value !== null) {  
+                  return JSON.stringify(value);  
+            } else {  
+                  return value;  
+            }  
+         }  
+      
+         static deserialize(value) {  
+            if (typeof value !== 'string') {  
+                  return value;  
+            }  
+      
+            const parsed = JSON.parse(value);  
+      
+            if (parsed.type === 'Map') {  
+                  return new Map(parsed.value);  
+            } else if (parsed.type === 'Set') {  
+                  return new Set(parsed.value);  
+            } else if (parsed.type === 'Date') {  
+                  return new Date(parsed.value);  
+            } else {  
+                  return parsed;  
+            }  
+         }  
+      
+         setItem(key, value) {  
+            const serializedValue = EnhancedLocalStorage.serialize(value);  
+            localStorage.setItem(key, serializedValue);  
+         }  
+      
+         getItem(key) {  
+            const serializedValue = localStorage.getItem(key);  
+            return EnhancedLocalStorage.deserialize(serializedValue);  
+         }  
+      
+         removeItem(key) {  
+            localStorage.removeItem(key);  
+         }  
+      
+         clear() {  
+            localStorage.clear();  
+         }  
+      
+         // Optional: Add methods to handle keys, e.g., getAllKeys()  
+         getAllKeys() {  
+            return Array.from(localStorage.keys());  
+         }  
+      }  
+      
+      // Usage example:  
+      const storage = new EnhancedLocalStorage();  
+      
+      // Store various types of data  
+      const myMap = new Map([['key1', 'value1'], ['key2', 'value2']]);  
+      const mySet = new Set([1, 2, 3]);  
+      const myObject = { name: 'Alice', age: 25 };  
+      const myDate = new Date();  
+      
+      storage.setItem('myMap', myMap);  
+      storage.setItem('mySet', mySet);  
+      storage.setItem('myObject', myObject);  
+      storage.setItem('myDate', myDate);  
+      
+      // Retrieve and verify the data  
+      console.log(storage.getItem('myMap')); // Map { 'key1' => 'value1', 'key2' => 'value2' }  
+      console.log(storage.getItem('mySet')); // Set { 1, 2, 3 }  
+      console.log(storage.getItem('myObject')); // { name: 'Alice', age: 25 }  
+      console.log(storage.getItem('myDate')); // Date object representing the same date and time as myDate
+      
+   ```
+</details>
+
+
+
+
+### CSS 动画和 JavaScript 动画的优缺点
+#### css动画
+优点：   
+ + 硬件加速：CSS 动画会使⽤浏览器的 GPU 来进⾏硬件加速，能够更加流畅和⾼效地运⾏。 
+ + 简单易⽤：CSS 动画通常只需要⼏⾏代码就能实现基本的动画效果，不需要使⽤ JavaScript 来控制动画。 
+ + 低资源占⽤：CSS 动画通常⽐ JavaScript 动画使⽤更少的 CPU 和内存资源，因此更适合⽤于简单的动画效果。  
+
+缺点：   
+ + 限制较⼤：CSS 动画在实现复杂的动画效果时，受到限制较⼤，不能像 JavaScript 动画那样⾃由控制动画的速度、⽅向等。
+ + 兼容性问题：由于不同浏览器对 CSS 动画⽀持程度不同，因此在实现时需要考虑浏览器兼容性问题。
+ + 可维护性差：当动画效果较为复杂时，使⽤ CSS 实现的代码会变得冗⻓和难以维护，因此需要进⾏代码优化和结构设计。
+ + 缺乏交互性：CSS动画通常只能在元素加载时播放一次，不能根据用户行为进行交互。
+
+#### JavaScript 动画
+优点：  
+ + ⾃由控制：JavaScript 动画能够更加⾃由地控制动画的速度、⽅向等，可以实现更加复杂的动画效果。  
+ + 兼容性好：由于 JavaScript 是浏览器通⽤的语⾔，因此在实现动画效果时，能够更好地兼容不同的浏览器。   
+ + 可维护性强：使⽤ JavaScript 实现动画时，代码结构更加灵活，能够更好地维护和扩展。 
+
+缺点：   
+ + 资源占⽤⾼：JavaScript 动画通常需要更多的 CPU 和内存资源，因此在实现动画效果时需要考虑系统资源的消耗问题。  
+ + 性能问题：JavaScript 动画性能受 JavaScript 引擎的影响，⽽不是浏览器引擎，因此需要对代码进⾏优化以提⾼动画性能。   
+ + 复杂度⾼：JavaScript 动画的实现复杂度通常⽐ CSS 动画⾼，因此需要对动画效果进⾏设计和规划。   
+
+### 什么是 FOUC (无样式内容闪烁)?你如何来避免 FOUC?
+FOUC（Flash of Unstyled Content，无样式内容闪烁）是指在网页加载过程中，用户可能会短暂地看到未应用样式的原始HTML内容，随后样式表加载完成后，页面才会以正确的样式重新渲染。这种现象会影响用户体验，显得页面加载不连贯和不专业。FOUC通常是由于样式表加载延迟或顺序不当引起的，具体原因可能包括：
+
++ 样式表放在HTML文档的底部，或通过JavaScript动态加载。
++ 外部样式表通过外部链接引用，加载速度依赖于网络连接状况。
++ 使用JavaScript动态修改样式或内容，导致内容在JavaScript执行前短暂无样式。
++ Web字体加载也可能导致FOUC。
+
+为了避免FOUC，可以采取以下措施：
+
+1. 确保样式表链接位置正确：将样式表链接放在HTML文档的`<head>`部分，确保在页面渲染之前先加载样式。
+2. 使用内联CSS：将CSS样式直接嵌入到HTML文档头部，这样也可以确保在页面渲染之前先加载样式。
+3. 预加载样式表：使用`<link rel="preload">`标签来预加载CSS文件，确保在渲染阶段之前提前加载样式。
+4. 优化外部字体加载：使用font-display: swap或其他字体加载策略，确保在字体加载期间使用后备字体，避免内容无样式闪烁。
+5. 避免阻塞脚本：确保JavaScript脚本不会阻塞CSS样式的加载，可以使用async或defer属性来异步加载脚本。
+6. 使用样式回退：在CSS样式加载之前，可以使用基本的HTML样式来避免FOUC，确保页面在加载完成前依然有可用的样式。
+7. 使用样式表框架：一些流行的样式表框架（如Bootstrap或Foundation等）已经对FOUC问题进行了优化和处理，使用这些框架也可以降低FOUC的发生概率。
 
 ### 描述一下TCP三次握手的过程。
 ### 在浏览器的开发者工具中，你如何定位和修复一个JavaScript错误？ 
@@ -65,9 +230,9 @@
 ### 请说出三种减少页面加载时间的方法。(加载时间指感知的时间或者实际加载时间)
 ### 如果你参与到一个项目中，发现他们使用 Tab 来缩进代码，但是你喜欢空格，你会怎么做?
 ### 请谈谈你对网页标准和标准制定机构重要性的理解。
-### 什么是 FOUC (无样式内容闪烁)?你如何来避免 FOUC?
+
 ### 请解释什么是 ARIA 和屏幕阅读器 (screenreaders)，以及如何使网站实现无障碍访问 (accessible)。
-### 请解释 CSS 动画和 JavaScript 动画的优缺点。
+
 ### 什么使 CORS，以及其要解决的问题?
 ### Koa2框架
 ### 介绍下深度优先遍历和广度优先遍历，如何实现?
@@ -164,11 +329,7 @@ menorepo+pnpm模式，来控制组件库和项目中的
 
 ### vue3和vue2对比
 
-### 二次封装 localStorage。如何存储map。
-+ 考虑存入和取出前的字符串转码
-+ 加密
-+ 类型问题
-+ 大小
+
 
 
 ### map 和对象的区别
@@ -179,7 +340,7 @@ menorepo+pnpm模式，来控制组件库和项目中的
 +  离线功能，有网和无网的扭转。
 
 ### 判断对象是否有环引用
-+ 深度变量。（判断是一个对象，就放到数组中，如果下次还是一个对象，就去看是是否有相同的对象，对比）
++ 深度变量。（判断是一个对象，就放到数组中，如果下次还是一个对象，就去看是否有相同的对象，对比）
 
 ### nextTick原理？微任务还是宏任务
 + 
@@ -215,3 +376,7 @@ https://leping.blog.csdn.net/article/details/136549736?spm=1001.2014.3001.5502
 ### nextTick为什么可以获取dom更新后的数据
 ### 你最常用的git命令是什么，如果要删除远程分支命令是什么
 ### websocket长链接，如何保持的。如果断开又怎么处理
+
+
+### js的垃圾回收基础，有什么问题，如何优化
+### js的堆和栈

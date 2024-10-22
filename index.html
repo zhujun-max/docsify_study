@@ -81,6 +81,7 @@
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
   </body>
   <style>
+    /* 代码块 */
     .markdown-section pre > code {
       padding: 10px !important;
       margin-bottom: 0 !important;
@@ -89,23 +90,28 @@
       overflow-y: auto;
       max-height: 400px;
     }
-    /* 针对Webkit内核的浏览器（如Chrome、Safari） */
+    /* 滚动条 */
     ::-webkit-scrollbar {
-      width: 10px; /* 滚动条的宽度 */
+      width: 10px; 
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: #888; /* 滚动条滑块的颜色 */
-      border-radius: 8px; /* 滚动条滑块的圆角 */
+      background-color: #888; 
+      border-radius: 8px;
     }
 
     ::-webkit-scrollbar-thumb:hover {
-      background-color: #555; /* 滚动条滑块悬停时的颜色 */
+      background-color: #555;
     }
 
     ::-webkit-scrollbar-track {
-      background-color: #f1f1f1; /* 滚动条轨道的颜色 */
-      border-radius: 8px; /* 滚动条轨道的圆角 */
+      background-color: #f1f1f1; 
+      border-radius: 8px;
+    }
+    /* 代码折叠颜色 */
+    summary{
+      color: #01ce00;
+      cursor: pointer;
     }
   </style>
 </html>
