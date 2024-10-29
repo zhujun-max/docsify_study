@@ -168,7 +168,47 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 2. 层级一样的情况下，后者的元素会覆盖前者。
 3. 标准 < 浮动 < 定位
 
-![层级关系](./img/css/7845-4323.png)
+<div class="levelRelationship">
+    <div class="levelone">标准流</div>
+    <div class="leveltwo">浮动</div>
+    <div class="levelthree">定位</div>
+</div>
+
+<style>
+.levelRelationship{
+    width:200px;
+    height:200px;
+    position: relative;
+}
+.levelRelationship>div{
+    color:#fff;
+    width:100px;
+    height:100px;
+}
+.levelRelationship>.levelone{
+    background-color:red;
+}
+.levelRelationship>.leveltwo{
+    background-color:green;
+    float:left;
+    margin-top: -60px;
+    margin-left: 40px;
+}
+.levelRelationship>.levelthree{
+    background-color:blue;
+    position: absolute;
+    top: 80px;
+    left: 80px;
+    z-index:2;
+}
+</style>
+
+
+### 浮动？？？
+
+
+两个div。第二个设置了浮动   
+两个行内块，都都设置了浮动，前后顺序
 
 ### 消除浮动
 
@@ -232,35 +272,6 @@ margin（外边距）， border（边框），padding（内边距），content�
 如果就想用设置宽高来当总体的宽高度 ，就设置一个``box-sizing：border-box；``
 
 
-
-### CSS实现一个三角形
-
-https://www.cnblogs.com/lidaying5/p/12605809.html
-
-```css
-#triangle-up {
-    width: 0;
-    height: 0;
-    border-left: 50px solid transparent;
-    border-right: 50px solid transparent;
-    border-bottom: 100px solid blue;
-}
-```
-
-![img](./img/css/01.png)
-
-```css
-#triangle-topleft {
-    width: 0;
-    height: 0;
-    border-top: 100px solid red;
-    border-right: 100px solid transparent;
-}
-```
-
-![img](./img/css/02.png)
-
-
 ### 重绘和回流
 
 回流：引起DOM树结构变化，页面布局变化的行为叫回流,且回流一定伴随重绘。
@@ -269,18 +280,11 @@ https://www.cnblogs.com/lidaying5/p/12605809.html
 
 
 ### 书写顺序
+
+增加可读性和维护性。新能优化，避免覆盖和冲突。
+
 1. 位置属性：position、top、right、z-index、display、float等
 2. 大小：width、height、padding、margin等
 3. 文字系列：font、line-height、letter-spacing、color-text-align等
 4. 背景：background、border等
 5. 其他：animation、transition等
-
-### 书写规范
-+ css属性使用缩写。
-+ 去掉小数点后面的0。
-+ 16进制颜色代码缩写。
-
-### css选择器命名规范
-+ 长名称或词组可以使用中横线来为选择器命名。
-+ 少用大写。
-+ 不随意使用id。
