@@ -489,6 +489,7 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
     }
 ```
 #### 2.【强制】组件的名字应该采用大驼峰命名法(帕斯卡命名法)，一方面可与组件名一致，使项目更加清晰，另一方面这样的写法对编辑器引入也很友好, 示例:
+
 ```js
     // 反例 
     ├── index.html
@@ -506,6 +507,7 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
         └── PageHeader
 ```
 对于例如按钮、下拉框或表格这样的基础组件应该始终以一个特定的前缀开头，区别与其他业务组件。
+
 ```js
     // 反例
     ├── index.html
@@ -621,7 +623,7 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
 #### 8.【强制】模板中使用简单的表达式,示例:
 组件模板应该只包含简单的表达式，复杂的表达式则应该重构为计算属性或方法。复杂表达式会让你的模板变得不那么声明式。我们应该尽量描述应该出现的是什么，而非如何计算那个值。而且计算属性和方法使得代码可以重用。
 + 反例
-```vue
+```js
    <template>
      <p>
         {{
@@ -633,17 +635,19 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
     </template>   
 ```
 + 正例
-```vue
+
+```js
     <template>
-    <p>{{ normalizedFullName }}</p>
+        <p>{{ normalizedFullName }}</p>
     </template>
+
     /* 复杂表达式已经移入一个计算属性 */
     computed: {
-    normalizedFullName: function () {
-        return this.fullName.split(' ').map(function (word) {
-        return word[0].toUpperCase() + word.slice(1)
-        }).join(' ')
-      }
+        normalizedFullName: function () {
+            return this.fullName.split(' ').map(function (word) {
+                return word[0].toUpperCase() + word.slice(1)
+            }).join(' ')
+        }
     }   
 ```
 #### 9.【强制】router 中的命名规范,示例:
