@@ -5,7 +5,7 @@
 + master(main)：分支则是用于稳定版本发布。
 
 
-![git常用命令](./img/git/img_git_01.png)
+![img git 01](https://s1.imagehub.cc/images/2024/11/03/85ce012a02df75ad67c407233daadc6a.png)
 ## 一、新功能开发流程
 
 ### 1. **拉取最新代码**：
@@ -36,13 +36,14 @@
 
 ### 5. **合并到`dev || test`分支**：
   - 在代码仓库详情页面，点击“New Merge Request”或相似的按钮开始创建合并请求
-  ![示例图片](./img/git/img_git_02.png)
+   ![img git 02](https://s1.imagehub.cc/images/2024/11/03/363d94b18b50e65da3cc4c0c88edb7a3.png)
   - 指定合并请求的源分支与目标分支。点击Compare branches and continue进行下一步填写相关合并信息
-  ![示例图片](./img/git/img_git_03.png)
+   ![img git 03](https://s1.imagehub.cc/images/2024/11/03/4b586108266466a2b66da9dcbb4f042d.png)
   - 创建合并请求后还可以在“提交记录”页分别查看本次请求中的所有提交历史与单次推送中包含的所有提交记录检查是否无误。
-   ![示例图片](./img/git/img_git_05.png)
+
+   ![img git 05](https://s1.imagehub.cc/images/2024/11/03/9ac01aaf1c7992f23e1f8285c32bb4e3.png)
   - 填写相关内容。`Description`：填写本次合并内容有哪些，`Assignee`：代码规范审查人 Assignee：选择`马安康` 特殊情况选择`张达`，填写完毕后点击Create merge request提交本次合并请求 由审查人审核代码
-  ![示例图片](./img/git/img_git_04.png)
+   ![img git 04](https://s1.imagehub.cc/images/2024/11/03/f0564c5f9e496083535552d18cb24c25.png)
    <!-- - 当你完成新功能的开发工作后，需要将它合并到`dev`分支。在合并之前，请确保你的本地代码库是最新的（通过拉取操作）。然后，将你的特性分支合并到`dev`分支。
 
    ```bash
@@ -54,12 +55,12 @@
    <!-- 如果合并过程中出现冲突，请手动解决冲突后再进行提交。 -->
 ### 6. **解决合并冲突**：
  - 造成合并冲突的原因是源分支与目标分支对相同的代码做出了不一致的变更。发起合并请求时将自动比对源分支与目标分支的内容差异，若发现存在冲突内容，系统将提示源分支和目标分支不可自动合并，你可以通过在线或本地两种方式解决冲突后继续发起合并请求。
-   ![示例图片](./img/git/img_git_06.png)
+   ![img git 06](https://s1.imagehub.cc/images/2024/11/03/6415db672ff93f1c473b0c9a20c91ee5.png)
 #### 在线解决冲突
  -  遇到代码冲突的情况往往需要在本地终端中反复拉取并解决，然后再推送至远端仓库中。在线解决冲突功能让繁琐的步骤 简化为简单的鼠标操作，点击网页中的“查看冲突内容”按钮便能够在线预览相冲突的内容。
-   ![示例图片](./img/git/img_git_07.png)
+   ![img git 07](https://s1.imagehub.cc/images/2024/11/03/0d071fa014098726f4ea772f8013eddc.png)
  -  冲突内容将会被高亮展示，此时选择需要保留的内容。点击右上角的切换按钮快速切换至其他冲突的所在行，解决所有冲突后轻点“提交改动”按钮提交变更，此时将在代码仓库中产生一个新的提交记录。
-   ![示例图片](./img/git/img_git_08.png)
+   ![img git 08](https://s1.imagehub.cc/images/2024/11/03/3b95b7acc97030f2045f28ac0b6fb481.png)
 #### 本地解决冲突
  -   例：当 branch-01 合并入 test 分支时提示有冲突时，可以先在本地切换至 test 分支并运行命令：
      ```bash

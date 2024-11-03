@@ -462,8 +462,7 @@ vue.delete：删除会直接删除一个数组元素，长度会减少。
    **访问原型对象：**构造函数.prorotypr
 
    **访问父对象：**子对象._ _propo_ _
-
-![img](./img/js/q6JFq1.png)
+  ![q6JFq1](https://s1.imagehub.cc/images/2024/11/03/ba25088de9e47be2554be31742cd3e8b.png)
 
 ```javascript
 function Student(sname,sage){
@@ -1091,7 +1090,7 @@ a()
 
 ### 项目目录结构
 
-![项目目录结构](./img/js/20191225163735830.png)
+![20191225163735830](https://s1.imagehub.cc/images/2024/11/03/d37c11b34ac01ce3cdb2d79bf6a36483.png)
 
 
 
