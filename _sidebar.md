@@ -13,7 +13,6 @@
     - [时空复杂度](other/STC.md)
     - [Linux](other/Linux.md)
     - [mysql](other/mysql.md)
-    - [autojs](other/autojs.md)
     - [bat脚本](other/batScript.md)
     - [centos命令](other/CentOS.md)
     - [一个div](other/oneDiv.md)
