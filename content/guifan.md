@@ -642,13 +642,14 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
     </template>
 
     /* 复杂表达式已经移入一个计算属性 */
-    computed: {
+/*     computed: {
         normalizedFullName: function () {
             return this.fullName.split(' ').map(function (word) {
                 return word[0].toUpperCase() + word.slice(1)
             }).join(' ')
         }
     }   
+*/
 ```
 #### 9.【强制】router 中的命名规范,示例:
 ```bash
