@@ -624,17 +624,17 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
 组件模板应该只包含简单的表达式，复杂的表达式则应该重构为计算属性或方法。复杂表达式会让你的模板变得不那么声明式。我们应该尽量描述应该出现的是什么，而非如何计算那个值。而且计算属性和方法使得代码可以重用。
 + 反例
 ```js
-/*
    <template>
      <p>
+        {% raw %}
         {{
             fullName.split(' ').map(function (word) {
                 return word[0].toUpperCase() + word.slice(1)
             }).join(' ')
         }}
+        {% endraw %}
         </p>
     </template>   
-*/
 ```
 + 正例
 
@@ -644,14 +644,14 @@ JavaScript规范应在遵守现有ES5规范的基础上，尽量拥抱ES6/7规�
     </template>
 
     /* 复杂表达式已经移入一个计算属性 */
-/*     computed: {
+    computed: {
         normalizedFullName: function () {
             return this.fullName.split(' ').map(function (word) {
                 return word[0].toUpperCase() + word.slice(1)
             }).join(' ')
         }
     }   
-*/
+
 ```
 #### 9.【强制】router 中的命名规范,示例:
 ```bash
