@@ -1145,7 +1145,7 @@ vue中子组件可以使用父组件传递过来的数据，但是绝对不能�
    ```
 
 ### 获取vue data中的初始值
-获取到data中的初始值，可以直接点出来单个的值：`this.data.options()`
+获取到data中的初始值，可以直接点出来单个的值：`this.$options.data().xxx`
 获取当data组件当前的所有值： `this.$data`
 
 
