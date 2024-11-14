@@ -24,7 +24,7 @@
 ### 三、可以填写多个参数的属性
 ```css
     .streak{
-        width: 400px;
+        width: 100%;
         height: 150px;
         background-color: #eee;
         background-repeat: 
@@ -48,7 +48,7 @@
 <div class="streak"></div>
 <style>
     .streak{
-        width: 400px;
+        width: 100%;
         height: 150px;
         background-color: #eee;
         background-repeat: 
@@ -74,7 +74,7 @@
 <style>
 .ellipse{
     background-color: #f7f7f7;
-    width:400px;
+    width:100%;
     height:200px;
     position: relative;
 }
@@ -120,7 +120,7 @@
 <style>
 .ellipse{
     background-color: #f7f7f7;
-    width:400px;
+    width:100%;
     height:200px;
     position: relative;
 }
@@ -212,7 +212,7 @@
     }
     #rhyme1{
         background-color: #4169e1;
-        width:644px;
+        width:100%;
         height:400px;
         position: relative;
     }
@@ -276,7 +276,7 @@
     }
     #rhyme2{
         background-color: #4169e1;
-        width:644px;
+        width:100%;
         height:400px;
         position: relative;
     }
@@ -363,7 +363,7 @@
     }
     #rhyme3{
         background-color: #4169e1;
-        width:644px;
+        width:100%;
         height:400px;
         position: relative;
     }

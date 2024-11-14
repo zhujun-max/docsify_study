@@ -203,3 +203,18 @@ pause
 for /l %D in (1,1,255) do (ping 192.168.1.%D -n 1 && echo 192.168.1.%D>>ok.txt || echo 192.168.1.%D >>no.txt)
 ```
 
+### 使用bat脚本批量提取文件夹下所有的文件名
+```bat
+ dir *.*/b>a.xlsx
+```
+
+
+### 隐藏窗口后台运行指令
+```js
+@echo off
+if "%1"=="h" goto begin
+start mshta vbscript:createobject("wscript.shell").run("""%~nx0"" h",0)(window.close)&&exit
+:begin
+// 自定义运行的可执行程序的代码放在此处
+```
++ 如果要关闭窗口，只能在控制台进行关闭，或者电脑关机。
