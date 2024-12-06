@@ -2179,3 +2179,20 @@ jQuery.ready函数只需要等待DOM执行完毕后，就会执行。
 
 
 
+### JSLabel语法
+使用label语句可以在代码中添加标签，以便循环时可以退出循环。
+
+```js
+  // 使用标记语法 (label) 
+  // 标记a(任意名字)相当于外层循
+  {
+      a: for (let i = 0; i < 20; i++) {
+          for (let j = 0; j < 10; j++) {
+              if (i === j) {
+                  console.log(1)
+                  break a; // break 要终止标记 a
+              }
+          }
+      }
+  }
+```
