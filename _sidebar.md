@@ -1,7 +1,7 @@
   - **规范文档**
     - [前端开发规范](content/guifan.md)
     - [git使用](content/git.md)
-    - [项目建议](content/xmjy.md)
+    - [建议](content/xmjy.md)
   - **面试题**
     - [css](content/css.md)
     - [js](content/js.md)
@@ -18,4 +18,4 @@
     - [三角形](other/triangle.md)
     - [npm依赖](other/npm.md)
     - [Chrome控制台](other/Chrome.md)
-    - [基础算法题](other/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95.md)
+    - [基础算法题](other/algorithm.md)
