@@ -11,6 +11,7 @@
     - [工作中的问题](content/difficulty.md)
   - **学习资料**
     - [时空复杂度](other/STC.md)
+    - [ECMAScript](other/ECMAScript.md)
     - [服务器命令](other/ServerCommand.md)
     - [mysql](other/mysql.md)
     - [bat脚本](other/batScript.md)
