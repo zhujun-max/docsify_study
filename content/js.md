@@ -205,7 +205,172 @@ b()//10
 + window.name + iframe 
 + document.domain + iframe
 
+### 箭头函数和普通函数的区别
+??? 
 
+### 对象、方法、函数的区别和用法
+
+#### 对象：
+
+  **定义：**
+    对象是属性（键值对）和方法的集合，用来存储和组织数据。
+
+  **特点：**    
+  + 是一种数据结构，可以动态添加属性或方法。
+  + 属性是值（数字、字符串、布尔值等）。
+  + 方法是对象的行为（函数作为属性）。
+
+  **用法：**
+  1. 定义和操作属性：
+
+  ```javascript
+    const person = { name: 'Alice', age: 25 }; // 定义对象
+    console.log(person.name); // 获取属性：Alice
+    person.gender = 'female'; // 动态添加属性
+    console.log(person); // { name: 'Alice', age: 25, gender: 'female' }
+  ```
+  2. 存储和组织复杂数据：
+
+  ```javascript
+    const car = {
+        brand: 'Toyota',
+        model: 'Camry',
+        features: ['AC', 'GPS', 'Bluetooth'],
+    };
+    console.log(car.features[1]); // 获取数组中的值：GPS
+  ```
+  3. 嵌套对象：
+
+  ```javascript
+    const user = {
+        name: 'Bob',
+        address: { city: 'New York', zip: '10001' },
+    };
+    console.log(user.address.city); // New York
+  ```
+
+#### 方法 
+
+**定义：**
+方法是对象的属性，值为函数，表示对象可以执行的行为。
+
+**特点：**
+  + 方法是对象的“行为”部分，与属性的“数据”部分相对应。
+  + 方法可以通过 this 关键字访问对象的其他属性。
+
+**用法：**
+1. 定义方法：
+
+```javascript
+const person = {
+    name: 'Alice',
+    greet: function() { // 定义方法
+        console.log('Hello, ' + this.name);
+    },
+};
+person.greet(); // 调用方法：Hello, Alice
+```
+2. 简写方法：
+
+```javascript
+const calculator = {
+    add(a, b) {
+        return a + b; // 方法简写
+    },
+};
+console.log(calculator.add(2, 3)); // 5
+```
+3. 操作对象的属性：
+
+```javascript
+const counter = {
+    count: 0,
+    increment() {
+        this.count++; // 修改对象属性
+        console.log(this.count);
+    },
+};
+counter.increment(); // 1
+counter.increment(); // 2
+```
+#### 函数
+**定义：**
+函数是一个可调用的代码块，可以独立于任何对象执行任务。
+
+**特点：**
+  + 是一种代码复用的方式。
+  + 可以接收参数，返回结果。
+  + 在 JavaScript 中，函数本身也是对象。
+
+**用法：**
+
+1. 定义和调用函数：
+```javascript
+function add(a, b) {
+    return a + b; // 返回值
+}
+console.log(add(2, 3)); // 5
+```
+2. 函数表达式：
+
+```javascript
+const greet = function(name) {
+    return 'Hello, ' + name;
+};
+console.log(greet('Alice')); // Hello, Alice
+```
+
+3. 匿名函数：
+
+```javascript
+setTimeout(function() {
+    console.log('Time is up!');
+}, 1000); // 1 秒后输出
+```
+4. 箭头函数：
+
+```javascript
+const square = (x) => x * x;
+console.log(square(4)); // 16
+```
+
+
+### 构造函数，原型对象，原型、原型链。都是干什么的，怎么区分？
+
+
+#### 构造函数（Constructor Function）
+
+**构造函数允许你定义一个模板，然后基于这个模板创建多个对象实例。每个实例都有自己的属性副本（除非属性是引用类型，如对象或数组），但它们共享通过原型链继承的方法。**
+
+构造函数的名字通常以大写字母开头，以区别于普通函数。在调用时，使用new关键字
+
+```javascript
+// 定义一个构造函数
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+// 在原型上添加一个方法
+Person.prototype.greet = function() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+};
+
+// 创建两个对象实例
+const alice = new Person('Alice', 30);
+const bob = new Person('Bob', 25);
+
+// 调用原型上的方法
+alice.greet(); // 输出: Hello, my name is Alice and I am 30 years old.
+bob.greet();   // 输出: Hello, my name is Bob and I am 25 years old.
+
+```
+
+#### 原型对象 (Prototype Object)
+
+
+
+??? 
 
 
 
