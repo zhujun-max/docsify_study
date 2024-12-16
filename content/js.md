@@ -206,7 +206,201 @@ b()//10
 + document.domain + iframe
 
 ### 箭头函数和普通函数的区别
-??? 
+
+1. 语法简洁性
+
+相对于普通函数，箭头函数不用写`function`，有时候还可以省略`{}`和`return`，当只有一个参数时，`（）`也可以省略。
+```js
+//普通函数
+function add(a,b){
+     return a+b
+}
+//箭头函数
+const add=(a,b)=>a+b
+
+```
+
+2. this指向不同
+
+普通函数的`this`是在函数被调用时就确定的，它指向调用该函数的对象；    
+箭头函数的`this`永远指向其（创建时的）父级的作用域（call、apply、bind也无法改变）
+
+（1） 普通函数      
++ this指向全局对象      
+作为函数独立调用时，this 一般指向全局对象（在浏览器中是 window，在Node.js中是 global）      
+```js
+function func() {
+  console.log(this); // window 或 global
+}
+func();
+```
++ this指向调用它的对象      
+当函数被对象调用时，this指向调用它的对象。
+
+```js
+const obj = {
+  name:'dog',
+  method: function() {
+    console.log(this); // { name: 'dog', method: [Function: method] }
+    console.log(this.name);//dog
+  }
+};
+obj.method();
+
+```
+
++ this指向参数
+
+使用 `call 、 apply、bind `方法调用时，`this` 指向 `call、apply、bind` 方法的第一个参数。
+
+```js
+function foo(a,b) {
+  console.log(this) //[Number: 1]  
+}
+foo.call(1,2)
+
+```
+
++ this指向实例化对象    
+在构造函数里面的`this`指向实例化出来的对象
+
+```js
+function Constructor() {
+  this.value = 'Hello';
+}
+const instance = new Constructor();
+console.log(instance.value); // Hello
+
+```
+
+（2）箭头函数
+
+指向window、指向父级作用域的`this`    
+
++ this指向`window`    
+this指向父级作用域的`this`，当父级作用域为全局作用域时，`this`指向`window`，此时`this.name`为`undefined`。
+
+```js
+const obj={
+    name:"a",
+    fun:()=>{
+        console.log(this.name)//undefined
+    }
+}
+obj.fun()
+
+```
+
++ 箭头函数的this指向父级作用域的this
+
+```js
+function foo() {
+  console.log(this) // { a: 1, foo: [Function: foo] }
+  var test = () => {
+      console.log(this) // { a: 1, foo: [Function: foo] }
+  }
+  test()
+}
+var obj = {
+    a: 1,
+    foo: foo
+}
+obj.foo()
+```
+
+（3）总结
+  普通函数的this指向调用该函数的对象      
+  ①　独立调用时，指向全局对象（window或global）     
+  ②　被对象调用时，指向调用它的对象     
+  ③　使用call、apply或bind方法调用时，指向他们的第一个参数      
+  ④　在构造函数中使用时，指向实例化该构造函数的对象     
+  箭头函数的this指向该函数定义是所在的定义域      
+  ①　在全局作用域定义时，this指向window，此时this.item为undefined     
+  ②　在普通函数中定义时，this继承普通函数的this指向     
+
+3、有无arguements对象
+(1)普通函数有`arguements`对象   
+在普通函数中，可以使用`arguements`对象访问函数的所有对象，它是一个类数组对象。
+
+```js
+function fun(){
+    console.log(arguments[0]) //1
+    console.log(arguments[1]) //2
+    console.log(arguments[2]) //3
+}
+fun(1,2,3);
+```
+
+(2)箭头函数无arguements对象   
+箭头函数没有自己的 arguments 对象，但可以通过 rest 参数语法来获取所有参数。
+
+```js
+const myArrowFunction = (...args) => {
+  console.log(args); // 输出传递给函数的参数数组
+};
+
+myArrowFunction(1, 2, 3); // 输出: [1, 2, 3]
+```
+
+<details> 
+  <summary>箭头函数的args和普通函数的arguments的区别</summary>
+  箭头函数的args（通常使用...args表示rest参数）和普通函数的arguments对象在功能和用途上是相似的，但它们在语法和行为上存在显著的区别。以下是对这两者区别的详细解释：
+  1. 语法区别
+    + 箭头函数的rest参数（...args）：
+      + 箭头函数本身没有arguments对象，但可以使用rest参数语法...args来捕获所有传递给函数的参数。
+      + Rest参数是一个数组，它包含了传递给函数的所有参数。
+      + Rest参数必须放在函数参数列表的最后。  
+   + 普通函数的arguments对象：
+      + 普通函数有一个arguments对象，该对象是一个类数组对象，包含了传递给函数的所有参数。
+      + arguments对象不是数组，但它具有数组的长度属性，并且可以使用索引来访问各个参数。
+      + arguments对象还包含了一些额外的属性，如callee（指向当前执行的函数）和caller（指向调用当前函数的函数，但在严格模式下为null）。
+  2. 行为区别
+  + 箭头函数的rest参数：
+    + 由于箭头函数没有自己的this和arguments，因此rest参数是获取所有参数的唯一方式。
+    + Rest参数是一个真正的数组，可以使用数组的所有方法和属性。
+  + 普通函数的arguments对象：
+    + arguments对象虽然类似于数组，但它不是数组，因此不能直接使用数组的方法（如push、pop等）。不过，可以通过Array.  prototype.slice.call(arguments)等方法将其转换为数组。
+    + arguments对象能够反映出函数被调用时传入的参数，即使函数声明时的形参与实际传入的参数不一致。
+  3. 使用场景
+  + 箭头函数的rest参数：
+     + 常用于需要处理不定数量参数的箭头函数中。
+     + 由于箭头函数通常用于简短的回调或内联函数，rest参数提供了一种简洁的方式来捕获所有参数。
+  + 普通函数的arguments对象：
+     + 在需要访问所有传递给函数的参数，而不仅仅是某些特定参数时非常有用。
+     + 在函数体内部，当参数数量不确定或需要动态处理参数时，arguments对象非常有用。
+  4. 注意事项
+    + 在箭头函数中，由于this和arguments的绑定行为与普通函数不同，因此不能期望在箭头函数内部使用arguments对象来获取参数。
+    + 在普通函数中，虽然arguments对象提供了很大的灵活性，但也要注意其不是真正的数组，可能会在某些情况下导致性能问题或代码可读性问题。
+</details>
+
+
+4、是否能作为构造函数   
+（1）普通函数可以作为构造函数   
+普通函数可以用作构造函数，可以通过new关键字来创建实例化对象。
+
+```js
+function Person(name){
+    this.name=name
+}
+const p=new Person('dog')
+console.log(p.name)//dog
+```
+
+(2)箭头函数不能作为构造函数
+```js
+const Person=(name)=>{
+    this.name=name
+}
+const p=new Person('hh')
+console.log(p.name)//ERROR
+
+```
+
+**简要回答：**
+1. 箭头函数没有自己的 this、arguments、super 或 new.target 绑定。这些值从外围作用域（即封闭的执行上下文）继承而来。
+2. 由于箭头函数不绑定自己的 this，它们不能用作构造函数，因此也没有 prototype 属性。
+3. 箭头函数因为没有 prototype 和其他与对象相关的特性，通常比普通函数占用更少的内存。
+
 
 ### 对象、方法、函数的区别和用法
 
@@ -365,13 +559,6 @@ alice.greet(); // 输出: Hello, my name is Alice and I am 30 years old.
 bob.greet();   // 输出: Hello, my name is Bob and I am 25 years old.
 
 ```
-
-#### 原型对象 (Prototype Object)
-
-
-
-??? 
-
 
 
 ###  网络性能优化
@@ -782,55 +969,6 @@ function setCookie(name, value, { secure, path, domain, expires }) {
 }
 
 ```
-
-### 箭头函数的特点
-
-箭头函数是匿名函数.  
-1. 不能作为构造函数，不能使用new
-
-```javascript
-  let foo=()=>{}
-  var newFoo=new foo()//foo is not a construcotr
-```
-
-2. 不能使用argumetns,取而代之用rest参数...解决
-
-```javascript
-let C = (...c) => {
-  console.log(c);
-}
-C(1,2,3,3)
-```
-
-3. this永远指向其（创建时的）父级的作用域（call、apply、bind也无法改变）
-
-  ```javascript
-      function regularFunction() {
-      this.value = 1;
-
-      setTimeout(function() {
-        this.value++;
-        console.log("Regular function this.value:", this.value);
-      }, 1000);
-    }
-
-    function arrowFunction() {
-      this.value = 1;
-
-      setTimeout(() => {
-        this.value++;
-        console.log("Arrow function this.value:", this.value);
-      }, 1000);
-    }
-
-    const obj = new regularFunction(); // 输出 "Regular function this.value: NaN"，因为 this 在 setTimeout 回调中指向全局对象而不是 obj
-
-    const objWithArrowFunction = new arrowFunction(); // 输出 "Arrow function this.value: 2"，因为箭头函数继承了外部上下文的 this
-
-  ```
-
-4. 箭头函数没有原型对象
-
 
 
 ### 多维数组的扁平化
