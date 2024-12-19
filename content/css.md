@@ -261,16 +261,89 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 | :after               | 在某元素之后插入某些内容                      | 
 
 
+### `display:none;` 和`visibility:hidden;`的区别
+
+`display:none;` 彻底消失，释放空间。能引发页面的reflow回流（重排）。
+
+`visibility:hidden;` 就是隐藏，但是位置没释放，好比`opacity:0; `不引发页面回流。
+
+### CSS 优先级和权重值如何计算 ???
+
+内嵌样式>内部样式>外部样式>导入式
+
+!important > 内嵌 1000 >Id 100 > class=[]=伪类 10 > tag=伪元素 1 > ( * + > ~) 0
+
+
 
 
 ### 盒子模型是什么
 
-盒子模型由四个部分组成： 
+标准盒模型 ： W3C标准的盒子模型（更常用）       
+怪异盒模型：IE标准的盒子模型        
 
-margin（外边距）， border（边框），padding（内边距），content（内容）
+#### 标准盒模型
 
-如果就想用设置宽高来当总体的宽高度 ，就设置一个``box-sizing：border-box；``
+设置：`box-sizing: content-box;`
 
+设置宽高将限制`content`
+
+标准的盒子模型由：**content(区域内容大小) + padding(内边距) + border(边框) + margin(外边距)组成**  
+**设置固定宽高后，更改padding和border都不会影响整体宽高**
+width = content(内容)的宽度 + padding(左右) + border(左右)；  
+height = content(内容)的高度 + padding(上下) + border(上下)；  
+总宽 = width + margin(左右)  
+总高 = height + margin(上下)  
+总面积 = 总宽 x 总高  
+
+<details> 
+    <summary>垂直两个div外边距重叠问题</summary>
+
+两个垂直方向的div，上面div设置了margin:10px。下面的div设置了margin:20px;那么两个div之间的距离按理说应该是10
++20=30px。
+
+实际他们之间的距离是20px。为什么？
+
+**这是因为浏览器上下放置两个块元素时，它们垂直方向的外边距会发生重叠，浏览器会把他们之间的外边距会折叠在一起，折叠后的外边距就是两个外边距中较大的那个外边距的大小。**
+
+所以重新计算两个div垂直方向之间的距离为：
+
+`max(margin-bottom(div.box1),margin-top(div.box2))=max(10px,20px)=20px`
+
+</details>
+
+
+
+<details> 
+    <summary>父子嵌套div外边距重叠问题</summary>
+
+如果一个元素嵌套在另外一个元素中，他们都有外边距，也会重叠吗？（父级外边距折叠塌陷问题）。
+<div style="border: 1px solid;">
+    <div style="width: 200px;height: 200px;margin: 10px;background:antiquewhite;">
+        <div style="width: 100px;height: 100px;margin: 30px;background:aqua;"></div>
+    </div>
+</div>
+
+**水平方向：**正常。
+**垂直方向：**父级div和子级div外边距发生了重叠，**取二者中较大者**
+
+**解决方法：**
++ 给父级1px的边框
++ 给父级1px内边距
++ 不用margin-top，改用父级内边距padding   
++ 给父元素设置overflow:hidden; （触发bfc）父元素会变成独立的空间
++ 将子元素转换为行内块元素
+
+</details>
+
+#### 怪异盒模型
+
+设置： `box-sizing:border-box;`
+
+设置宽高将限制`content + padding + border`
+
+计算盒子宽：`width(content + padding + border)`     
+计算盒子高：`heigth(content + padding + border)`   
+怪异盒子模型的宽高是定死的，设置 padding 或 border 不会影响页面布局。   
 
 ### 重绘和回流
 
