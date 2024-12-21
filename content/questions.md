@@ -176,6 +176,44 @@ console.log(obj);
 
 ```
 
+### forEach和map跳出循环
+  ```js
+    // 采用try..catch.. 和  throw new Error()来实现条件跳出，或者报错防止阻塞代码的作用
+  // 1. 单层循环：
+  try{
+    obj.forEach(item => {
+      console.log(`当前id：${item.id}`)
+      if(item.id === '002'){
+        throw new Error('id等于002，跳出循环');
+      }
+    });
+  }
+  catch(error){
+    console.error(error)
+  };
+  console.log("如果看见了这段话说明代码没有被报错所阻塞");
+
+  // 2. 双层循环：
+  // 只是跳出了第二层循环，第一层循环会继续执行的
+
+  try{
+    obj.forEach(item => {
+      console.log(`第一层forEach循环：${item.id}`);
+      try{
+        item.array.forEach(val => {
+          if(val.age < 18){
+            throw  new Error('年龄不能小于18岁');
+          }
+        })
+      }catch(error){
+        console.error(error)
+      }
+    })
+  }catch(error){
+    console.log(error)
+  };
+  console.log("如果看见了这段话说明代码没有被报错所阻塞");
+  ```
 
 ### CSS 动画和 JavaScript 动画的优缺点
 #### css动画
@@ -481,6 +519,39 @@ let closure = createClosure();
 3. 使用弱引用
 JavaScript 提供了 WeakMap 和 WeakSet，它们不会阻止垃圾回收。使用这些数据结构可以减少内存泄漏的可能性。
 
+
+
+### ECMAScript和JavaScript的关系
+
+ECMAScript和JavaScript之间的关系是标准与实现的关系。
+JavaScript最初是由Netscape公司（现为Mozilla基金会的一部分）开发的一种脚本语言，用于为网页添加动态功能。随着互联网的发展，JavaScript逐渐成为了网页开发不可或缺的一部分。
+
+为了标准化JavaScript并确保不同浏览器之间的兼容性，欧洲计算机制造商协会（ECMA，后更名为ECMA International）在1996年成立了一个委员会，专门负责制定JavaScript语言的规范。这个规范被称为ECMAScript。因此，ECMAScript实际上是JavaScript语言的标准规范，定义了该语言的语法、数据类型、操作符、对象等核心组成部分。
+
+简而言之，ECMAScript是JavaScript的标准，而JavaScript是ECMAScript标准的具体实现之一。尽管在实际开发中，我们通常将ECMAScript和JavaScript视为同义词，但严格来说，它们之间还是存在细微的差别的。当我们谈论JavaScript时，我们可能指的是这门语言本身、它的各种实现（如浏览器中的JavaScript引擎）、以及与之相关的API（如DOM和BOM）等。而当我们谈论ECMAScript时，我们更侧重于指这门语言的语法和语义规范。
+
+随着Web技术的不断发展，ECMAScript标准也在不断更新和完善。从ECMAScript 3（1999年发布）到最新的ECMAScript 2023（也称为ES14），每个新版本都引入了一些新特性和改进，旨在使JavaScript更加现代化、高效和易于使用。
+
+
+ECMAScript和JavaScript之间的关系：
+<details> 
+   <summary>比喻</summary>
+
+比喻：     
+想象你是一位厨师（开发者），你正在准备一顿美味的饭菜（编写JavaScript代码）。你的厨房（浏览器）是你进行烹饪（代码执行）的地方，它提供了你所需的所有工具和设备（如炉灶、烤箱、刀具等，对应浏览器的各种功能和API）。      
+
+现在，假设你所在的地区（Web开发社区）有一个烹饪协会（ECMA International），它负责制定烹饪规范（JavaScript规范，特别是ECMAScript）。这些规范告诉你如何正确地准备食材（编写代码），包括使用哪些烹饪技巧（语法和语义），以及如何将不同的食材组合在一起（函数、对象等）。     
+
+每当烹饪协会发布新的烹饪规范时（ECMAScript更新版本），它可能会引入新的烹饪技巧或食材（新的JavaScript特性）。然而，这并不意味着你的厨房（浏览器）会立即拥有这些新的工具或食材。     
+
+实际情况：    
+
+浏览器更新：为了支持新的烹饪规范（ECMAScript版本），你的厨房（浏览器）需要进行升级或改造。这通常意味着浏览器开发商需要添加新的功能或改进现有功能，以确保它们能够按照新的规范来烹饪（执行JavaScript代码）。
+兼容性：不是所有的厨房（浏览器）都会立即进行升级。有些厨房可能由于各种原因（如资源限制、旧设备的兼容性等）而延迟升级。因此，即使烹饪协会发布了新的规范，也可能会有一些厨房（浏览器）暂时无法支持这些新特性。
+开发者责任：作为厨师（开发者），你需要了解你的目标顾客（用户）所使用的厨房（浏览器）类型，并相应地调整你的烹饪方法（编写代码）。如果某些顾客使用的是旧厨房（旧浏览器），你可能需要使用一些技巧（如代码转换工具Babel）来确保你的饭菜（代码）能够在他们的厨房中正确烹饪（执行）。
+通过这个比喻，希望能够帮助你更好地理解浏览器、JavaScript规范（ECMAScript）以及它们之间的关系。简而言之，浏览器是JavaScript代码的运行环境，而ECMAScript规范定义了JavaScript代码的编写方式。每当ECMAScript更新版本时，浏览器需要相应地更新以支持这些新特性，但并非所有浏览器都会立即进行更新。
+</details> 
+
 ### sass 和 less的区别
 
    #### 一、编译环境不同?
@@ -751,3 +822,5 @@ menorepo+pnpm模式，来控制组件库和项目中的
 ### 你最常用的git命令是什么，如果要删除远程分支命令是什么
 ### websocket长链接，如何保持的。如果断开又怎么处理
 ### js的堆和栈
+### 如何修改第三方npm包
+### 使用 pnpm 快速配置 monorepo

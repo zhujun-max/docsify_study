@@ -1,5 +1,5 @@
 
-## 面试题
+## 基础题
 
 ### promise和await/async的区别
 
@@ -81,26 +81,23 @@ promise是同步，then是异步
 8. class 面向对象
 
 
-###  什么是单页面应用
+### JSLabel语法
+使用label语句可以在代码中添加标签，以便循环时可以退出循环。
 
-单页应用的全称是 Single Page Application，简称 SPA
-
-通过路由的变更，局部切换网页内容，取代整个页面的刷新操作
-
-三大框架均采用单页面应用模式
-
-+ 优点
-  1. 用户操作体验好，用户不用刷新页面。
-  2. 局部更新，对服务器压力小
-  3. 良好的前后端分离，后端不用在负责页面渲染和输出工作
-+ 缺点
-  1. 首次加载耗时长，速度慢
-     1. 去掉编译后的map文件，map文件是帮助线上调试，查看样式，通常不生成map文件。
-     2. vue-router路由懒加载 component: () => import( "@/index.vue")。（懒加载的文件会单独生成一个js文件，非懒加载的文件会统一生成一个app.js）
-     3. 使用CDN减小代码体积加快请求速度
-     4. 文件按需加载
-  2. SEO不友好，需要采用prender服务进行完善
-
+```js
+  // 使用标记语法 (label) 
+  // 标记a(任意名字)相当于外层循
+  {
+      a: for (let i = 0; i < 20; i++) {
+          for (let j = 0; j < 10; j++) {
+              if (i === j) {
+                  console.log(1)
+                  break a; // break 要终止标记 a
+              }
+          }
+      }
+  }
+```
 
 
 
@@ -687,6 +684,63 @@ e.stopPropagation()冒泡机制下，阻止事件的进一步往上冒泡。捕�
 
 e.cancelBubble 是e.stopPropagation() 的曾用名，也可以阻止冒泡和捕获
 e.cancelBubble = true;
+
+### 代码规范，Eslint是干什么的
+
+基本格式化
+
++ 常量使用全大写字母，并用下划线分割GLOBAL_NAME="name"
++ 变量和函数小驼峰方式，常量名词开头，函数动词开头。
++ 构造函数class大驼峰方式。
++ 一行代码不超过80个字符，编辑器会换行。
++ 字符串统一使用单引号，多行或需要携带变量使用反引号，props属性参数使用双引号。
++ null当做对象占位符。
++ 避免使用undefined。
++ 创建对象时使用：{}。
++ 创建数组时使用：[]。
+
+**EsLint是javascript代码中识别和报告模式匹配的工具，他的目标时保证代码的一致性和避免错误。**
+
+
+### npm安装时-g、-S、-D有什么区别
+**npm install name**：安装依赖到 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install -g name**：全局安装,不在 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
+
+**npm install name -S**：npm install name -save的简写，自动把模块和版本添加到dependencies。
+
+**npm install name -D**：npm install name -save-dev简写自动把模块和版本添加到devDependencies。
+
+**-D**后，安装包会在package.json中的devDependencies对象中，简称dev。dev是在开发中要用到的。
+
+**-S**后，安装包会在package.json中的dependencies对象中。简称dep。dep是在生产环境中要用到的。
+
+比如：
+
+**构建工具**：gulp和webpakc是用来压缩代码，打包需要的工具，程序实际运行中时候并不需要，就要放在dev中所以要用 -D。
+
+**项目插件**：如element ui ,echarts,这种的插件要在运行中使用的，就要放在dep中所以就用-S。 一般我们项目插件，在api中都可以看到，一般都是-S。因为这些插件是在程序运行中使用的。
+
+
+###  什么是单页面应用
+
+单页应用的全称是 Single Page Application，简称 SPA
+
+通过路由的变更，局部切换网页内容，取代整个页面的刷新操作
+
+三大框架均采用单页面应用模式
+
++ 优点
+  1. 用户操作体验好，用户不用刷新页面。
+  2. 局部更新，对服务器压力小
+  3. 良好的前后端分离，后端不用在负责页面渲染和输出工作
++ 缺点
+  1. 首次加载耗时长，速度慢
+     1. 去掉编译后的map文件，map文件是帮助线上调试，查看样式，通常不生成map文件。
+     2. vue-router路由懒加载 component: () => import( "@/index.vue")。（懒加载的文件会单独生成一个js文件，非懒加载的文件会统一生成一个app.js）
+     3. 使用CDN减小代码体积加快请求速度
+     4. 文件按需加载
+  2. SEO不友好，需要采用prender服务进行完善
 
 
 
@@ -1441,23 +1495,6 @@ a()
 
 
 
-### 代码规范，Eslint是干什么的
-
-基本格式化
-
-+ 常量使用全大写字母，并用下划线分割GLOBAL_NAME="name"
-+ 变量和函数小驼峰方式，常量名词开头，函数动词开头。
-+ 构造函数class大驼峰方式。
-+ 一行代码不超过80个字符，编辑器会换行。
-+ 字符串统一使用单引号，多行或需要携带变量使用反引号，props属性参数使用双引号。
-+ null当做对象占位符。
-+ 避免使用undefined。
-+ 创建对象时使用：{}。
-+ 创建数组时使用：[]。
-
-**EsLint是javascript代码中识别和报告模式匹配的工具，他的目标时保证代码的一致性和避免错误。**
-
-
 
 
 ### src和href的区别
@@ -1635,25 +1672,6 @@ console.log(JSON.parse(url))
   2. cnpm: 网速快。淘宝对npm的拷贝，10分钟同步一次。
   3. yarn: 以前安装过，后期可以离线安装。版本统一。扁平模式（将依赖包的不同版本归结为单个版本，以避免创建多个副本）
 
-### npm安装时-g、-S、-D有什么区别
-**npm install name**：安装依赖到 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
-
-**npm install -g name**：全局安装,不在 node_modules 目录下,不写入节点, npm install 时不下载该依赖。
-
-**npm install name -S**：npm install name -save的简写，自动把模块和版本添加到dependencies。
-
-**npm install name -D**：npm install name -save-dev简写自动把模块和版本添加到devDependencies。
-
-**-D**后，安装包会在package.json中的devDependencies对象中，简称dev。dev是在开发中要用到的。
-
-**-S**后，安装包会在package.json中的dependencies对象中。简称dep。dep是在生产环境中要用到的。
-
-比如：
-
-**构建工具**：gulp和webpakc是用来压缩代码，打包需要的工具，程序实际运行中时候并不需要，就要放在dev中所以要用 -D。
-
-**项目插件**：如element ui ,echarts,这种的插件要在运行中使用的，就要放在dep中所以就用-S。 一般我们项目插件，在api中都可以看到，一般都是-S。因为这些插件是在程序运行中使用的。
-
 
 ### js中if判断true和false
 ''、0、undefined、null、false、NaN都为false。其他的都为true。
@@ -1800,11 +1818,12 @@ setTimeout(function() {
 
 
 
-### forEach会改变原来的数组吗?
-答：如果数组中的值是基本类型, 改变不了;
-如果是引用类型分两种情况：
-  1、没有修改形参元素的地址值, 只是修改形参元素内部的某些属性，会改变原数组；
-  2、直接修改整个元素对象时，无法改变原数组；
+### forEach会改变原来的数组吗
+
+答：如果数组中的值是基本类型, 改变不了;   
+如果是引用类型分两种情况：    
+  1. 没有修改形参元素的地址值, 只是修改形参元素内部的某些属性，会改变原数组；   
+  2. 直接修改整个元素对象时，无法改变原数组；   
 
   map也是一样的  
 
@@ -1821,89 +1840,48 @@ setTimeout(function() {
   数组包含的是引用数据类型a，那么在使用forEach的时候，形参b拷贝的是引用数据类型在栈中的地址，此时a和b都同时指向在一开始定义a时在堆中保存的数据，所以当我们修改b的数据，a的值也会改变，因为他们都是指向的堆中的同一数据。
 （基本数据类型：栈中保存指针与值；引用数据类型：栈中保存指针，堆中保存值）
   1、数组的元素是引用数据类型：（直接修改整个元素对象时，无法改变原数组）
-  ```js
-    let array = [
-      { name: '张三', age: 10 },
-      { name: '李四', age: 20 },
-  ];
-  
-  array.forEach((item) => {
-      item = {
-          name: '王五',
-          age: '29',
-      };
-  });
-  console.log(array ); 
-  
-  // 打印结果：[{"name": "张三","age": 10},{"name": "李四","age": 10}]
-  ```
-  2、数组的元素是引用数据类型：（修改元素对象里的某个属性时，可以改变原数组）
-  ```js
-    let arr= [
-      { name: '张三', age: 10 },
-      { name: '李四', age: 20 },
-  ];
-  
-  arr.forEach((item) => {
-      item.name = '王五';
-  });
-  console.log(arr);
-  // 打印结果：[{"name":"王五","age":18},{"name":"王五","age":20}]
-  ```
-  **如何改变原数组中基本类型的值：**  
-  可以借助第二个参数index来改变数组
-  ```js
-  let array = [1, 2, 3, 4];
-  array.forEach((item,index) => {
-  array[index] = item * 2
-  })
-  console.log(array); // [1,2,3,4]
-  ```
+```js
+  let array = [
+    { name: '张三', age: 10 },
+    { name: '李四', age: 20 },
+];
 
+array.forEach((item) => {
+    item = {
+        name: '王五',
+        age: '29',
+    };
+});
+console.log(array ); 
 
-### forEach和map跳出循环
-  ```js
-    // 采用try..catch.. 和  throw new Error()来实现条件跳出，或者报错防止阻塞代码的作用
-  // 1. 单层循环：
-  try{
-    obj.forEach(item => {
-      console.log(`当前id：${item.id}`)
-      if(item.id === '002'){
-        throw new Error('id等于002，跳出循环');
-      }
-    });
-  }
-  catch(error){
-    console.error(error)
-  };
-  console.log("如果看见了这段话说明代码没有被报错所阻塞");
+// 打印结果：[{"name": "张三","age": 10},{"name": "李四","age": 10}]
+```
+2、数组的元素是引用数据类型：（修改元素对象里的某个属性时，可以改变原数组）
+```js
+  let arr= [
+    { name: '张三', age: 10 },
+    { name: '李四', age: 20 },
+];
 
-  // 2. 双层循环：
-  // 只是跳出了第二层循环，第一层循环会继续执行的
-
-  try{
-    obj.forEach(item => {
-      console.log(`第一层forEach循环：${item.id}`);
-      try{
-        item.array.forEach(val => {
-          if(val.age < 18){
-            throw  new Error('年龄不能小于18岁');
-          }
-        })
-      }catch(error){
-        console.error(error)
-      }
-    })
-  }catch(error){
-    console.log(error)
-  };
-  console.log("如果看见了这段话说明代码没有被报错所阻塞");
-  ```
-
-### web worker的作用，什么时候使用 ???
+arr.forEach((item) => {
+    item.name = '王五';
+});
+console.log(arr);
+// 打印结果：[{"name":"王五","age":18},{"name":"王五","age":20}]
+```
+**如何改变原数组中基本类型的值：**  
+可以借助第二个参数index来改变数组
+```js
+let array = [1, 2, 3, 4];
+array.forEach((item,index) => {
+array[index] = item * 2
+})
+console.log(array); // [1,2,3,4]
+```
 
 
 ## 详细事件
+
 ### addEventListener事件监听
 
 
@@ -2479,23 +2457,3 @@ window.onlod事件等待DOM被创建，还要等所用的外部资源被引用�
 
 jQuery.ready函数只需要等待DOM执行完毕后，就会执行。
 
-
-
-
-### JSLabel语法
-使用label语句可以在代码中添加标签，以便循环时可以退出循环。
-
-```js
-  // 使用标记语法 (label) 
-  // 标记a(任意名字)相当于外层循
-  {
-      a: for (let i = 0; i < 20; i++) {
-          for (let j = 0; j < 10; j++) {
-              if (i === j) {
-                  console.log(1)
-                  break a; // break 要终止标记 a
-              }
-          }
-      }
-  }
-```

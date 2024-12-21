@@ -88,11 +88,11 @@
 其作用是使内部元素的布局不受外部元素影响。
 
 **BFC的触发条件**
-+ 根元素，也就是html根标签
++ 根元素，也就是html、body根标签
 + position：fixed/absoluted
 + float属性值不是none的
 + overflow属性值不是visible的
-+ display属性值：inline-display/table-cell/table-caption/flex/inline-flex;
++ display属性值：inline-block/table-cell/flex
 
 **BFC的作用**
 + bfc内部元素的布局不受外部元素影响。
