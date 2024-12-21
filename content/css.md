@@ -85,7 +85,7 @@
 
 ### BFC布局
 
-bfc：其作用是使内部元素的布局不受外部元素影响。
+其作用是使内部元素的布局不受外部元素影响。
 
 **BFC的触发条件**
 + 根元素，也就是html根标签
@@ -101,67 +101,13 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 + bfc区域不会和浮动元素重合
 
 
-
-### css垂直居中
-
-+ 方式1：绝对定位
-
-  ```css
-  porentElement{
-      posotion:relative;
-  }
-  childElement{
-      position:absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%,-50%);
-  }
-  ```
-
-+ 方式2：flex布局
-
-  ```css
-  parentElement{
-      display:flex;
-      align-items: center;
-      justify-content: center;
-  }
-  ```
-
-
-
-
-### 左右固定，中间实现自适应
-
-**1. float实现**
-
-```html
-<div>
-    <div style="float: left;width: 200px;">left</div>
-    <div style="margin: 0 200px;">middle</div>
-    <div style="float: right;width: 200px;">right</div>
-</div>
-```
-
-**2. flex实现**
-
-```html
-<div style="display:flex;">
-    <div style="width: 200px;">left</div>
-    <div style="flex:1;">middle</div>
-    <div style="width: 200px;">right</div>
-</div>
-```
-
-
-
 ### position有哪些属性
 
-1. absolute:绝对定位；根据有定位的父元素为基准进行定位，脱离文档流，不占用原来的位置。
-2. relative：相对定位；根据自身为基准点进行定位，不脱离文档流，只改变自身的位置，还是会占用原来的位置。
+1. relative：相对定位；根据自身为基准点进行定位，不脱离文档流，只改变自身的位置，还是会占用原来的位置。(可以使用top、bottom、right、left)
+2. absolute:绝对定位；根据有定位的父元素为基准进行定位，脱离文档流，不占用原来的位置。
 3. fixed：固定定位；类似absolute，但不随滚动条的位置而改变。
-4. static：默认值；默认布局（使用z-index无效）。
-
+4. sticky：粘性定位；它是 relative 和 fixed 的结合体，能够实线类似吸附的效果，当滚动页面时它的效果与 relative 相同，当要滚动到屏幕之外时则会自动变成 fixed 的效果。
+5. static：默认值；默认布局（使用z-index无效）。
 
 ### css定位和层级
 1. z-index只有设置了定位才能生效（设置static默认定位是无效的）
@@ -204,11 +150,6 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 </style>
 
 
-### 浮动？？？
-
-
-两个div。第二个设置了浮动   
-两个行内块，都都设置了浮动，前后顺序
 
 ### 消除浮动
 
@@ -217,10 +158,10 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 2. 子元素设置了float浮动属性；
 
 **解决方案：**  
-1. 在标签的最后位置添加一个div标签，设置``clear: both;``  
+1. 在标签的最后位置添加一个div标签，设置`clear: both;` 
 2. 给父元素添加overflow属性  
 3. 让父级元素也浮动  
-4. 给邻接元素添加``clear:both; `` 
+4. 给邻接元素添加`clear:both; ` 
 5. 给父级设置after元素，设置  
    ```css
    .clearfix:after{
@@ -261,25 +202,71 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 | :after               | 在某元素之后插入某些内容                      | 
 
 
-### `display:none;` 和`visibility:hidden;`的区别
+### display:none;和visibility:hidden;的区别
 
-`display:none;` 彻底消失，释放空间。能引发页面的reflow回流（重排）。
+`display:none;` 将元素的显示设为无，即在网页中不占任何的位置。能引发页面的reflow回流（重排）。
 
-`visibility:hidden;` 就是隐藏，但是位置没释放，好比`opacity:0; `不引发页面回流。
-
-### CSS 优先级和权重值如何计算 ???
-
-内嵌样式>内部样式>外部样式>导入式
-
-!important > 内嵌 1000 >Id 100 > class=[]=伪类 10 > tag=伪元素 1 > ( * + > ~) 0
+`visibility:hidden;` 仅仅是在视觉上看不见，空间位置仍然存在。好比`opacity:0;` 不引发页面回流。
 
 
+### 重绘和回流
+
+**回流：**引起DOM树结构变化，页面布局变化的行为叫回流,且回流一定伴随重绘。      
+ <span style="    font-size: 12px;
+    line-height: 10px;
+    color: #878787;">回流也被称为重排。本质相近。回流：更侧重于元素位置和大小的重新计算。重排：更侧重于整个布局或页面的重新排列。</span>     
+
+**重绘：**只是样式的变化，不会引起DOM树的变化，页面布局的行为叫重绘，且重绘不一定会伴随回流。
+
+
+### CSS 优先级和权重值如何计算
+
++ !important。它会覆盖页面内任何位置定义的元素样式。（ie6支持上有些bug）。
++ 内联样式，如：style=“color:red;”，权值为`1000`.（该方法会造成css难以管理，所以不推荐使用）
++ ID选择器，如：#header，权值为`0100`.
++ 类、伪类、属性选择器, 如：.bar， 权值为`0010`.
++ 标签、伪元素选择器，如：div ::first-line 权值为`0001`.
++ 通配符，子选择器，相邻选择器等。如*，>,+, 权值为`0000`.
++ 继承的样式没有权值
+
+
+
+<details> 
+   <summary>权重四元组</summary>
+
+
+**权重四元组是用于表示CSS选择器权重的四个数字组合，这四个数字分别代表了不同类型选择器的数量，从左到右级别依次降低。权重四元组的具体组成部分如下：**
+
+**[a,b,c,d]**
+
+**第一个数字（a位置）：**
+代表内联样式的数量。（但实际上，内联样式通常不直接用这个四位数来表示，因为它的优先级是固定的，且非常高，可以覆盖其他所有样式规则。在权重计算时，内联样式通常被视为一个特殊的优先级，而不是作为权重四元组的一部分）
+
+**第二个数字（b位置）：**
+代表ID选择器的数量。
+
+**第三个数字（c位置）：**
+代表类、伪类、属性选择器的数量。
+
+**第四个数字（d位置）：**
+代表标签、伪元素选择器的数量。
+
+!> **权重计算永不进位**
+
+需要注意的是，权重四元组中的每个数字都是独立计算的，并且不会相互进位。也就是说，即使某个级别的选择器数量很多，也不会影响到其他级别选择器的权重值。
+
+在CSS样式表中，当多个选择器作用于同一个元素时，浏览器会根据权重四元组来计算每个选择器的权重，并决定哪个样式规则应该被应用。权重越高的选择器，其对应的样式规则就越有可能被应用。
+
+总的来说，权重四元组是CSS权重计算的基础，它帮助我们确定了不同选择器在CSS样式表中的优先级顺序。
+</details> 
 
 
 ### 盒子模型是什么
 
-标准盒模型 ： W3C标准的盒子模型（更常用）       
-怪异盒模型：IE标准的盒子模型        
+**标准盒模型 ：** W3C标准的盒子模型（更常用）       
+**怪异盒模型：**IE标准的盒子模型    
+    
+标准的盒子模型由：**content(区域内容大小) + padding(内边距) + border(边框) + margin(外边距)组成**  
 
 #### 标准盒模型
 
@@ -287,13 +274,8 @@ bfc：其作用是使内部元素的布局不受外部元素影响。
 
 设置宽高将限制`content`
 
-标准的盒子模型由：**content(区域内容大小) + padding(内边距) + border(边框) + margin(外边距)组成**  
 **设置固定宽高后，更改padding和border都不会影响整体宽高**
-width = content(内容)的宽度 + padding(左右) + border(左右)；  
-height = content(内容)的高度 + padding(上下) + border(上下)；  
-总宽 = width + margin(左右)  
-总高 = height + margin(上下)  
-总面积 = 总宽 x 总高  
+
 
 <details> 
     <summary>垂直两个div外边距重叠问题</summary>
@@ -341,23 +323,15 @@ height = content(内容)的高度 + padding(上下) + border(上下)；
 
 设置宽高将限制`content + padding + border`
 
-计算盒子宽：`width(content + padding + border)`     
-计算盒子高：`heigth(content + padding + border)`   
-怪异盒子模型的宽高是定死的，设置 padding 或 border 不会影响页面布局。   
 
-### 重绘和回流
-
-回流：引起DOM树结构变化，页面布局变化的行为叫回流,且回流一定伴随重绘。
-
-重绘：只是样式的变化，不会引起DOM树的变化，页面布局的行为叫重绘，且重绘不一定会伴随回流。
 
 
 ### 书写顺序
 
-增加可读性和维护性。新能优化，避免覆盖和冲突。
+增加可读性和维护性。性能优化，避免覆盖和冲突。
 
-1. 位置属性：position、top、right、z-index、display、float等
-2. 大小：width、height、padding、margin等
-3. 文字系列：font、line-height、letter-spacing、color-text-align等
-4. 背景：background、border等
-5. 其他：animation、transition等
+1. 位置属性：`position、top、right、z-index、display、float`
+2. 大小：`width、height、padding、margin`
+3. 文字系列：`font、line-height、letter-spacing、color-text-align`
+4. 背景：`background、border`
+5. 其他：`animation、transition`
