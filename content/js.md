@@ -3,6 +3,7 @@
 
 ### promise和await/async的区别
 
+
 区别主要在于按顺序调用多个 异步函数 时的写法 和报错获取 
 
 
@@ -139,7 +140,7 @@ b()//10
 
 原因：浏览器同源策略
 
-浏览器从一个域名的网页去请求另一个域名的资源时，域名，端口，协议任一不同，都是跨域
+浏览器从一个域名的网页去请求另一个域名的资源。当协议、域名或端口中有任意一个不同时，就会产生跨域问题。  
 
 常见的解决方案有3种：
 
@@ -154,41 +155,38 @@ b()//10
 
   + 前端：发送特定的jsonp格式数据到服务器
 
-    ```javascript
-        <div id='divCustomers'></div>
-        <script>
+  ```html
+      <script>
         function callbackFunction(result,methodName){
             var html='<ul>';
             for(var i = 0; i < result.length; i++){
-            html += '<li>' + result[i] + '</li>';
-          }
-          html += '</ul>';
-        document.getElementById('divCustomers').innerHTML = html;
+              html += '<li>' + result[i] + '</li>';
+            }
+            html += '</ul>';
+            document.getElementById('divCustomers').innerHTML = html;
         }
-        </script>
-        <script type="text/javascript"
-        src="https://www.runoob.com/try/ajax/jsonp.php?
-        jsoncallback=callbackFunction">
-        </script>
-    
-    ```
+      </script>
+
+      <script type="text/javascript" src="https://xxxx.com/try/ajax/jsonp.php?jsoncallback=callbackFunction"></script>
+  
+  ```
 
 + 代理proxy
 
   + vue、angualr都提供固定的方式设定代理
 
-    ```javascript
+    ```js
     //vue-cli3.0里面的vue.config.js做配置
     devServer:{
         proxy:{
-            '/rng': { //这里最好有一个 /
-    		target: 'http://45.105.124.130:8081', // 后台接口域名
-    	 	ws: true, //如果要代理 websockets，配置这个参数
-     		secure: false, // 如果是https接口，需要配置这个参数
-     		changeOrigin: true, //是否跨域
-     		pathRewrite:{
-     		'^/rng':''
-     		}
+          '/rng': { //这里最好有一个 /
+              target: 'http://45.105.124.130:8081', // 后台接口域名
+              ws: true, //如果要代理 websockets，配置这个参数
+              secure: false, // 如果是https接口，需要配置这个参数
+              changeOrigin: true, //是否跨域
+              pathRewrite:{
+              '^/rng':''
+              }
           }
        }
     }
@@ -341,33 +339,34 @@ myArrowFunction(1, 2, 3); // 输出: [1, 2, 3]
 
 <details> 
   <summary>箭头函数的args和普通函数的arguments的区别</summary>
-  箭头函数的args（通常使用...args表示rest参数）和普通函数的arguments对象在功能和用途上是相似的，但它们在语法和行为上存在显著的区别。以下是对这两者区别的详细解释：
+
+  **箭头函数的args（通常使用...args表示rest参数）和普通函数的arguments对象在功能和用途上是相似的，但它们在语法和行为上存在显著的区别。以下是对这两者区别的详细解释：**
   1. 语法区别
     + 箭头函数的rest参数（...args）：
-      + 箭头函数本身没有arguments对象，但可以使用rest参数语法...args来捕获所有传递给函数的参数。
-      + Rest参数是一个数组，它包含了传递给函数的所有参数。
-      + Rest参数必须放在函数参数列表的最后。  
-   + 普通函数的arguments对象：
-      + 普通函数有一个arguments对象，该对象是一个类数组对象，包含了传递给函数的所有参数。
-      + arguments对象不是数组，但它具有数组的长度属性，并且可以使用索引来访问各个参数。
-      + arguments对象还包含了一些额外的属性，如callee（指向当前执行的函数）和caller（指向调用当前函数的函数，但在严格模式下为null）。
+        + 箭头函数本身没有arguments对象，但可以使用rest参数语法...args来捕获所有传递给函数的参数。
+        + Rest参数是一个数组，它包含了传递给函数的所有参数。
+        + Rest参数必须放在函数参数列表的最后。  
+    + 普通函数的arguments对象：
+        + 普通函数有一个arguments对象，该对象是一个类数组对象，包含了传递给函数的所有参数。
+        + arguments对象不是数组，但它具有数组的长度属性，并且可以使用索引来访问各个参数。
+        + arguments对象还包含了一些额外的属性，如callee（指向当前执行的函数）和caller（指向调用当前函数的函数，但在严格模式下为null）。
   2. 行为区别
-  + 箭头函数的rest参数：
-    + 由于箭头函数没有自己的this和arguments，因此rest参数是获取所有参数的唯一方式。
-    + Rest参数是一个真正的数组，可以使用数组的所有方法和属性。
-  + 普通函数的arguments对象：
-    + arguments对象虽然类似于数组，但它不是数组，因此不能直接使用数组的方法（如push、pop等）。不过，可以通过Array.  prototype.slice.call(arguments)等方法将其转换为数组。
-    + arguments对象能够反映出函数被调用时传入的参数，即使函数声明时的形参与实际传入的参数不一致。
+    + 箭头函数的rest参数：
+        + 由于箭头函数没有自己的this和arguments，因此rest参数是获取所有参数的唯一方式。
+        + Rest参数是一个真正的数组，可以使用数组的所有方法和属性。
+    + 普通函数的arguments对象：
+        + arguments对象虽然类似于数组，但它不是数组，因此不能直接使用数组的方法（如push、pop等）。不过，可以通过Array.  prototype.slice.call(arguments)等方法将其转换为数组。
+        + arguments对象能够反映出函数被调用时传入的参数，即使函数声明时的形参与实际传入的参数不一致。
   3. 使用场景
-  + 箭头函数的rest参数：
-     + 常用于需要处理不定数量参数的箭头函数中。
-     + 由于箭头函数通常用于简短的回调或内联函数，rest参数提供了一种简洁的方式来捕获所有参数。
-  + 普通函数的arguments对象：
-     + 在需要访问所有传递给函数的参数，而不仅仅是某些特定参数时非常有用。
-     + 在函数体内部，当参数数量不确定或需要动态处理参数时，arguments对象非常有用。
+    + 箭头函数的rest参数：
+        + 常用于需要处理不定数量参数的箭头函数中。
+        + 由于箭头函数通常用于简短的回调或内联函数，rest参数提供了一种简洁的方式来捕获所有参数。
+    + 普通函数的arguments对象：
+        + 在需要访问所有传递给函数的参数，而不仅仅是某些特定参数时非常有用。
+        + 在函数体内部，当参数数量不确定或需要动态处理参数时，arguments对象非常有用。
   4. 注意事项
-    + 在箭头函数中，由于this和arguments的绑定行为与普通函数不同，因此不能期望在箭头函数内部使用arguments对象来获取参数。
-    + 在普通函数中，虽然arguments对象提供了很大的灵活性，但也要注意其不是真正的数组，可能会在某些情况下导致性能问题或代码可读性问题。
+      + 在箭头函数中，由于this和arguments的绑定行为与普通函数不同，因此不能期望在箭头函数内部使用arguments对象来获取参数。
+      + 在普通函数中，虽然arguments对象提供了很大的灵活性，但也要注意其不是真正的数组，可能会在某些情况下导致性能问题或代码可读性问题。
 </details>
 
 

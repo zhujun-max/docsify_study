@@ -607,10 +607,12 @@ ECMAScript和JavaScript之间的关系：
    (k) @debug：@debug用于输出调试信息,编译不会终止，可以打印变量值或语句来调试SCSS。   
    (l) @at-root：用于将样式放在根层级,破坏当前的嵌套规则。在需要跳出嵌套导致的重复选择器时使用。   
 
-### 前端换肤方案？？？
+ ### 前端换肤方案
 1. 硬编码。写多套css。
-2. 基于Eelement-ui。sass变量配置。
+2. sass变量配置。
 3. css属性。滤镜filter
+4. 第三方库：Ant Design、Element UI等  
+
 
 ### 前端工程化
 
@@ -822,5 +824,127 @@ menorepo+pnpm模式，来控制组件库和项目中的
 ### 你最常用的git命令是什么，如果要删除远程分支命令是什么
 ### websocket长链接，如何保持的。如果断开又怎么处理
 ### js的堆和栈
-### 如何修改第三方npm包
+
 ### 使用 pnpm 快速配置 monorepo
+
+### 如何修改第三方npm包
+
+如果遇到第三方包有bug或者需求不一样的情况。需要更改第三方npm包。
+
+1. patch-package 是一个非常实用的工具，专门用于修复第三方依赖包。    
+
+2. 直接在第三方包中更改（但是需要每次都把修改后的包发给没有node_modules包的同事）。    
+3. 向原作者提issue，或者Fork该仓库代码，修改以后，提交合并请求。（废时间）
+
+
+### vue常见优化手段
+1. 使用key
+2. 使用冻结的对象
+3. 使用函数式组件
+4. 使用计算属性
+5. 非实时绑定的表单项
+6. 保持对象引用稳定
+7. 使用v-show替代v-if
+8. 使用延迟装载（defer）
+9. 使用keep-alive
+10. 长列表优化
+11. 打包体积优化
+
+### webpack 打包优化
+[打包体积的分析和优化【渡一教育】](https://www.bilibili.com/video/BV19z4y1P7xp/?share_source=copy_web&vd_source=ac7b22a8a616c6ac6cfb5e6a9219e959)
+
+首先使用`webpack Bundle Analyzer`可视化工具，可以帮助我们直观地看到各个模块的大小分布。
+
+1. 如果你的大型项目使用了乾坤等微前端框架来分成多个子项目，并且这些子项目都引用了相同的依赖，那么通过CDN来引用这些依赖并配置正确的缓存策略是一个有效的性能优化方法。在同一域名下，浏览器会共享这些资源的缓存，从而加快加载速度并提高用户体验。
+```html
+   <% if(NODE_ENV === "production")	{ %>	
+   <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.min.js"></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/ vue-router/3.4.7/vue-router.min.js"></script>
+   <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios .min.js"></script>
+   <% } %>
+```
+
+2. 针对浏览器兼容性打包两个版本（core-js和Babel在新版浏览器可以酌情引用）     
+打包为两个版本后使用nginx代理并检测浏览器版本，来判断进入哪个项目    
+```js
+server {
+    listen 80;
+    server_name your_domain.com;
+
+    # 检测User-Agent并重写URL
+    location / {
+        # 这是一个简化的示例，实际中需要根据具体的User-Agent字符串进行匹配
+        if ($http_user_agent ~* "MSIE [6-8]|Firefox/[1-3]\.|Safari/[1-5]\.|Opera/[7-9]\.|Trident") {
+            # 如果是老版本浏览器，重写URL到兼容版本项目包
+            rewrite ^/(.*)$ /old_project/$1 last;
+        }
+        # 否则，默认访问新版本项目包
+        rewrite ^/(.*)$ /new_project/$1 last;
+    }
+
+    # 配置old_project的根目录和静态文件处理
+    location /old_project/ {
+        alias /path/to/old_project/;
+        try_files $uri $uri/ /old_project/index.html;
+    }
+
+    # 配置new_project的根目录和静态文件处理
+    location /new_project/ {
+        alias /path/to/new_project/;
+        try_files $uri $uri/ /new_project/index.html;
+    }
+
+    # 其他配置，如错误页面、日志等
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+
+    # ... 其他配置 ...
+}
+```
+
+<details> 
+   <summary>更多</summary> 
+
+
+Webpack是一个现代化的前端构建工具，用于打包和构建项目中的各种资源文件。以下是一些Webpack的优化手段：
+
+一、减少入口文件大小和优化加载速度     
+1. 拆分入口文件：将入口文件拆分为多个较小的模块，使用动态导入（dynamic imports）按需加载，减少初始加载的文件大小。      
+2. 代码分割：通过配置Webpack的代码分割功能，将项目代码分割成多个块（chunks），并在需要的时候按需加载。      
+3. 使用插件：如MiniCssExtractPlugin来提取CSS代码，减少构建时间和加载时间。    
+4. 利用缓存：使用babel-loader的缓存机制等，以减少构建时间。    
+
+二、优化文件体积     
+1. Tree Shaking：通过配置Webpack的Tree Shaking功能，只保留项目中实际使用到的代码，剔除未使用的代码，从而减少打包后的文件大小。      
+2. 压缩代码：     
+   + 使用Webpack的压缩插件如terser-webpack-plugin来压缩JavaScript代码。      
+   + 使用cssnano等工具压缩CSS代码。      
+   + 使用image-webpack-loader等工具压缩图片资源。 
+
+三、提升构建速度     
+1. 并行构建：使用Webpack的thread-loader或happypack插件将任务分发给多个子进程并行处理，提高构建速度。     
+2. 利用缓存：配置Webpack的缓存功能，使得构建过程中只重新构建发生更改的部分，而不是每次都重新构建整个项目。     
+3. 优化loader配置：     
+   + 使用oneOf配置加载器，使其文件只能匹配其中的一个loader，避免不必要的遍历。     
+   + 通过include和exclude属性，只包含或排除某些文件，减少处理文件的数量。    
+
+四、优化用户体验     
+1. 懒加载与预加载：     
+   + 对于大型应用，使用Webpack的懒加载（Dynamic Import）功能，按需加载非关键性资源。     
+   + 使用预加载（Preload）和预解析（Prefetch）机制提前加载关键资源。      
+2. 优化图片资源：    
++ 使用Webpack的url-loader或file-loader来压缩和处理图片。      
++ 根据需要进行懒加载或响应式加载。    
+
+五、其他优化手段     
+1. Source Map：在开发模式下生成更准确的source-map，以便在代码出错时快速定位到源代码的位置。在生产模式下，可以生成更小的源映射，以平衡性能和准确性。      
+2. 模块解析优化：通过配置Webpack的resolve选项，设置合适的模块解析规则，避免过多的文件查找和解析过程。    
+3. Bundle Analyzer：使用webpack-bundle-analyzer来查看打包后的bundle文件的体积，然后进行相应的体积优化。     
+4. Gzip压缩：使用compression-webpack-plugin插件对打包后的文件进行Gzip压缩，提高传输效率。 
+
+综上所述，Webpack的优化手段多种多样，涵盖了减少入口文件大小、优化文件体积、提升构建速度、优化用户体验以及其他方面的优化。这些优化手段可以根据具体项目需求和场景灵活应用，以提升Webpack的构建性能和用户体验。      
+   
+</details> 
