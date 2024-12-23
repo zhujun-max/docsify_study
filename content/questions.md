@@ -744,7 +744,6 @@ ARIA（Accessible Rich Internet Applications）‌是一种技术规范，旨在
 ### 大文件下载暂停
 ### 优化的指标
 ### 计算首屏时间
-### webWorker
 
 ### Webpack
 ### 网络
@@ -834,7 +833,7 @@ menorepo+pnpm模式，来控制组件库和项目中的
 1. patch-package 是一个非常实用的工具，专门用于修复第三方依赖包。    
 
 2. 直接在第三方包中更改（但是需要每次都把修改后的包发给没有node_modules包的同事）。    
-3. 向原作者提issue，或者Fork该仓库代码，修改以后，提交合并请求。（废时间）
+3. 向原作者提issue，或者Fork该仓库代码，修改以后，提交合并请求。（费时间）
 
 
 ### vue常见优化手段
@@ -948,3 +947,104 @@ Webpack是一个现代化的前端构建工具，用于打包和构建项目中�
 综上所述，Webpack的优化手段多种多样，涵盖了减少入口文件大小、优化文件体积、提升构建速度、优化用户体验以及其他方面的优化。这些优化手段可以根据具体项目需求和场景灵活应用，以提升Webpack的构建性能和用户体验。      
    
 </details> 
+
+
+
+### web Worker
+
+ 作用：允许主线程创建 Worker 线程，将一些任务分配给后者运行。在主线程运行的同时，Worker 线程在后台运行，两者互不干扰。等到 Worker 线程完成计算任务，再把结果返回给主线程。这样的好处是，一些计算密集型或高延迟的任务，被 Worker 线程负担了，主线程（通常负责 UI 交互）就会很流畅，不会被阻塞或拖慢。
+
+ 注意点：
+
+1. 线程安全：
+   + Web Workers 运行在独立的线程中，这意味着它们有自己的全局作用域和内存空间。因此，它们不能直接访问主线程中的变量或 DOM。
+   + 数据需要在主线程和 Worker 之间通过 postMessage 方法进行传递。由于数据是通过结构化克隆算法进行复制的，因此传递的是数据的副本，而不是引用。
+2. 通信开销：
+   + 尽管 Web Workers 提供了在主线程和 Worker 之间进行通信的能力，但这种通信是有开销的。频繁地发送和接收大量数据可能会导致性能问题。
+   + 为了最小化通信开销，可以考虑将任务拆分成较小的块，并在必要时才进行通信。
+3. 错误处理：
+   + Worker 中的代码可能会抛出错误或遇到异常情况。由于 Worker 运行在独立的线程中，这些错误不会直接传播到主线程。
+   + 需要在 Worker 中添加适当的错误处理逻辑，并通过 postMessage 方法将错误信息发送回主线程进行处理。
+4. 资源限制：
+   + 每个浏览器对 Web Workers 的数量和资源使用都有一定的限制。例如，可能限制了可以同时创建的 Worker 数量，或者限制了 Worker 可以使用的内存量。
+   + 在开发过程中，需要注意这些限制，并确保应用程序在受限条件下仍然能够正常工作。
+5. 兼容性：
+   + 尽管现代浏览器普遍支持 Web Workers，但并非所有浏览器都支持所有版本的 Web Workers API。
+   + 在使用 Web Workers 之前，应该检查目标浏览器的兼容性，并考虑提供适当的回退机制。
+6. 调试和测试：
+   + 由于 Worker 运行在独立的线程中，传统的调试工具可能无法直接应用于 Worker 代码。
+   + 可以使用 console.log、console.error 等方法来输出调试信息，并通过主线程和 Worker 之间的通信来传递这些信息。
+   + 还可以考虑使用专门的调试工具或库来简化 Worker 代码的调试过程。
+7. 终止 Worker：
+   + 当不再需要 Worker 时，应该通过调用 terminate 方法来终止它。这有助于释放系统资源并避免潜在的内存泄漏。
+   + 需要注意的是，一旦 Worker 被终止，它将无法再接收消息或执行任何代码。
+8. 数据同步：
+   + 如果主线程和 Worker 之间需要共享数据并保持同步，那么需要实现一种数据同步机制。
+   + 这可能涉及到使用共享内存（如 SharedArrayBuffer 和 Atomics API）或其他同步原语来确保数据的一致性和正确性。
+
+使用场景：
+   执行耗时任务、处理大量数据、处理复杂逻辑。
+
+
+使用：
+
+1. 创建一个名为 worker.js 的文件       
+这个文件不能访问 DOM，但它可以执行计算任务、处理数据等。
+```js
+// worker.js
+self.onmessage = function(event) {
+    // 从主线程接收到的数据
+    const data = event.data;
+    
+    // 执行一些计算任务，例如计算一个数组的和
+    let sum = 0;
+    for (let i = 0; i < data.length; i++) {
+        sum += data;
+    }
+    
+    // 将结果发送回主线程
+    self.postMessage(sum);
+};
+```
+
+2. 在主线程中创建 Worker 实例       
+在你的主 JavaScript 文件中，你需要创建一个 Worker 实例，并指定 Worker 文件的路径。
+```js
+// main.js
+if (window.Worker) {
+    // 创建 Worker 实例
+    const myWorker = new Worker('worker.js');
+    
+    // 向 Worker 发送数据
+    const dataArray = [1, 2, 3, 4, 5];
+    myWorker.postMessage(dataArray);
+    
+    // 监听来自 Worker 的消息
+    myWorker.onmessage = function(event) {
+        console.log('Result from worker:', event.data); // 输出 Worker 计算的结果
+    };
+    
+    // 监听 Worker 错误
+    myWorker.onerror = function(error) {
+        console.error('Error from worker:', error.message);
+    };
+} else {
+    console.log('Your browser does not support Web Workers.');
+}
+```
+
+3. 运行你的代码   
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Worker Example</title>
+</head>
+<body>
+    <h1>Web Worker Example</h1>
+    <script src="main.js"></script>
+</body>
+</html>
+```
