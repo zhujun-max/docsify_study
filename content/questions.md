@@ -830,7 +830,37 @@ menorepo+pnpm模式，来控制组件库和项目中的
 
 如果遇到第三方包有bug或者需求不一样的情况。需要更改第三方npm包。
 
-1. patch-package 是一个非常实用的工具，专门用于修复第三方依赖包。    
+1. patch-package 是一个非常实用的工具，专门用于修复第三方依赖包。 
+
+<details> 
+   <summary>如何使用patch-package</summary>
+
+1. 安装  
+`npm install patch-package --save-dev`
+
+2. 修改依赖包     
+假设你需要修改`some-package`中的某个文件，你可以直接在`node_modules`目录下进行修改。
+
+3. 生成补丁文件            
+修改完成后，运行以下命令生成补丁文件：    
+`npx patch-package some-package`    
+这会在你的项目根目录下生成一个 patches 文件夹，其中包含生成的补丁文件（记得提交到git）。    
+
+4. 配置 postinstall 脚本      
+为了确保每次安装依赖时都能自动应用补丁，你需要在 package.json 中添加 postinstall 脚本：      
+```js
+{
+  "scripts": {
+    "postinstall": "patch-package"
+  }
+}
+```
+
+注意：         
+patch是锁定版本号的，如果升级了版本，patch内容将会失效，最好在package.json能够锁定版本号。      
+patch能支持多少文件修改，没有仔细测过，或许只能支持少量修改    
+</details>
+
 
 2. 直接在第三方包中更改（但是需要每次都把修改后的包发给没有node_modules包的同事）。    
 3. 向原作者提issue，或者Fork该仓库代码，修改以后，提交合并请求。（费时间）
