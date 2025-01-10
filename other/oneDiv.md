@@ -23,27 +23,27 @@
 
 ### 三、可以填写多个参数的属性
 ```css
-    .streak{
-        width: 100%;
-        height: 150px;
-        background-color: #eee;
-        background-repeat: 
-            no-repeat,
-            repeat-x,
-            no-repeat;
-        background-image: 
-            linear-gradient(yellow, yellow),
-            linear-gradient(to right, #eee 0%, red 100%),
-            radial-gradient(circle, red, yellow, green);
-        background-size: 
-            200px 40px,
-            100px 40px,
-            30px 30px;
-        background-position: 
-            left 10px top 10px,
-            left 10px top 60px,
-            left 10px top 110px;
-    }
+.streak{
+    width: 100%;
+    height: 150px;
+    background-color: #eee;
+    background-repeat: 
+        no-repeat,
+        repeat-x,
+        no-repeat;
+    background-image: 
+        linear-gradient(yellow, yellow),
+        linear-gradient(to right, #eee 0%, red 100%),
+        radial-gradient(circle, red, yellow, green);
+    background-size: 
+        200px 40px,
+        100px 40px,
+        30px 30px;
+    background-position: 
+        left 10px top 10px,
+        left 10px top 60px,
+        left 10px top 110px;
+}
 ```
 <div class="streak"></div>
 <style>
@@ -158,7 +158,7 @@
 </style>
 
 
-## 案列
+## 复杂的案列
 绘制一个手提袋
 
 ### 一、绘制袋身
@@ -234,7 +234,7 @@
 </style>
 
 
-### 二、 绘制提手。和袋身文字
+### 二、 绘制提手和袋身文字
 ```css
 /* 把袋身中的文字也插入 */
 #rhyme div:before {
@@ -318,7 +318,7 @@
     }
 </style>
 
-### 三、绘制针线的缝合纹路。和袋身上的主题文字
+### 三、绘制针线缝合纹路和袋身主题文字
 
 ```css
 #rhyme div:after {

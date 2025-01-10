@@ -17,6 +17,5 @@
     - [bat脚本](other/batScript.md)
     - [一个div](other/oneDiv.md)
     - [三角形](other/triangle.md)
-    - [npm依赖](other/npm.md)
     - [Chrome控制台](other/Chrome.md)
     - [基础算法题](other/algorithm.md)

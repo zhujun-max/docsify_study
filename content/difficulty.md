@@ -1,22 +1,21 @@
 ### Element
 
-1. element 按需引入，官方文档其实并不是全部的，比如 skeleton,Loading 都没写
 
-2. ElementUI 响应式布局 bug、其中 el-col-sm-0 会导致响应式布局失效。  
+1. ElementUI 响应式布局 bug、其中 el-col-sm-0 会导致响应式布局失效。  
    解决方法: 获取 body 宽度，if 判断隐藏元素  
    参考：https://javaforall.cn/190289.html
 
-3. Element 输入框，选择器，有值组件不更新  
+2. Element 输入框，选择器，有值组件不更新  
    解决方法: this.$forceUpdate()
 
-4. el-image 组件使用本地图片不显示的问题
+3. el-image 组件使用本地图片不显示的问题
 
    ```html
    <!-- 解决方案 -->
    <el-image :src="require('../assets/bg_login.jpeg')"></el-image>
    ```
 
-5. element 数值输入框小数点最后一位，会出现异常情况
+4. element 数值输入框小数点最后一位，会出现异常情况
 
 ### Git
 
