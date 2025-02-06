@@ -15,7 +15,6 @@
     - [服务器命令](other/ServerCommand.md)
     - [mysql](other/mysql.md)
     - [bat脚本](other/batScript.md)
-    - [一个div](other/oneDiv.md)
-    - [三角形](other/triangle.md)
+    - [css](other/css.md)
     - [Chrome控制台](other/Chrome.md)
     - [基础算法题](other/algorithm.md)

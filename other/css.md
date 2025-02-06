@@ -1,8 +1,11 @@
+
+## 一个div
+
 [学习的网站](https://a.singlediv.com/)
 
-## 所需知识点
+### 所需知识点
 
-### 一、 background属性
+#### 一、 background属性
 
 + `background-color`：设置元素的背景颜色，默认值：transparent。
 + `background-image`：设置元素的背景图像，默认值：none。
@@ -14,14 +17,14 @@
 + `background-attachment`：设置元素的背景图像是否随页面滚动或固定，默认值：scroll。
 + `background-blend-mode`（不支持简写）：设置元素背景层的混合模式，默认值：normal。
 
-### 二、缩写规则
+#### 二、缩写规则
 
 1. `color、image、size、position、repeat、attachment`。这六条属性值都不是必填项，不填会使用默认值。
 2. `position / size`，定位属性必须要和大小在一起，使用`/`隔开。其余属性任意顺序。(如果只有一个参数，会作用在`position`上，如果要使用`size`，必须要填写为`position / size`)
 3. `clip、origin`拥有三条相同的属性值，如果都没填写，就是用默认值。如果只填写了一个，将会同时作用于`clip、origin`。如果填写了两个，第一个为`origin`。第二个为`clip`。
 4. 如果`background`属性设置了多个背景层，那么每个背景层之间使用`,`隔开。按顺序从前往后渲染。`color`始终在最底层显示，因为背景颜色是唯一的。
 
-### 三、可以填写多个参数的属性
+#### 三、可以填写多个参数的属性
 ```css
 .streak{
     width: 100%;
@@ -158,10 +161,10 @@
 </style>
 
 
-## 复杂的案列
+### 复杂的案列
 绘制一个手提袋
 
-### 一、绘制袋身
+#### 一、绘制袋身
 
 ```html
 // 外层div只设置宽高和背景
@@ -234,7 +237,7 @@
 </style>
 
 
-### 二、 绘制提手和袋身文字
+#### 二、 绘制提手和袋身文字
 ```css
 /* 把袋身中的文字也插入 */
 #rhyme div:before {
@@ -318,7 +321,7 @@
     }
 </style>
 
-### 三、绘制针线缝合纹路和袋身主题文字
+#### 三、绘制针线缝合纹路和袋身主题文字
 
 ```css
 #rhyme div:after {
@@ -419,5 +422,292 @@
         color: white;
         text-shadow: .1em .1em 0 rgba(255, 255, 255, 0.2);
         line-height: 1.1;
+    }
+</style>
+
+## 三角形
+
+
+[学习的网站](https://css.bqrdh.com/triangle/editor)
+
+
+?> 三角形原理其实是利用`border`属性的颜色与宽高绘制。
+
+
+<div class="triangle1"></div>
+
+<style>
+    .triangle1 {
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+        border: 20px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+</style>
+
+```css
+<div class="triangle"></div>
+
+<style>
+/* 分别给每个边框设置不同的颜色 */
+    .triangle{
+        width: 100px;
+        height: 100px;
+        background: #ccc;
+        border: 20px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+</style>
+```
+
+**如果把div的宽高设置为0，然后给边框设置距离**  
+<div class="triangle20"></div>
+
+<style>
+    .triangle20 {
+        width: 0;
+        height: 0;
+        background: #ccc;
+        border: 20px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+</style>
+
+```css
+<div class="triangle20"></div>
+
+<style>
+    .triangle20 {
+        width: 0;
+        height: 0;
+        background: #ccc;
+        border: 20px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+</style>
+```
+
+
+
+
+**稍微复杂一些的三角形**
+
+<div class="triangle2"></div>
+<div class="triangle3"></div>
+<div class="triangle4"></div>
+<div class="triangle5"></div>
+<div class="triangle6"></div>
+<div class="triangle7"></div>
+
+<style>
+    .triangle2,.triangle3,.triangle4,.triangle5,.triangle6,.triangle7{
+        margin-right:10px;
+        width: 0;
+        height: 0;
+        display: inline-block;
+    }
+    .triangle2 {
+        border: 50px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+    .triangle3 {
+        border-top: 70px solid red;
+        border-right: 40px solid chocolate;
+        border-bottom: 30px solid black;
+        border-left: 60px solid blue;
+        
+    }
+    .triangle4 {
+        border-right: 30px solid chocolate;
+        border-bottom: 100px solid black;
+        border-left: 70px solid blue;
+    }
+    .triangle5 {    
+        border-top: 100px solid red;
+        border-right: 100px solid chocolate;
+    }
+    .triangle6 {    
+        border: 50px double #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+    .triangle7 {   
+        box-shadow: 5px -5px 0px 5px #ff0000;
+        border-top: 60px solid #ff0000;
+        border-right: 60px solid #ff0000;
+        border-bottom: 30px solid blue;
+        border-left: 30px solid blue
+    }
+</style>
+
+```css
+.triangle2,.triangle3,.triangle4,.triangle5,.triangle6,.triangle7{
+        margin-right:10px;
+        width: 0;
+        height: 0;
+        display: inline-block;
+    }
+    .triangle2 {
+        border: 50px solid #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+    .triangle3 {
+        border-top: 70px solid red;
+        border-right: 40px solid chocolate;
+        border-bottom: 30px solid black;
+        border-left: 60px solid blue;
+        
+    }
+    .triangle4 {
+        border-right: 30px solid chocolate;
+        border-bottom: 100px solid black;
+        border-left: 70px solid blue;
+    }
+    .triangle5 {    
+        border-top: 100px solid red;
+        border-right: 100px solid chocolate;
+    }
+    .triangle6 {    
+        border: 50px double #ccc;
+        border-top-color: red;
+        border-right-color: chocolate;
+        border-bottom-color: black;
+        border-left-color: blue;
+    }
+    .triangle7 {   
+        box-shadow: 5px -5px 0px 5px #ff0000;
+        border-top: 60px solid #ff0000;
+        border-right: 60px solid #ff0000;
+        border-bottom: 30px solid blue;
+        border-left: 30px solid blue
+    }
+```
+
+**把不需要的边使用`transparent`设置透明颜色**
+
+```css
+border: 50px solid transparent;
+border-top-color: red;
+```
+
+<div class="triangle10"></div>
+
+<style>
+    .triangle10 {
+        width: 0;
+        height: 0;
+        border: 50px solid transparent;
+        border-top-color: red;
+    }
+</style>
+  
+
+**如果加一个圆角，可以出来一个扇形**
+
+<div class="triangle11"></div>
+
+<style>
+    .triangle11 {
+        width: 0;
+        height: 0;
+        border: 50px solid transparent;
+        border-top-color: red;
+        border-radius: 50%;
+    }
+</style>
+
+**空心三角形，就是两个div重叠在一起，也可以使用clip-path**
+<div class="triangle12"></div>
+
+<style>
+.triangle12 {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 50px 50px;
+  border-color: transparent transparent #d9534f;
+  position: relative;
+}
+.triangle12:after {
+  content: '';
+  border-style: solid;
+  border-width: 0 40px 40px;
+  border-color: transparent transparent #fff;
+  position: absolute;
+  top: 6px;
+  left: -40px;
+}
+</style>
+
+## 其他技巧
+
+### 磨砂玻璃效果 
+
+<div class="yds">
+    <div class="yds1">
+        <div class="yds11">
+            <h1 style="color:#CDDC39;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</h1>
+            <h2 style="color:#FFC107;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</h2>
+            <h3 style="color:#9E9E9E;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</h3>
+            <button style="min-width: 100px;height: 50px;background: #F44336;border: 1px solid;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</button>
+            <button style="min-width: 100px;height: 50px;background: #03A9F4;border: 1px solid;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</button>
+            <button style="min-width: 100px;height: 50px;background: #009688;border: 1px solid;">全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</button>
+            <hr style="border-bottom: 1px solid rgb(0, 0, 0);">
+            <input />
+            <div>全国人民你最牛，骑着板凳上月球，天下数你最能吹，喝酒用缸不用杯。</div>
+            <hr style="border-bottom: 1px solid #000000;">
+        </div>
+        <div class="yds22">
+    </div>
+</div>
+<style>
+    .yds{
+        position: relative;
+        width:100%;
+        height:200px;
+    }
+    .yds1{
+        width:100%;
+        height:200px;
+        border:1px solid #ccc;
+        overflow: auto;
+    }
+    .yds11{
+        width: 100%;
+        padding: 40px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    .yds22{
+        width: 80%;
+        height: 40%;
+        border: 1px solid #ccc;
+        position: absolute;
+        top: 20%;
+        left: 10%;
+        background-image: radial-gradient(transparent 1px, #ffffff 1px);
+        background-size: 4px 4px;
+        backdrop-filter: saturate(50%) blur(4px);
     }
 </style>
